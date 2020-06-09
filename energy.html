@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>嘉兴大楼</title>
+    <!-- css -->
+    <link href="./css/bootstrap.4.5.0.min.css" rel="stylesheet" />
+    <link href="./css/font-awesome.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/global.css" rel="stylesheet" />
+</head>
+<body ng-app="app" ng-controller="energyCtrl">
+<div class="container energy">
+    <div id="map"></div>
+
+    <div class="header">
+        <div class="left" ng-click="goto('home')"><span class="fa fa-chevron-left"></span> 返回前页</div>
+        <div class="right" ng-bind="datas.headRight"></div>
+        <div class="center" ng-bind="datas.headCenter"></div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+
+            <div class="col-3" style="padding-left:5px; padding-right:0px;">
+                <ul class="block">
+                    <li class="title">
+                        <span class="fa fa-bar-chart-o"></span>
+                        国网嘉兴综合能源公司
+                    </li>
+                    <li class="active">
+                        <span class="fa fa-edit"></span>
+                        总体用能概述
+                    </li>
+                    <li ng-click="goto('energy-detail', 'stp=能耗分项&tp=01')">用电监测</li>
+                    <li ng-click="goto('energy-detail', 'stp=能耗分项&tp=02')">用水监测</li>
+                </ul>
+            </div>
+
+            <div class="col-9" style="padding-left:0px;">
+                <div class="card mg-t-12 block">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">30日用能概况</h3>
+                    <div class="pull-right form-inline">
+                        查询条件:
+                        <!--<input type="text" class="form-control mr10" id="reservation">-->
+                        <input type="text" class="form-control datePicker" ng-model="datas.fromDate">
+                        ~
+                        <input type="text" class="form-control mr10 datePicker" ng-model="datas.toDate">
+
+                        <button ng-click="refreshDatas();" class="submit"><spam class="glyphicon glyphicon-refresh"></spam> 更新</button>
+                    </div>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="chart">
+                        <div id="summaryChart" class="echart"></div>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+
+                <div class="card block">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">详细数据</h3>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-inline table-dark" id="summaryTable">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="(k,n) in datas.result.tableData.title" ng-bind="n"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="v in datas.result.tableData.data">
+                                    <td ng-repeat="(k,n) in datas.result.tableData.title"
+                                        ng-bind="v[k]"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+
+            </div>
+        </div>
+
+    </div>
+
+    
+    
+</div>
+<!-- js libs -->
+<script src="./js/libs/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script src="./js/libs/jquery-ui-1.10.4.min.js" type="text/javascript"></script>
+<script src="./js/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="./js/libs/angular.min.js" type="text/javascript"></script>
+<script src="./js/libs/echarts.min.js" type="text/javascript"></script>
+<script src="./js/libs/moment-with-locales.min.js" type="text/javascript"></script>
+<script src="./js/libs/toastr.min.js" type="text/javascript"></script>
+<script src = "./js/fake_data.js"></script>
+<script src = "./js/comm.js"></script>
+<script src = "./js/energy.js"></script>
+</body>
+</html>
+
