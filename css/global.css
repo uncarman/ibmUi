@@ -96,6 +96,72 @@ span { display: inline; }
 .icon-xfxt { background-image: url(../images/menu_L_xfxt.png);  }
 
 
+/** 页面中间加载动画 */
+._loading {
+    background: rgba(0,0,0,.2);
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 99999;
+}
+._loading .loader-inner {
+    bottom: 0;
+    height: 60px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100px;
+}
+._loading figure { 
+  position: absolute;
+  margin: auto;
+  top: 0; bottom: 0; left: 0; right: 0;
+  width: 6.250em; height: 6.250em;
+  animation: _rotate 2.4s linear infinite;
+}
+._loading .white { 
+  top: 0; bottom: 0; left: 0; right: 0; 
+  background: white; 
+  animation: _flash 2.4s linear infinite;
+  opacity: 0;
+}
+._loading .dot {
+  position: absolute;
+  margin: auto;
+  width: 2.4em; height: 2.4em;
+  border-radius: 100%;
+  transition: all 1s ease;
+}
+._loading .dot:nth-child(2) { top: 0; bottom: 0; left: 0; background: #FF4444; animation: _dotsY 2.4s linear infinite; }
+._loading .dot:nth-child(3) { left: 0; right: 0; top: 0; background: #FFBB33; animation: _dotsX 2.4s linear infinite; }
+._loading .dot:nth-child(4) { top: 0; bottom: 0; right: 0; background: #99CC00; animation: _dotsY 2.4s linear infinite; }
+._loading .dot:nth-child(5) { left: 0; right: 0; bottom: 0; background: #33B5E5; animation: _dotsX 2.4s linear infinite; }
+@keyframes _rotate {
+  0% { transform: rotate( 0 ); }
+  10% { width: 6.250em; height: 6.250em; }
+  66% { width: 2.4em; height: 2.4em; }
+  100%{ transform: rotate(360deg); width: 6.250em; height: 6.250em; }
+}
+@keyframes _dotsY {
+  66% { opacity: .1; width: 2.4em; }
+  77%{ opacity: 1; width: 0; }
+}
+@keyframes _dotsX {
+  66% { opacity: .1; height: 2.4em;}
+  77%{ opacity: 1; height: 0; }
+}
+@keyframes _flash {
+  33% { opacity: 0; border-radius: 0%; }
+  55%{ opacity: .6; border-radius: 100%; }
+  66%{ opacity: 0; }
+}
+/** 页面中间加载动画 */
+
 .leftFoot li { padding-left: 0px; }
 .dot { list-style:inside circle; }
 
@@ -289,7 +355,7 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
     color: #fff;
     cursor: pointer;
 }
-.energy .card .card-header h3 { color: #fff; font-size: 20px; line-height: 30px; }
+.energy .card .card-header h3 { color: #3CE7DA; font-weight: bold; font-size: 24px; line-height: 30px; }
 .energy .table-responsive { max-height: 400px; }
 .energy .table-dark { background:none; }
 .energy .table th, .energy .table td { padding: 12px; color:#3CE7DA; min-width: 130px;

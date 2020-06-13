@@ -47,8 +47,12 @@ define(function (require) {
             "cityId": "1233",  // 嘉兴市
             "AppCode": "1b676b19152f4f41b16a961742c49ac0",  // aliyun墨迹
 
-            headCenter: "智慧楼宇数据管控平台",
-            headLeft: "",
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
+
+            pageTitle: settings.pageTitle,
+            headLeft: "安全·舒适·节能",
             headRight: moment().format("YYYY-MM-DD dddd"),
 
             safeDays: moment().diff(moment(startDay), "days"), // 安全运行天数
@@ -56,10 +60,6 @@ define(function (require) {
             // showType ->  hour/day/month/year
             // energyType -> 01/02/03/04
             // energySubType -> 能耗分项/建筑区域/组织机构
-
-            // 建筑id
-            buildingId: 56, //global.read_storage("session", "building")["id"],
-
             showType: "day", // 默认固定
             energyType: global.request("et"), // 01 -> 电
             energySubType: global.request("est"),
@@ -126,7 +126,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.getItemGroupByType,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                     type: $scope.data.energyType,
                     subType: $scope.data.energySubType,
                 }
@@ -161,7 +161,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.getEnergyChartDataByType,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                     from: $scope.data.fromDate,
                     to: $scope.data.toDate,
                     type: $scope.data.chartType.val,
@@ -189,7 +189,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.getEnergyTableDataByType,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                     from: $scope.data.fromDate,
                     to: $scope.data.toDate,
                     type: $scope.data.chartType.val,

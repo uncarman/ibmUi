@@ -230,8 +230,12 @@ define(function (require) {
         };
 
         $scope.data = {
-            headCenter: "智慧楼宇数据管控平台",
-            headLeft: "",
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
+            
+            pageTitle: settings.pageTitle,
+            headLeft: "安全·舒适·节能",
             headRight: moment().format("YYYY-MM-DD dddd"),
 
             // 建筑id

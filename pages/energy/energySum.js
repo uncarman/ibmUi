@@ -60,16 +60,13 @@ define(function (require) {
         }, 0);
 
         $scope.data = {
-            // 空气质量
-            "cityId": "1233",  // 嘉兴市
-            "AppCode": "1b676b19152f4f41b16a961742c49ac0",  // aliyun墨迹
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
 
-            headCenter: "智慧楼宇数据管控平台",
-            headLeft: "",
+            pageTitle: settings.pageTitle,
+            headLeft: "安全·舒适·节能",
             headRight: moment().format("YYYY-MM-DD dddd"),
-
-            // 建筑id
-            buildingId: 56, //global.read_storage("session", "building")["id"],
 
             fmt: "YYYY-MM-DD",
             datePickerDom: ".datePicker",
@@ -119,7 +116,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.getEnergyChartDataByType,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                     from: moment($scope.data.fromDate).format($scope.data.chartType.paramFmt), // $scope.data.fromDate,
                     to: to,   // $scope.data.toDate,
                     type: $scope.data.chartType.val,
@@ -146,7 +143,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.getEnergyTableDataByType,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                     from: moment($scope.data.fromDate).format($scope.data.chartType.paramFmt), // $scope.data.fromDate,
                     to: to,   // $scope.data.toDate,
                     type: $scope.data.chartType.val,
@@ -168,7 +165,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.ajaxGetItemGroups,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                 }
             };
             global.ajax_data($scope, param, function (res) {
@@ -182,7 +179,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.ajaxGetBuildingItems,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                 }
             };
             global.ajax_data($scope, param, function (res) {
@@ -204,7 +201,7 @@ define(function (require) {
                 _method: 'post',
                 _url: settings.ajax_func.getItemDatasByDate,
                 _param: {
-                    buildingId: $scope.data.buildingId,
+                    buildingId: $scope.data.curBuilding.id,
                     from: moment($scope.data.fromDate).format($scope.data.chartType.paramFmt), // $scope.data.fromDate,
                     to: to,   // $scope.data.toDate,
                     type: $scope.data.chartType.val,

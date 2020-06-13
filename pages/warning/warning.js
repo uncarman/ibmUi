@@ -222,5 +222,7 @@ define(function (require) {
         $scope.changeType = function(type) {
             $scope.goto('warning', 'tp='+type);
         }
+
+
     });
 });

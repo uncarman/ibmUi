@@ -50,12 +50,14 @@ define(function (require) {
         };
 
         $scope.data = {
-            headCenter: "智慧楼宇数据管控平台",
-            headLeft: "",
-            headRight: moment().format("YYYY-MM-DD dddd"),
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
 
-            // 建筑id
-            buildingId: 56, //global.read_storage("session", "building")["id"],
+            pageTitle: settings.pageTitle,
+            headLeft: "安全·舒适·节能",
+            headRight: moment().format("YYYY-MM-DD dddd"),
+            
             types: types,
             type: types[((global.request("tp") != "" && global.request("tp") > 0) ? global.request("tp") : "1")],
 

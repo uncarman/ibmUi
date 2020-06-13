@@ -11,12 +11,12 @@ define(function (require) {
         $urlRouterProvider.otherwise('/home');
 
         $stateProvider
-            .state('login', {
-                url: '/login',
-                templateUrl: './pages/login/login.html?v='+version,
-                controllerUrl: './pages/login/loginCtrl',
-                controller: 'loginCtrl'
-            })
+            // .state('login', {
+            //     url: '/login',
+            //     templateUrl: './pages/login/login.html?v='+version,
+            //     controllerUrl: './pages/login/loginCtrl',
+            //     controller: 'loginCtrl'
+            // })
             .state('home', {
                 url: '/home',
                 templateUrl: './pages/home/home.html?v='+version,

@@ -2,7 +2,7 @@
     <div class="header">
         <div class="left" ng-bind="data.headLeft"></div>
         <div class="right" ng-bind="data.headRight"></div>
-        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="center" ng-bind="data.pageTitle"></div>
         <div class="clearfix"></div>
     </div>
 
@@ -285,7 +285,7 @@
         </div>
 
         <div class="center">
-            <div class="center-title">国网嘉兴综合能源公司</div>
+            <div class="center-title" ng-bind="data.curBuilding.name"></div>
             <div class="col-12">
                 <span class="point pointMz"></span>
                 <span class="point pointJs"></span>

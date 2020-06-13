@@ -18,6 +18,7 @@ var _colors = ["#59c4e6","#93b7e3","#edafda","#f2d643","#2ec7c9","#5ab1ef",
     "#00fa9a", "#ffd700", "#6699FF", "#ff6666", "#3cb371", "#b8860b", "#30e0e0"];
 
 var settings = {
+    pageTitle: "智慧楼宇数据管控平台",
     WEATHER : {
         UNSET: { text: 'unset', class: 'default' },
         UNKNOWN: { text: '获取异常', class: 'default' },
@@ -1083,6 +1084,8 @@ var global = {
         // $scope.normalCompareClass = global.normalCompareClass;
         // $scope.normalCompareValue = global.normalCompareValue;
 
+
+        global.check_logined();
         // 前端校验用户登录
         var _session = global.read_storage('session');
         var token = _session.token;
@@ -1112,18 +1115,19 @@ var global = {
     },
 
     check_logined: function () {
-        return true;
         var user = global.read_storage("session", "user");
         try {
             if(typeof user != "undefined" && typeof user["id"] != "undefined" && user["id"] > 0) {
                 // pass
             } else {
                 global.clearLoginStatus();
-                window.location.href = "/login.html";
+                global.gotoLogin();
+                //window.location.href = "./login.html";
             }
         } catch (e) {
             global.clearLoginStatus();
-            window.location.href = "/login.html";
+            global.gotoLogin();
+            //window.location.href = "./login.html";
         }
     },
 
@@ -1296,24 +1300,17 @@ var global = {
             if (iloadingDom.length > 0) {
                 $("#iloadingbox").show();
             } else {
-                $('body').append(
-                    '<div style="z-index: 20000; left: 0px; width: 0px; height: auto; top: 0px; margin-left: 0px;" id="iloadingbox" class="xubox_layer" type="page">' +
-                    '<div style="z-index: 20000; height: 0px; background-color: rgb(255, 255, 255);" class="xubox_main">' +
-                    '<div class="xubox_page">' +
-                    '<div class="xuboxPageHtml">' +
-                    '<div id="iLoading_overlay" class="iLoading_overlay" style="display: block;"></div>' +
-                    '<div class="iLoading_showbox" style="display: block; opacity: 1;">' +
-                    '<div class="iLoading_pic">' +
-                    '<div class="iLoading_loading_pic"></div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>' +
-                    '<span class="xubox_botton"></span>' +
-                    '</div>' +
-                    '<div id="xubox_border2" class="xubox_border" style="z-index: 19891015; opacity: 0; top: 0px; left: 0px; width: 0px; height: 0px; background-color: rgb(255, 255, 255);"></div>' +
-                    '</div>'
-                );
+                $('body').append(`
+                    <div id="iloadingbox" class="_loading">
+                        <figure class="loader-inner">
+                            <div class="dot white"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </figure>
+                    </div>
+                `);
             }
         } else {
             $("#iloadingbox").hide();
@@ -1387,7 +1384,15 @@ var global = {
                 new_page = settings.root + query + "#/"+page; //page + ".html";
             }
         }
-        window.location.href = new_page;
+        if(cur_page != new_page) {
+            window.location.href = new_page;
+        }
+    },
+
+    gotoLogin: function() {
+        if(window.location.pathname.indexOf("login.html") < 0) {
+            window.location.href = "./login.html";
+        }
     },
 
     // 过期可选，毫秒数

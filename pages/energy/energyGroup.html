@@ -4,7 +4,7 @@
     <div class="header">
         <div class="left" ng-click="goto('home', '')"><span class="fa fa-chevron-left"></span> 返回前页</div>
         <div class="right" ng-bind="data.headRight"></div>
-        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="center" ng-bind="data.pageTitle"></div>
         <div class="clearfix"></div>
     </div>
 
@@ -15,7 +15,7 @@
             <div class="col-3 innerLeft">
                 <div class="title">
                     <span class="fa fa-bar-chart-o"></span>
-                    国网嘉兴综合能源公司
+                    <span ng-bind="data.curBuilding.name"></span>
                 </div>
                 <ul class="block">
                     <li ng-class="!data.parent ? 'active' : ''"><span ng-click="_goto('energyGroup', '')">所有分项</span></li>
@@ -30,7 +30,7 @@
             <div class="col-9" style="padding-left:0px;">
                 <div class="card mg-t-12 block">
                   <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
-                    <h3 class="mg-b-0">用能概况</h3>
+                    <h3 class="mg-b-0"><span class="fa fa-area-chart"></span> 用能概况</h3>
                     <div class="pull-right form-inline">
                         查询条件:
                         <!--<input type="text" class="form-control mr10" id="reservation">-->
@@ -53,7 +53,7 @@
 
                 <div class="card block">
                   <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
-                    <h3 class="mg-b-0">详细数据</h3>
+                    <h3 class="mg-b-0"><span class="fa fa-table"></span> 详细数据</h3>
                   </div><!-- card-header -->
                   <div class="card-body pd-10 pd-sm-20">
                     <div class="table-responsive">

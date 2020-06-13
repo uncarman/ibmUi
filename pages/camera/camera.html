@@ -4,7 +4,7 @@
     <div class="header">
         <div class="left" ng-click="goto('home')"><span class="fa fa-chevron-left"></span> 返回前页</div>
         <div class="right" ng-bind="data.headRight"></div>
-        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="center" ng-bind="data.pageTitle"></div>
         <div class="clearfix"></div>
     </div>
 
@@ -14,7 +14,7 @@
             <div class="col-3 innerLeft">
                 <div class="title">
                     <span class="fa fa-bar-chart-o"></span>
-                    国网嘉兴综合能源公司
+                    <span ng-bind="data.curBuilding.name"></span>
                 </div>
                 <ul class="block">
                     <li ng-class="f.id==data.floorSelected.id? 'active' : ''"

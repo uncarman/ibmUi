@@ -6,9 +6,8 @@ define(function (require) {
 
     app.controller('homeCtrl', ['$scope', function($scope) {
         moment.locale("zh_cn");
-
-        // 检查是否登录
-        global.check_logined();
+        $scope.is_debug = settings.is_debug;
+        global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
 
         $scope.$watch('$viewContentLoaded', function() {
             feather.replace();
@@ -32,19 +31,16 @@ define(function (require) {
             "http://192.168.151.163:9435/FmVideo.html?channel=11&ip=192.168.1.18",
         ];
 
-        // 7天内报警数据
-        var _warningUrl = "http://192.168.18.227/open/platform/tpos/building/fire/list?bid=2&limit=10000&secret=70149deb4c100ecd319b4af71b66eb39&appkey=iicp";
-        _warningUrl += "&startTime="+ moment().add(-7, 'day').format("YYYY-MM-DD");
-
         $scope.data = {
-            user: global.read_storage("session", "user"),
-            curBuilding: global.read_storage("session", "building"),
-            buildingList: global.read_storage("session", "buildingList"),
             // 空气质量
             "cityId": "1233",  // 嘉兴市
             "AppCode": "1b676b19152f4f41b16a961742c49ac0",  // aliyun墨迹
 
-            headCenter: "智慧楼宇数据管控平台",
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
+
+            pageTitle: settings.pageTitle,
             headLeft: "安全·舒适·节能",
             headRight: moment().format("YYYY-MM-DD dddd"),
 
@@ -105,56 +101,6 @@ define(function (require) {
         $scope.doLogout = function () {
             global.do_logout();
             window.location.href = "/login.html";
-        };
-
-        $scope.ajaxBuildingList = function () {
-            var param = {
-                _method: 'post',
-                _url: settings.ajax_func.ajaxGetUserBuildings,
-                _param: {
-                    userId: $scope.datas.user.id
-                }
-            };
-            return global.return_promise($scope, param);
-        }
-
-        $scope.buildBuildingsTable = function (res) {
-            var tableData = {
-                "title": ["id", "图片", "建筑名称", "地址", "建筑面积", "建设年代"],
-                "data": [],
-            };
-            var cacheData = {};
-            res.data.map(function (cur) {
-                cur.photo_url = cur.photo_url ? cur.photo_url : settings.default_photo;
-                tableData.data.push([cur.id, cur.photo_url, cur.name, cur.address, cur.area, cur.build_year]);
-                cacheData[cur.id] = cur;
-            });
-            $scope.$apply(function () {
-                $scope.datas.tableData = tableData;
-                $scope.datas.cacheData = cacheData;
-            });
-
-            // 缓存用户建筑列表
-            global.set_storage_key('session', [
-                {
-                    key: 'buildingList',
-                    val: $scope.datas.cacheData,
-                }
-            ]);
-            // 如果有建筑列表, 默认第一个选中
-            if(res.data.length > 0) {
-                global.set_storage_key('session', [
-                    {
-                        key: 'building',
-                        val: res.data[0],
-                    }
-                ]);
-                $scope.$apply(function () {
-                    $scope.datas.buildingList = $scope.datas.cacheData;
-                    $scope.datas.curBuilding = res.data[0];
-                    $scope.datas.buildingId = $scope.datas.curBuilding["id"];
-                });
-            }
         };
 
         function refreshDatas(){
@@ -299,7 +245,7 @@ define(function (require) {
             //     _method: 'get',
             //     _url: settings.ajax_func.ajaxEnergyData,
             //     _param: {
-            //         buildingId: $scope.data.curBuilding,
+            //         buildingId: $scope.data.curBuilding.id,
             //         today: moment().format("YYYY-MM-DD")
             //     }
             // };

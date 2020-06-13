@@ -1,54 +1,160 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html ng-app="app" ng-controller="loginCtrl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title th:text="${appName}"></title>
-
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/nprogress.css" rel="stylesheet">
-    <link href="css/normalize.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<title ng-bind="data.pageTitle"></title>
+<link rel="stylesheet" type="text/css" href="css/reset.css" />
+<link rel="stylesheet" type="text/css" href="css/global.css">
+<link rel="stylesheet" type="text/css" href="css/login.css" />
 </head>
-<body class="login" ng-app="app" ng-controller="login">
-<div>
-    <a class="hiddenanchor" id="signup"></a>
-    <a class="hiddenanchor" id="signin"></a>
-    <div class="login_wrapper">
-        <div class="animate form login_form">
-            <section class="login_content">
-                <form>
-                    <h1>用户登录</h1>
-                    <div>
-                        <input type="text" class="form-control" ng-model="datas.username" placeholder="用户名" required="" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" ng-model="datas.password" placeholder="密码" required="" />
-                    </div>
-                    <div>
-                        <button class="btn btn-success btn-lg" ng-click="doLogin();">登录</button>
-                    </div>
-                    <div class="clearfix"></div>
-                </form>
-            </section>
+<body>
+    <div id="particles-js"></div>
+    <div class="wp">
+        <div class="boardLogin">
+            <h1>
+                <img src="images/s_ico1.png">
+                <span ng-bind="data.pageTitle"></span>
+            </h1>
+            <div>
+                <div class="inpGroup">
+                    <span class="loginIco1"></span>
+                    <input type="text" autocomplete="off" placeholder="请输入您的用户名"
+                        ng-model="data.username" date-keys>
+                </div>
+                <div class="prompt">
+                    <p class="error">用户名错误或不存在</p>
+                </div>
+                
+                <div class="inpGroup">
+                    <span class="loginIco2"></span>
+                    <input type="password" autocomplete="new-password" placeholder="请输入您的密码"
+                        ng-model="data.password"
+                        date-keys >
+                </div>
+                <div class="prompt">
+                    <p class="success">输入正确</p>
+                </div>
+                
+                <!-- <button class="submit">登录</button> -->
+                <button class="animsition-link submit" ng-click="doLogin();">登录</button>
+            </div>
         </div>
     </div>
-</div>
-
-<!-- jQuery 3 -->
-<script src="./js/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/angular.min.js"></script>
-<script src="./js/angular_ui_router.min.js"></script>
-<script src="./js/fake_datas.js?v4"></script>
-<!-- <script src="./js/sweetalert.min.js?v4"></script> -->
-<script src="./js/comm.js?v4"></script>
-
-<script src="./pages/login.js?v4"></script>
 </body>
+<script type="text/javascript" src="js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="js/libs/particles.min.js"></script>
+
+<script type="text/javascript" src="js/particlesInit.js"></script>
+<script type="text/javascript" src="./js/libs/angular.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+
+<script type="text/javascript">
+var app = angular.module("app",[]);
+app.config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('{[{');
+    $interpolateProvider.endSymbol('}]}');
+}).directive('dateKeys', function () {
+return {
+    restrict: 'A',
+        link: function (scope, element, attrs, controller) {
+            element.on('keydown', function (event) {
+                if (event.keyCode == 13) {
+                    scope.doLogin();
+                } else {
+                    return true;
+                }
+            });
+        }
+    }
+}).filter('trustAsResourceUrl', ['$sce', function($sce) {
+    return function(val) {
+        return $sce.trustAsResourceUrl(val);
+    };
+}]).controller('loginCtrl', function($scope) {
+
+    $scope.is_debug = settings.is_debug;
+    global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
+
+    $scope.$watch('$viewContentLoaded', function () {
+        global.on_loaded_func($scope);    // 显示页面内容
+    });
+
+    $scope.data = {
+        pageTitle: settings.pageTitle,
+
+        data: {
+            user: {},
+            username: "",
+            password: "",
+        }
+    }
+
+    $scope.doLogin = function () {
+        if($scope.data.username == "") {
+            alert("请填写用户名.");
+            return false;
+        }
+        if($scope.data.password == "") {
+            alert("请填写密码.");
+            return false;
+        }
+        var param = {
+            _method: 'post',
+            _url: settings.ajax_func.ajaxLogin,
+            _param: {
+                userName: $scope.data.username,
+                password: $scope.data.password,
+            }
+        };
+        global.ajax_data($scope, param, function (res) {
+            var user = res.data;
+            user.photo_url = user.photo_url ? user.photo_url : settings.default_photo;
+            global.set_storage_key('session', [
+                {
+                    key: 'user',
+                    val: user,
+                }
+            ]);
+            $scope.data.user = user;
+            $scope.getBuildingList();
+        }, [], function (res) {
+            if(res.message) {
+                alert(res.message);
+            }
+        });
+    }
+
+    $scope.getBuildingList = function() {
+        var param = {
+            _method: 'post',
+            _url: settings.ajax_func.ajaxGetUserBuildings,
+            _param: {
+                userId: $scope.data.user.id
+            }
+        };
+        global.ajax_data($scope, param, function (res) {
+            // 缓存用户建筑列表
+            global.set_storage_key('session', [
+                {
+                    key: 'buildingList',
+                    val: res.data,
+                },
+                {
+                    key: 'building',
+                    val: res.data[0],
+                }
+            ]);
+            window.location.href = "./index.html";
+        }, [], function (res) {
+            if(res.message) {
+                alert(res.message);
+            }
+        });
+    }
+});
+
+</script>
+
 </html>

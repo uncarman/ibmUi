@@ -31,12 +31,14 @@ define(function (require) {
         }, 0);
 
         $scope.data = {
-            headCenter: "智慧楼宇数据管控平台",
-            headLeft: "",
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
+
+            pageTitle: settings.pageTitle,
+            headLeft: "安全·舒适·节能",
             headRight: moment().format("YYYY-MM-DD dddd"),
 
-            // 建筑id
-            buildingId: 56, //global.read_storage("session", "building")["id"],
             floor: (global.request("fl") != "" && global.request("fl") > 0) ? global.request("fl") : "1",
             cameraSelected : null,
             fmt: "YYYY-MM-DD",
