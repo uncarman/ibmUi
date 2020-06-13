@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="./img/favicon.png">
+
+    <title>智慧楼宇</title>
+
+    <!-- css -->
+    <link href="./css/font-awesome.css" rel="stylesheet" />
+    <link href="./css/bootstrap.4.5.0.min.css" rel="stylesheet" />
+    <link href="./css/toastr.min.css" rel="stylesheet" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link href="./css/global.css" rel="stylesheet" />
+</head>
+<body class="page-profile" on-finish-render-filters>
+
+<div ui-view></div>
+
+<!--<hr/>-->
+
+<!--<div>-->
+<!--    $state = {{$state.current.name}}-->
+<!--</div>-->
+
+
+<!-- jQuery 3 -->
+<script src="./js/libs/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="./js/libs/bootstrap.min.js"></script>
+<!-- bootstrap datepicker -->
+<script src="./js/libs/bootstrap-datepicker.min.js"></script>
+<script src="./js/libs/bootstrap-datepicker.zh-CN.min.js"></script>
+<!-- 百度地图 -->
+<script src="https://webapi.amap.com/maps?v=1.4.10&key=9ab87268e7b0963b097a9c6c7ddd06d9"></script>
+<!-- toastr -->
+<script src="./js/libs/toastr.min.js"></script>
+<script type="text/javascript">
+    toastr.options = { 
+        closeButton: false,
+        debug: false,
+        progressBar: true,
+        positionClass: "toast-top-center",
+        timeOut: 300000,
+    };
+</script>
+
+
+<script src="js/fake-data.js"></script>
+<script src="js/comm.js"></script>
+<script src="js/libs/require.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

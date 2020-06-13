@@ -1,0 +1,96 @@
+<div class="container innerPage energy">
+    <div id="map"></div>
+
+    <div class="header">
+        <div class="left" ng-click="goto('home')"><span class="fa fa-chevron-left"></span> 返回前页</div>
+        <div class="right" ng-bind="data.headRight"></div>
+        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+
+            <div class="col-3 innerLeft">
+                <div class="title">
+                    <span class="fa fa-bar-chart-o"></span>
+                    国网嘉兴综合能源公司
+                </div>
+                <ul class="block">
+                    <li ng-class="data.energyType=='01'? 'active' : ''" ng-click="gotoPage('01');">
+                        <span class="fa fa-edit"></span>
+                        用电监测
+                    </li>
+                    <li ng-class="data.energyType=='02'? 'active' : ''" ng-click="gotoPage('02')">
+                        <span class="fa fa-edit"></span>
+                        用水监测
+                    </li>
+                </ul>
+                <p class="clearfix mb20"></p>
+                <ul class="block">
+                    <li class="title">
+                        选择设备
+                        <button ng-click="refreshDatas();" class="submit pull-right"><spam class="glyphicon glyphicon-refresh"></spam> 查看</button>
+                    </li>
+                    <div style="max-height:600px; overflow:auto;">
+                        <li ng-repeat="it in data.result.itemList"
+                            ng-show="it.dataType==data.itemType"
+                            ng-click="doSelect(it);"
+                            ng-class="data.itemSelected.indexOf(it)>=0 ? 'active' : ''">
+                            <span class="fa fa-circle-o" ng-show="data.itemSelected.indexOf(it)<0"></span>
+                            <span class="fa fa-check" ng-show="data.itemSelected.indexOf(it)>=0"></span>
+                            <span ng-bind="it.name"></span>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="col-9" style="padding-left:0px;">
+                <div class="card mg-t-12 block">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">用能概况</h3>
+                    <div class="pull-right form-inline">
+                        查询条件:
+                        <!--<input type="text" class="form-control mr10" id="reservation">-->
+                        <input type="text" class="form-control datePicker" ng-model="data.fromDate">
+                        ~
+                        </span>
+                        <input type="text" class="form-control mr10 datePicker" ng-model="data.toDate">
+                        <button ng-click="refreshDatas();" class="submit"><spam class="glyphicon glyphicon-refresh"></spam> 更新</button>
+                    </div>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="chart">
+                        <div id="summaryChart" class="echart"></div>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+
+                <div class="card block">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">详细数据</h3>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-inline" id="summaryTable">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="(k,n) in data.result.tableData.title" ng-bind="n"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="v in data.result.tableData.data">
+                                    <td ng-repeat="(k,n) in data.result.tableData.title"
+                                        ng-bind="v[k]"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+
+            </div>
+        </div>
+
+    </div>

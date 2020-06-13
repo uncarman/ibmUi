@@ -1,0 +1,83 @@
+<div class="container innerPage energy">
+    <div id="map"></div>
+
+    <div class="header">
+        <div class="left" ng-click="goto('home', '')"><span class="fa fa-chevron-left"></span> 返回前页</div>
+        <div class="right" ng-bind="data.headRight"></div>
+        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+
+            <div class="col-3 innerLeft">
+                <div class="title">
+                    <span class="fa fa-bar-chart-o"></span>
+                    国网嘉兴综合能源公司
+                </div>
+                <ul class="block">
+                    <li ng-class="!data.parent ? 'active' : ''"><span ng-click="_goto('energyGroup', '')">所有分项</span></li>
+                    <li ng-repeat="ig in data.result.itemGroups.childs"
+                        ng-class="data.parent == ig.id ? 'active' : ''">
+                        <span class="fa fa-line-chart"></span>
+                        <span ng-click="_goto('energyGroup', ig.id)" ng-bind="ig.name"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-9" style="padding-left:0px;">
+                <div class="card mg-t-12 block">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">用能概况</h3>
+                    <div class="pull-right form-inline">
+                        查询条件:
+                        <!--<input type="text" class="form-control mr10" id="reservation">-->
+                        <input type="text" class="form-control datePicker" ng-model="data.fromDate">
+                        ~
+                        <input type="text" class="form-control mr10 datePicker" ng-model="data.toDate">
+
+                        <button ng-click="refreshDatas();" class="btn btn-primary"><spam class="glyphicon glyphicon-refresh"></spam> 查看</button>
+                    </div>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="col-4" ng-show="data.hasChilds">
+                        <div id="summaryPieChart" class="echart"></div>
+                    </div>
+                    <div ng-class="data.hasChilds ? 'col-8' : 'col-12'">
+                        <div id="dailyChart" class="echart"></div>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+
+                <div class="card block">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">详细数据</h3>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-inline table-dark" id="summaryTable">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="(k,n) in data.result.tableData.title" ng-bind="n"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="v in data.result.tableData.data">
+                                    <td ng-repeat="(k,n) in data.result.tableData.title"
+                                        ng-bind="v[k]"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+
+ 

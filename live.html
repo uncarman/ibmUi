@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${appName}"></title>
+    <link href="css/live.css" rel="stylesheet">
+</head>
+<body class="live" ng-app="app" ng-controller="live">
+<div>
+    <div ui-view></div>
+</div>
+<!--地图api-->
+<script src="./js/echarts.min.js"></script>
+<script src="./js/echart_theme_dark.js"></script>
+<script src="./js/moment.min.js"></script>
+<script src="./js/moment-with-locales.min.js"></script>
+<!-- jQuery 3 -->
+<script src="./js/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/angular.min.js"></script>
+<script src="./js/angular_ui_router.min.js"></script>
+<script src="./js/fake_datas.js?v4"></script>
+<!-- <script src="./js/sweetalert.min.js?v4"></script> -->
+<script src="./js/comm.js?v4"></script>
+
+<script src="./js/app_live.js?v9"></script>
+<script src="pages/live.js?v9"></script>
+<script src="/pages/live/home.js?v4"></script>
+
+</body>
+</html>

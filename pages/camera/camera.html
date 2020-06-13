@@ -1,0 +1,94 @@
+<div class="container innerPage camera">
+    <div id="map"></div>
+
+    <div class="header">
+        <div class="left" ng-click="goto('home')"><span class="fa fa-chevron-left"></span> 返回前页</div>
+        <div class="right" ng-bind="data.headRight"></div>
+        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+            <div class="col-3 innerLeft">
+                <div class="title">
+                    <span class="fa fa-bar-chart-o"></span>
+                    国网嘉兴综合能源公司
+                </div>
+                <ul class="block">
+                    <li ng-class="f.id==data.floorSelected.id? 'active' : ''"
+                        ng-repeat="f in data.floors"
+                        ng-click="displayFloor(f)">
+                        <span class="fa fa-align-center"></span>
+                        <span ng-bind="f.name"></span>
+                    </li>
+                </ul>
+                <p class="clearfix mb20"></p>
+                <ul class="block">
+                    <li class="title">监控列表</li>
+                    <li ng-repeat="p in data.floorSelected.points"
+                        ng-class="p.id==data.cameraSelected.id ? 'active' : ''"
+                        ng-click="displayCamera(p);">
+                        <span class="fa fa-align-center"></span>
+                        <span ng-bind="p.name"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-9 innerRight">
+                <div class="block">
+                    <div class="title">
+                        <span class="icons icon-camera-s"></span>
+                        监控画面
+                        <div class="summary pull-right">
+                            <div>
+                                在线：<span ng-bind="data.floorSelected.points.length"></span>
+                            </div>
+                            <div>
+                                关闭：<span ng-bind="'0'"></span>
+                            </div>
+                            <div>
+                                故障：<span ng-bind="'0'"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body floor">
+                        <div class="floor-out">
+                            <div class="dynamic_plot" ng-repeat="p in data.floorSelected.points"
+                                ng-style="p.style" ng-click="displayCamera(p);">
+                            </div>
+                            <img ng-src="{[{data.floorSelected.resource}]}" />
+                        </div>
+                        <!-- 直接平铺摄像头 -->
+                        <!-- <div class="iframe" ng-repeat="v in data.videos">
+                            <iframe ng-src="{[{v | trustAsResourceUrl}]}" class="camera" frameborder=0 scrolling="no"></iframe>
+                        </div> -->
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="videoModal">
+          <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+              <div class="closeBox">
+                  <div class="fa fa-times"></div>
+              </div>
+              <div class="modal-header">
+                <h5 class="modal-title" ng-bind="data.cameraSelected.name"></h5>
+              </div>
+              <div class="modal-body">
+                <div class="iframe">
+                    <iframe ng-src="{[{data.cameraSelected.video | trustAsResourceUrl}]}" class="camera" frameborder=0 scrolling="no"></iframe>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary">录像回放</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

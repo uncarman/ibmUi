@@ -1,0 +1,59 @@
+<div class="container innerPage camera powerDispatch">
+    <div id="map"></div>
+
+    <div class="header">
+        <div class="left" ng-click="goto('home')"><span class="fa fa-chevron-left"></span> 返回前页</div>
+        <div class="right" ng-bind="data.headRight"></div>
+        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+            <div class="col-3 innerLeft">
+                <div class="title">
+                    <span class="fa fa-bar-chart-o"></span>
+                    国网嘉兴综合能源公司
+                </div>
+                <ul class="block">
+                    <li ng-class="k==data.type.id? 'active' : ''"
+                        ng-repeat="(k,v) in data.types"
+                        ng-click="displayType(v)">
+                        <span class="fa fa-align-center"></span>
+                        <span ng-bind="v.name"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-9 innerRight">
+                <div class="block">
+                    <div class="title">
+                        <span class="fa icons icon-camera-s"></span>
+                        电力调度
+                        <div class="summary pull-right">
+                            
+                        </div>
+                    </div>
+                    <div class="body floor">
+                        <div class="floor-out">
+                            <div class="chart" ng-repeat="(k,v) in data.types" ng-show="k==data.type.id">
+                                <h2 class="title" ng-bind="v.name"></h2>
+                                <div class="line" ng-repeat="l in v.lines" ng-class="l.class"  ng-style="l.style"></div>
+                                <div class="data" ng-repeat="d in v.datas"
+                                    ng-class="d.status=='off'?'red':''" ng-style="d._style">
+                                    <div class="s icons icon-inner" ng-class="d.status=='off'?'icon-off':'icon-on'"></div>
+                                    <div class="t" ng-bind="d.name"></div>
+                                    <div class="v">
+                                        <div ng-repeat="(_k,_v) in d.vals" ng-bind="_v.val+_v.unit"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

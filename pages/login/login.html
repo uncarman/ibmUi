@@ -1,0 +1,13 @@
+<div>
+   	<div ng-if="data.userinfo">
+   		<div>name: <i ng-bind="data.userinfo.name"></i></div>
+   		<div>mobile: <i ng-bind="data.userinfo.mobile"></i></div>
+   	</div>
+
+   	<input type="text" ng-model="data.mobile">
+   	<input type="button" value="submit" ng-click="send_sms()">
+
+</div>
+<div>
+    <a ui-sref="products">goto products</a>
+</div>

@@ -1,0 +1,124 @@
+<div class="container innerPage camera device">
+    <div id="map"></div>
+
+    <div class="header">
+        <div class="left" ng-click="goto('home')"><span class="fa fa-chevron-left"></span> 返回前页</div>
+        <div class="right" ng-bind="data.headRight"></div>
+        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+            <div class="col-3 innerLeft">
+                <div class="title">
+                    <span class="fa fa-bar-chart-o"></span>
+                    国网嘉兴综合能源公司
+                </div>
+                <ul class="block">
+                    <li ng-class="k==data.type.id? 'active' : ''"
+                        ng-repeat="(k,v) in data.types"
+                        ng-click="displayType(v)">
+                        <span class="fa" ng-class="v.icon"></span>
+                        <span ng-bind="v.name"></span>
+                    </li>
+                </ul>
+                <p class="clearfix mb20"></p>
+                <ul class="block">
+                    <div ng-show="data.type.childs.length>0">
+                        <li ng-class="!data.floor? 'active' : ''"
+                            ng-click="displayFloor({})">
+                            <span class="fa fa-align-center"></span>
+                            <span>所有</span>
+                        </li>
+                    </div>
+                    <li ng-class="f.id==data.floor.id? 'active' : ''"
+                        ng-repeat="(id, f) in data.floors"
+                        ng-click="displayFloor(f)">
+                        <span class="fa fa-align-center"></span>
+                        <span ng-bind="f.name"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-9 innerRight">
+                <div class="block">
+                    <div class="title">
+                        <span class="fa" ng-class="data.type.icon"></span>
+                        <span ng-bind="data.type.name"></span>
+                        <div class="summary pull-right" ng-show="data.type!=''">
+                            <!-- <div>
+                                在线：<span ng-bind="data.floorSelected.points.length"></span>
+                            </div>
+                            <div>
+                                关闭：<span ng-bind="'0'"></span>
+                            </div>
+                            <div>
+                                故障：<span ng-bind="'0'"></span>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 同类设备汇总显示 -->
+                    <div class="body floor" ng-show="!(data.floor['id']>0)">
+                        <div class="floor-out">
+                            <div ng-show="data.type.childs.length>0">
+                                <div class="col-6 media"
+                                    ng-repeat="c in data.type.childs"
+                                    ng-click="displaySubType(c);">
+                                    <div class="title" ng-bind="c.name"></div>
+                                    <div class="clearfix">
+                                        <div class="leftImg">
+                                            <!-- <span class="img fa" ng-class="c.icon"></span> -->
+                                            <img class="img" ng-src="{[{c.icon}]}" src="images/icon-wind-on.png" />
+                                        </div>
+                                        <div class="rightBlock">
+                                            <div>
+                                                总共数量：2<span ng-bind=""></span>
+                                            </div>
+                                            <div>
+                                                开启设备：0<span ng-bind=""></span>
+                                            </div>
+                                            <div>
+                                                故障设备：0<span ng-bind=""></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <!-- 楼层设备显示 -->
+                    <div ng-show="(data.floor['id']>0)">
+                        <ul class="nav nav-tabs bar_tabs" ng-show="data.type.childs.length>0">
+                            <!-- <li ng-class="data.type.chi==''?'active':''"><span ng-click="changeSubtype('');">全部类型</span></li> -->
+                            <li ng-repeat="c in data.type.childs"
+                                ng-class="c.id==data.subType.id? 'active' : ''"
+                                ng-click="displaySubType(c);">
+                                <span class="fa fa-align-center"></span>
+                                <span ng-bind="c.name"></span>
+                            </li>
+                            <div class="clearfix"></div>
+                        </ul>
+                    <div class="body floor">
+                        <div class="floor-out">
+                            <!-- 楼层设备显示 -->
+                            <div ng-show="data.floor['id']>0">
+                                <div class="dynamic_plot" ng-repeat="d in data.devices"
+                                    ng-show="(d.type == data.type.id || d.type == data.subType.id) && d.floor == data.floor.id"
+                                    ng-style="d.style" ng-click="displayDevice(d);">
+                                </div>
+                                <img ng-src="{[{data.floor.resource}]}" />
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

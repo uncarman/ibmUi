@@ -1,0 +1,87 @@
+<div class="container innerPage warning">
+
+    <div class="header">
+        <div class="left" ng-click="goto('home', '')"><span class="fa fa-chevron-left"></span> 返回前页</div>
+        <div class="right" ng-bind="data.headRight"></div>
+        <div class="center" ng-bind="data.headCenter"></div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+            <div class="col-3 innerLeft">
+                <div class="title">
+                    <span class="fa fa-bar-chart-o"></span>
+                    国网嘉兴综合能源公司
+                </div>
+                <ul class="block">
+                    <li ng-repeat="(k,v) in data.types"
+                        ng-class="data.type==k? 'active' : ''"
+                        ng-click="changeType(k);">
+                        <span class="fa fa-fire"></span>
+                        <span ng-bind="v"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-9" style="padding-left:0px;">
+                <div class="block">
+                    <div class="title">
+                        <span class="fa fa-exclamation-triangle"></span>
+                        <span ng-bind="data.typeName"></span>
+                        <div class="summary pull-right">
+                            <div>
+                                未处理：<span ng-bind="data.result.tableData.data.length"></span>
+                            </div>
+                            <div>
+                                已处理：<span ng-bind="'0'"></span>
+                            </div>
+                            <div class="btn-group" id="actionMenu">
+                                <button type="button" class="btn btn-primary dropdown-toggle"
+                                    ng-click="data.showActionMenu=!data.showActionMenu">操作</button>
+                                <div class="dropdown-menu" ng-class="data.showActionMenu==true?'show':''">
+                                    <a class="dropdown-item" ng-click="updateItem('1');">全部处理</a>
+                                    <a class="dropdown-item" ng-click="updateItem('2');">全部忽略</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs bar_tabs">
+                        <li ng-class="data.subType==''?'active':''"><span ng-click="changeSubtype('');">全部类型</span></li>
+                        <li ng-class="data.subType==1?'active':''"><span ng-click="changeSubtype('1');">安全用电</span></li>
+                        <li ng-class="data.subType==2?'active':''"><span ng-click="changeSubtype('2');">水流平衡</span></li>
+                        <li ng-class="data.subType==3?'active':''"><span ng-click="changeSubtype('3');">环境板块</span></li>
+                        <div class="clearfix"></div>
+                    </ul>
+                    <div class="body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-inline" id="summaryTable">
+                                        <thead>
+                                        <tr>
+                                            <th ng-repeat="(k,n) in data.result.tableData.title" ng-bind="n"></th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="v in data.result.tableData.data">
+                                            <td ng-repeat="(k,n) in data.result.tableData.title"
+                                                ng-bind="v[k]"></td>
+                                            <td>
+                                                <button class="btn btn-success btn-xs" ng-click="updateItem($index, v, 1);">处理</button>
+                                                <button class="btn btn-default btn-xs" ng-click="updateItem($index, v, 2);">忽略</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

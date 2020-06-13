@@ -1,0 +1,66 @@
+<aside class="aside aside-fixed" ui-view="nav"></aside>
+
+<div class="content ht-100v pd-0">
+    <div class="content-header">
+        <div class="content-search">
+            <i data-feather="search"></i>
+            <input type="search" class="form-control" placeholder="Search...">
+        </div>
+        <nav class="nav">
+            <a href="" class="nav-link"><i data-feather="help-circle"></i></a>
+        </nav>
+    </div><!-- content-header -->
+
+    <div class="content-body">
+        <div class="container pd-x-0">
+
+            <div class="col-lg-12 mg-t-12">
+                <div class="card card-crypto">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">图表展示</h3>
+                    <div class="pull-right form-inline">
+                        查询条件:
+                        <!--<input type="text" class="form-control mr10" id="reservation">-->
+                        <input type="text" class="form-control datePicker" ng-model="datas.fromDate">
+                        ~
+                        <input type="text" class="form-control mr10 datePicker" ng-model="datas.toDate">
+
+                        <button ng-click="refreshDatas();" class="btn btn-primary"><spam class="glyphicon glyphicon-refresh"></spam> 更新</button>
+                    </div>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="chart">
+                        <div id="summaryChart" style="height:400px;"></div>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+            </div>
+
+            <div class="col-lg-12 mg-t-12">
+                <div class="card card-crypto">
+                  <div class="card-header pd-y-8 d-sm-flex align-items-center justify-content-between">
+                    <h3 class="mg-b-0">详细数据</h3>
+                  </div><!-- card-header -->
+                  <div class="card-body pd-10 pd-sm-20">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-inline table-primary" id="summaryTable">
+                            <thead>
+                                <tr>
+                                    <th ng-repeat="(k,n) in datas.result.tableData.title" ng-bind="n"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="v in datas.result.tableData.data">
+                                    <td ng-repeat="(k,n) in datas.result.tableData.title"
+                                        ng-bind="v[k]"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  </div><!-- card-body -->
+                </div><!-- card -->
+            </div>
+        </div>
+    </div>
+</div>
+
