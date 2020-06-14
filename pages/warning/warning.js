@@ -5,6 +5,10 @@ define(function (require) {
     var echarts = require('echarts');
 
     app.controller('warningCtrl',function ($scope) {
+        window.echarts = echarts;
+        moment.locale("zh_cn");
+        $scope.is_debug = settings.is_debug;
+        global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
 
         $scope.$watch('$viewContentLoaded', function () {
             global.on_loaded_func($scope);    // 显示页面内容
@@ -32,14 +36,15 @@ define(function (require) {
         };
 
         $scope.data = {
-            headCenter: "智慧楼宇数据管控平台",
-            headLeft: "",
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
+
+            pageTitle: settings.pageTitle,
+            headLeft: "安全·舒适·节能",
             headRight: moment().format("YYYY-MM-DD dddd"),
 
-            // 建筑id
-            buildingId: global.read_storage("session", "building")["id"],
             types: types,
-
             type: global.request("tp"), // pip 管网安全
             typeName: types[global.request("tp")],
             subType: "",

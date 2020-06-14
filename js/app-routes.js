@@ -23,6 +23,12 @@ define(function (require) {
                 controllerUrl: './pages/home/home',
                 controller: 'homeCtrl',
             })
+            .state('statistics', {
+                url: '/statistics',
+                templateUrl: './pages/statistics/statistics.html?v='+version,
+                controllerUrl: './pages/statistics/statistics',
+                controller: 'statisticsCtrl',
+            })
             .state('energySum', {
                 url: '/energySum',
                 templateUrl: './pages/energy/energySum.html?v='+version,

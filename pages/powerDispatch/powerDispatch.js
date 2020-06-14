@@ -33,18 +33,22 @@ define(function (require) {
         var types = {
             "1": {
                 id: 1,
-                name: "中压变电",
+                name: "大楼配电房",
             },
             "2": {
                 id: 2,
-                name: "低压变电I",
+                name: "中压变电",
             },
             "3": {
                 id: 3,
-                name: "低压变电II",
+                name: "低压变电I",
             },
             "4": {
                 id: 4,
+                name: "低压变电II",
+            },
+            "5": {
+                id: 5,
                 name: "低压变电III",
             }
         };
@@ -57,7 +61,7 @@ define(function (require) {
             pageTitle: settings.pageTitle,
             headLeft: "安全·舒适·节能",
             headRight: moment().format("YYYY-MM-DD dddd"),
-            
+
             types: types,
             type: types[((global.request("tp") != "" && global.request("tp") > 0) ? global.request("tp") : "1")],
 
@@ -71,9 +75,170 @@ define(function (require) {
 
         $scope.getDatas = function() {
             $scope.$apply(function(){
-                // 实际背景线条
+                // lines -> 实际背景线条
                 // line -> 水平; hline -> 垂直
+                // datas -> 显示内容
+                // status 会改变开关图标
+                // x,y 是原始数据, 用于计算 _style 样式
                 $scope.data.types["1"]["lines"] = [
+                    {
+                        class: "line",
+                        style: {
+                            "width": "1470px",
+                            "margin-left": "50px",
+                            "margin-top": "10px"
+                        },
+                    },
+                    {
+                        class: "hline",
+                        style: {
+                            "width": "250px",
+                            "margin-left": "75px",
+                            "margin-top": "10px"
+                        },
+                    },
+                    {
+                        class: "hline",
+                        style: {
+                            "width": "250px",
+                            "margin-left": "375px",
+                            "margin-top": "10px"
+                        },
+                    },
+                    {
+                        class: "hline",
+                        style: {
+                            "width": "250px",
+                            "margin-left": "675px",
+                            "margin-top": "10px"
+                        },
+                    },
+                    {
+                        class: "hline",
+                        style: {
+                            "width": "250px",
+                            "margin-left": "975px",
+                            "margin-top": "10px"
+                        },
+                    },
+                    {
+                        class: "hline",
+                        style: {
+                            "width": "250px",
+                            "margin-left": "1275px",
+                            "margin-top": "10px"
+                        },
+                    }
+                ];
+                $scope.data.types["1"]["datas"] = [
+                    {
+                        "id": 1,
+                        "name": "市电109线",
+                        "vals": [
+                            {
+                                "val": "0.00",
+                                "unit":"A",
+                            },
+                            {
+                                "val": "0.00",
+                                "unit":"A",
+                            }
+                        ],
+                        "status": "on",
+                        "x": 0,
+                        "y": 100,
+                        "_style": {
+                            "margin-top": "0px",
+                            "margin-left": "100px",
+                        }
+                    },
+                    {
+                        "id": 2,
+                        "name": "1#变压器",
+                        "vals": [
+                            {
+                                "val": "64.00",
+                                "unit":"A",
+                            },
+                            {
+                                "val": "82.00",
+                                "unit":"A",
+                            }
+                        ],
+                        "status": "on",
+                        "x": 00,
+                        "y": 400,
+                        "_style": {
+                            "margin-top": "00px",
+                            "margin-left": "400px",
+                        }
+                    },
+                    {
+                        "id": 3,
+                        "name": "联络1",
+                        "vals": [
+                            {
+                                "val": "445.00",
+                                "unit":"A",
+                            },
+                            {
+                                "val": "0.00",
+                                "unit":"A",
+                            }
+                        ],
+                        "status": "on",
+                        "x": 00,
+                        "y": 700,
+                        "_style": {
+                            "margin-top": "00px",
+                            "margin-left": "700px",
+                        }
+                    },
+                    {
+                        "id": 4,
+                        "name": "2#变压器",
+                        "vals": [
+                            {
+                                "val": "0.00",
+                                "unit":"A",
+                            },
+                            {
+                                "val": "0.00",
+                                "unit":"A",
+                            }
+                        ],
+                        "status": "on",
+                        "x": 000,
+                        "y": 1000,
+                        "_style": {
+                            "margin-top": "000px",
+                            "margin-left": "1000px",
+                        }
+                    },
+                    {
+                        "id": 5,
+                        "name": "同乐743线",
+                        "vals": [
+                            {
+                                "val": "134.00",
+                                "unit":"A",
+                            },
+                            {
+                                "val": "132.00",
+                                "unit":"A",
+                            }
+                        ],
+                        "status": "on",
+                        "x": 00,
+                        "y": 1300,
+                        "_style": {
+                            "margin-top": "00px",
+                            "margin-left": "1300px",
+                        }
+                    }
+                ];
+
+                $scope.data.types["2"]["lines"] = [
                     {
                         class: "line",
                         style: {
@@ -123,10 +288,7 @@ define(function (require) {
                         },
                     }
                 ];
-                // 显示内容
-                // status 会改变开关图标
-                // x,y 是原始数据, 用于计算 _style 样式
-                $scope.data.types["1"]["datas"] = [
+                $scope.data.types["2"]["datas"] = [
                     {
                         "id": 1,
                         "name": "1P3G-1备用",
@@ -383,7 +545,7 @@ define(function (require) {
                     },
                 ];
 
-                $scope.data.types["2"]["lines"] = $scope.data.types["3"]["lines"] = $scope.data.types["4"]["lines"]  = [
+                $scope.data.types["3"]["lines"] = $scope.data.types["4"]["lines"] = $scope.data.types["5"]["lines"]  = [
                     {
                         class: "line",
                         style: {
@@ -417,7 +579,7 @@ define(function (require) {
                         },
                     }
                 ];
-                $scope.data.types["2"]["datas"] = $scope.data.types["3"]["datas"] = $scope.data.types["4"]["datas"] = [
+                $scope.data.types["3"]["datas"] = $scope.data.types["4"]["datas"] = $scope.data.types["5"]["datas"] = [
                     {
                         "id": 1,
                         "name": "1P3G-1备用",

@@ -302,8 +302,14 @@ width: 85px; height: 85px; }
 .innerRight .title {  }
 .innerRight .title .fa { margin-right:10px; }
 .innerRight .block .body { min-height: 600px; }
-.block { border-radius: 6px; box-shadow: 2px 2px 5px rgba(1, 1, 1, 0.3); }
 
+.innerRight .media { display: block; font-size: 24px; padding-bottom: 50px; }
+.innerRight .media .title { display: block; }
+.innerRight .media .leftImg { width: 170px; position: absolute; }
+.innerRight .media .leftImg .img { width: 75%; }
+.innerRight .media .rightBlock { margin-left: 170px; font-size: 20px; line-height: 2; }
+
+.block { border-radius: 6px; box-shadow: 2px 2px 5px rgba(1, 1, 1, 0.3); }
 .modal { background: rgba(0,0,0,0.3); color: #333; }
 
 ul.bar_tabs { margin: 20px auto; padding-bottom:20px; text-align: center; font-size: 22px; }
@@ -401,10 +407,5 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
 .powerDispatch .chart .data .s { width: 25px; height: 100px; transform:rotate(90deg) translate(75px,-75px); transform-origin: top left; }
 .powerDispatch .chart .data .t { font-size: 20px; font-weight: bold; top: -50px; }
 
-
-
-.innerRight .media { display: block; font-size: 24px; padding-bottom: 50px; }
-.innerRight .media .title { display: block; }
-.innerRight .media .leftImg { width: 170px; position: absolute; }
-.innerRight .media .leftImg .img { width: 75%; }
-.innerRight .media .rightBlock { margin-left: 170px; font-size: 20px; line-height: 2; }
+.statistics h3 { padding-top: 50px; font-weight: bold; font-size: 24px; border-bottom:1px solid rgba(60, 231, 218,1); padding-bottom: 20px; margin-bottom: 20px; }
+.statistics p { margin:20px 0; font-size: 18px; } 
