@@ -8,12 +8,14 @@
 }
 
 body {
-	width: 100%;
-    min-width: 1920px;
+	  width: 100%;
+    /*width: 1440px;
+    border: 1px solid red;*/
+    min-width: 1440;
     background: #002B6B url(../images/background.png) center fixed no-repeat;
     color: #3CE7DA;
-    font-size: 110%;
-    opacity: .999;
+    font-size: 90%;
+    opacity:1;
 }
 
 .container { width: 100%; height: 100%; max-width: 100%; }
@@ -57,8 +59,8 @@ span { display: inline; }
 .mg-b-0 { margin-bottom: 0px; }
 .text-center { text-align: center; }
 
-.icons { display: inline-block; width: 22px; height: 22px; background-size:100% 100%;  vertical-align: middle; position: relative; top:-2px; }
-.weather_icon { width: 60px; height: 60px; float: left; }
+.icons { display: inline-block; width: 20px; height: 20px; background-size:100% 100%;  vertical-align: middle; position: relative; top:-2px; }
+.weather_icon { width: 35px; height: 35px; float: left; margin-top: 10px; }
 
 .icon-elec { background-image: url(../images/icon-elec.png); width: 30px; height: 30px;  }
 .icon-water { background-image: url(../images/icon-water.png); width: 30px; height: 30px;  }
@@ -94,6 +96,49 @@ span { display: inline; }
 .icon-ntkt { background-image: url(../images/menu_L_ntkt.png);  }
 .icon-spjk { background-image: url(../images/menu_L_spjk.png);  }
 .icon-xfxt { background-image: url(../images/menu_L_xfxt.png);  }
+
+.icon-lm-fengjipanguan { background: url(images/icon-wind-on.png); }
+.icon-xinfeng { background:#666 url(../images/icon_xinfeng.png); }
+.icon-panguan { background:#666 url(../images/icon_panguan.png); }
+.icon-camera { background-image: url(../images/icon-canera2.png); }
+
+.icon-shuibeng { background-image: url(../images/shuibeng_1.png)  }
+.icon-pump { background-image: url(../images/icon-pump.png)  }
+.icon-vidio { background-image: url(../images/icon-vidio.png)  }
+
+/**
+火灾报警系统
+智能烟感 device_smoke_sensor
+风机 device_wind_machine
+独立可燃气体 device_air_sensor
+报警主机点位 device_fire_host
+
+电气火灾监控系统
+在线检查 device_check_online
+故障电弧 device_arcing
+灭弧 device_xl_protected
+防火卷帘门 device_fire_rollup_door
+防火门 device_fire_door
+
+消防水柜控制系统
+压力表 device_pressure_sensor
+水流表 device_flow_table
+液位仪 device_liquid_level
+水泵 device_water_pump
+**/
+.icon-device_smoke_sensor { background: url(images/device_smoke_sensor.png); }
+.icon-device_wind_machine { background: url(images/device_wind_machine.png); }
+.icon-device_air_sensor { background: url(images/device_air_sensor.png); }
+.icon-device_fire_host { background: url(images/device_fire_host.png); }
+.icon-device_check_online { background: url(images/device_check_online.png); }
+.icon-device_arcing { background: url(images/device_arcing.png); }
+.icon-device_xl_protected { background: url(images/device_xl_protected.png); }
+.icon-device_fire_rollup_door { background: url(images/device_fire_rollup_door.png); }
+.icon-device_fire_door { background: url(images/device_fire_door.png); }
+.icon-device_pressure_sensor { background: url(images/device_pressure_sensor.png); }
+.icon-device_flow_table { background: url(images/device_flow_table.png); }
+.icon-device_liquid_level { background: url(images/device_liquid_level.png); }
+.icon-device_water_pump { background: url(images/device_water_pump.png); }
 
 
 /** 页面中间加载动画 */
@@ -162,15 +207,15 @@ span { display: inline; }
 }
 /** 页面中间加载动画 */
 
-.leftFoot li { padding-left: 0px; }
+.leftFoot li { padding-left: 0px; font-size: 90%; }
 .dot { list-style:inside circle; }
 
 .bar { width: 100%; height: 12px; display: inline-block; vertical-align: middle; background:rgba(60, 231, 218, 0.1);  }
 .bar-inline { width: 100%; height: 100%; display: block; background:rgba(60, 231, 218, 1);  }
 
 .header { text-align: center; font-size: 150%; margin-bottom: 15px; font-weight: bold; }
-.header .left { float:left; background: url(../images/headLeft.png) left no-repeat; background-size:185%; width:27vw; height: 7vh; line-height: 5vh; }
-.header .right { float:right; background: url(../images/headRight.png) right no-repeat; background-size:185%; width:27vw; height: 7vh; line-height: 5vh; font-size: 90%;  }
+.header .left { float:left; background: url(../images/headLeft.png) left no-repeat; background-size:185%; width:25%; height: 7vh; line-height: 5vh; }
+.header .right { float:right; background: url(../images/headRight.png) right no-repeat; background-size:185%; width:25%; height: 7vh; line-height: 5vh; font-size: 90%;  }
 .header .center { background: url(../images/headCenter.png) center no-repeat; background-size:33.3333% 100%; font-size: 130%; line-height: 7vh; }
 
 .home .content { margin-top: 30px; }
@@ -180,13 +225,13 @@ span { display: inline; }
 .content { font-size: 100%; }
 .content > div {}
 .content .title { font-weight: bold; }
-.content > .left { float:left; width:518px; height: 87vh; position:fixed; margin-top: -40px; margin-bottom: -40px; left: 0px;}
-.content > .right { width:518px; height: 87vh; position:fixed; margin-top: -40px; margin-bottom: -40px; right: 0px; }
-.content > .center { margin:0 520px; height: 87vh; }
+.content > .left { float:left; width:22%; height: 87vh; position:fixed; margin-top: -40px; margin-bottom: -40px; left: 0px;}
+.content > .right { width:23%; height: 87vh; position:fixed; margin-top: -40px; margin-bottom: -40px; right: 0px; }
+.content > .center { margin:0 23%; height: 87vh; }
 
 .content > .center .center-title { position:absolute; top:85px; left:45%; }
 
-.content > .left .summary { margin-left:8px; }
+.content > .left .summary { margin: 10px 0 20px 8px; }
 .content > .left .summary .title { margin-left:10px; font-size: 120%;  }
 .content > .left .summary ul { margin: 10px 10px 0; }
 .content > .left .summary ul li { line-height: 2; }
@@ -204,7 +249,7 @@ span { display: inline; }
 .content > .left .leftFoot { margin-top:-10px; border-top:none; padding-top:10px; }
 
 .content > .left .tb  { width: 45%; }
-.content > .left .tb .tbinner { font-size: 80%; padding: 12px 10px 0px 30px; }
+.content > .left .tb .tbinner { font-size: 80%; padding: 12px 5px 0px 0px; }
 .content > .left .tb .col-6 { line-height: 1.75; padding-left:0px; padding-right: 0px; }
 
 .content > .left .dd p { font-size: 16px; font-weight: normal; margin:5px auto; }
@@ -215,6 +260,9 @@ span { display: inline; }
 .content > .center .title { font-size: 110%; margin-bottom: 2vh; }
 .content > .center .summary { margin: 6vh 0 2vh 2vw; text-align: left; }
 .content > .center .summary .title div { font-family: "digifacewide"; font-size:240%; font-weight: normal; }
+
+.content > .center iframe { width:98.5%; height: 525px; margin-top:15px; border: none; background: transparent; }
+
 
 .content > .center .block .echart { height: 140px; }
 
@@ -258,29 +306,30 @@ width: 85px; height: 85px; }
 
 
 .content > .right {}
-.content > .right .content-right-weather { width: 45%; float: left; padding-bottom: 15px; margin-right: 40px; margin-bottom: 15px; border-right:0.9px solid rgba(60, 231, 218, 1);  }
+.content > .right .content-right-weather { width: 55%; float: left; padding-bottom: 15px; margin-right: 15px; margin-bottom: 15px; border-right:0.9px solid rgba(60, 231, 218, 1);  }
 .content > .right .content-right-weather .temperature { float: left; margin-left: 10px; }
-.content > .right .content-right-weather .current-temp { font-size: 220%; }
+.content > .right .content-right-weather .current-temp { font-size: 200%; }
 .content > .right .content-right-weather .current-city { vertical-align: bottom; }
 
-.content > .right .title { font-size: 110%; }
+.content > .right .title { font-size: 100%; }
 
-.content > .right .visitor { padding:10px 100px; line-height: 1.8; }
+.content > .right .visitor { padding:0px 20px 10px 80px; line-height: 1.8; font-size: 90%; }
 
 .content > .right .block { background: rgba(60, 231, 218, 0.1); border: 0.9px solid rgba(255,255,255,.5);
  margin:0 8px 8px; padding:12px 10px 5px; }
  .content > .right .block .chart { margin-bottom: 6.6667px; }
-.content > .right .block .iframe { width: 215px; height: 140px; margin:10px 5px 0px 5px; border:none; float: left; overflow: hidden; }
-.content > .right .block .iframe iframe { width: 800px; height: 600px; margin-left: -270px; margin-top:-225px; overflow: hidden; transform: scale(0.24); }
+.content > .right .block .iframe { width: 48%; height: 100px; margin:5px 1% 0px 1%; border:none; float: left; overflow: hidden; }
+.content > .right .block .iframe iframe { width: 100%; height: 100%; }
 
 .content > .right .block .table { margin: 10px 0; line-height: 1.6; font-size: 16px; }
 .content > .right .block .table th { padding-bottom: 5px; }
 
 .content > .right .medias .title { margin-bottom: 10px; }
-.content > .right .media { float: left; margin: 1vh 2.5%; width: 45%; }
-.content > .right .media .leftImg { width: 88px; float: left; margin-right: 10px; }
+.content > .right .media { float: left; margin: 1vh 0.5%; width: 48%; }
+.content > .right .media .leftImg { width: 40%; float: left; margin-right: 10px; }
 .content > .right .media .leftImg img { width: 90%; }
-.content > .right .media .rightBlock { font-size: 16px; line-height: 1.8; }
+.content > .right .media .rightBlock { font-size: 90%; line-height: 1.5; }
+.content > .right .media .rightBlock b { font-weight: bold; }
 
 .mlr20 { margin: 0 5px 0 20px; padding: 10px 10px; }
 .border { border: 0.9px solid rgba(255,255,255,.5); }
@@ -290,10 +339,20 @@ width: 85px; height: 85px; }
 .diandu p.t { text-align: left; font-weight: bold; padding-bottom:8px;  border-bottom:1px solid rgba(255,255,255,.5); }
 .diandu p.b { border: 1px solid rgba(255,255,255,.5); padding: 2px 6px; display: inline; }
 
+.warning { width: 99%; margin-top: 10px; }
 
 
-.innerPage .title { margin:0 0 30px 0px; padding: 0 0 20px 20px; font-size: 24px; border-bottom: 1px solid rgba(255,255,255,.5);
-    font-size: 24px; padding-bottom: 15px; margin-bottom: 20px; border-bottom: 0.9px solid rgba(255,255,255,.5); }
+.innerLeft { width: 20%; max-width: 20%; flex:none; }
+.innerRight { width: 80%; max-width: 80%; flex:none; }
+
+.leftWidth .innerLeft { width: 30%; max-width: 30%; }
+.leftWidth .innerRight  { width: 70%; max-width: 70%; }
+
+.innerLeft .leftNavP, .innerLeft .leftNavC { float: left; width: 50%; height: 760px; overflow: auto; }
+.innerLeft .leftNavC { margin-left: 50%; }
+
+.innerPage .title { margin:0 0 30px 0px; padding: 5px 0 25px 20px; font-size: 20px; border-bottom: 1px solid rgba(255,255,255,.5);
+    padding-bottom: 15px; margin-bottom: 20px; border-bottom: 0.9px solid rgba(255,255,255,.5); }
 .innerLeft ul.block { padding-left:0px; padding-top:0px; padding-right:0px;  }
 .innerLeft .block li { list-style:none; padding: 10px 15px; margin: 10px; cursor: pointer; }
 .innerLeft .block li.active { color: #fff; background-color:rgba(60, 231, 218, 0.3); }
@@ -317,12 +376,15 @@ ul.bar_tabs li { padding: 5px 20px; border: 1px solid rgba(255,255,255,.5); bord
 ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255,255,.9); }
 
 .dynamic_plot {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-size: 90% 90%;
+    background-position: center center; 
+    /*border-radius: 50%;
     opacity: 0.5;
     animation: warn 2s infinite;
-    background-color: rgba(255,15,15, 0.85);
+    background-color: rgba(255,15,15, 0.85);*/
 }
 @keyframes warn {
     100% {
@@ -354,7 +416,7 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
     padding: 0 15px;
     box-sizing: border-box;
     display: block;
-    line-height: 36px;
+    line-height: 30px;
     text-align: center;
     border: 1px solid #01d1f2;
     background:rgba(60, 231, 218, 0.3);
@@ -381,9 +443,10 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
 .warning .summary .btn-group .dropdown-menu { left: inherit; right: 25px; }
 
 
-.camera .block .body { max-height:840px; overflow: auto; }
-.warning .block .body { max-height:790px; overflow: auto; }
-.device .block .body { min-height:780px; max-height: 780px; overflow: auto; }
+.camera .innerRight .block .body { max-height:840px; overflow: auto; }
+.warning .innerRight .block .body { max-height:790px; overflow: auto; }
+.device .innerRight .block .body { min-height:650px; max-height: 650px; overflow: auto; }
+.statistics .innerRight .block .body { min-height:730px; max-height: 730px; overflow: auto; }
 
 .camera .iframe { width: 100%; height: 680px; border:none; overflow: hidden; }
 .camera .iframe iframe { width: 100%; height: 100%; overflow: hidden; }
@@ -408,4 +471,14 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
 .powerDispatch .chart .data .t { font-size: 20px; font-weight: bold; top: -50px; }
 
 .statistics h3 { padding-top: 50px; font-weight: bold; font-size: 24px; border-bottom:1px solid rgba(60, 231, 218,1); padding-bottom: 20px; margin-bottom: 20px; }
-.statistics p { margin:20px 0; font-size: 18px; } 
+.statistics p { margin:20px 0; font-size: 18px; }
+
+.statistics .score { position: absolute; margin-top: 50px; width: 140px; height: 140px; padding-top: 30px; font-size: 120%; text-align: center;border: 5px solid rgba(255, 50, 50,1); color:rgba(255, 50, 50,1);  border-radius: 50%; }
+.statistics .score b { display: block; font-size: 160%; font-weight:normal; }
+.statistics .scoreDetail { margin-left: 170px; margin-top: 50px; font-size: 120%; }
+.statistics .scoreDetail b { margin-bottom: 20px; }
+.statistics .scoreText { margin-bottom: 30px; }
+.statistics .scoreText .title { font-size: 100%; padding-left: 0px; }
+.statistics .scoreText .title .badge { background:yellow; color: #000; }
+.statistics .scoreText p { font-size: 14px; margin: 10px 0; padding-left: 30px; background: url('../images/menu_L_ggzm.png') left 4px no-repeat; background-size: 16px 16px; }
+

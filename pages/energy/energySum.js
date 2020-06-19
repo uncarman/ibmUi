@@ -309,9 +309,32 @@ define(function (require) {
         };
 
         // 点击跳转
-        $scope.gotoPage = function (et) {
-            var query = "dt="+$scope.data.showType+"&et="+et;
-            $scope.goto("energySum", query);
+        $scope.gotoPage = function (et, dt) {
+            //var query = "dt="+$scope.data.showType+"&et="+et;
+            //$scope.goto("energySum", query);
+            $scope.data.showType = dt;
+            $scope.data.energyType = et;
+            $scope.data.itemType = parseInt(et) + 10;
+
+
+            if($scope.data.showType == "hour") {
+                $scope.data.fromDate = $scope.data.toDate;
+            } else {
+                $scope.data.fromDate = moment($scope.data.toDate).add(-15, 'day').format("YYYY-MM-DD");
+            }
+            $scope.data.chartType = $scope.data.chartTypes.filter(function(t){
+                return t.val == $scope.data.showType;
+            })[0];
+            // 生成对比年份
+            for(var i = 1; i < 6; i++) {
+                var year = moment().add(-i, 'year').format("YYYY");
+                $scope.data.chartCompares.push({
+                    val: year,
+                    name: year,
+                })
+            }
+            $scope.data.chartCompare = $scope.data.chartCompares[0];
+            $scope.refreshDatas();
         };
     });
 

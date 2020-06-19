@@ -17,19 +17,14 @@
     <link href="./css/style.css" rel="stylesheet" />
     <link href="./css/global.css" rel="stylesheet" />
 </head>
-<body class="page-profile" on-finish-render-filters>
+<body class="page-profile" on-finish-render-filters ng-controller="navController">
 
+<div ng-include="'pages/_components/nav/nav.html'"></div>
 <div ui-view></div>
-
-<!--<hr/>-->
-
-<!--<div>-->
-<!--    $state = {{$state.current.name}}-->
-<!--</div>-->
-
 
 <!-- jQuery 3 -->
 <script src="./js/libs/jquery.min.js"></script>
+<script src="./js/libs/moment.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="./js/libs/bootstrap.min.js"></script>
 <!-- bootstrap datepicker -->
@@ -48,7 +43,6 @@
         timeOut: 300000,
     };
 </script>
-
 
 <script src="js/fake-data.js"></script>
 <script src="js/comm.js"></script>

@@ -46,16 +46,22 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="nav nav-tabs bar_tabs">
+                    <!-- <ul class="nav nav-tabs bar_tabs">
                         <li ng-class="data.subType==''?'active':''"><span ng-click="changeSubtype('');">全部类型</span></li>
                         <li ng-class="data.subType==1?'active':''"><span ng-click="changeSubtype('1');">安全用电</span></li>
                         <li ng-class="data.subType==2?'active':''"><span ng-click="changeSubtype('2');">水流平衡</span></li>
                         <li ng-class="data.subType==3?'active':''"><span ng-click="changeSubtype('3');">环境板块</span></li>
                         <div class="clearfix"></div>
-                    </ul>
+                    </ul> -->
                     <div class="body">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tab1">
+                            <div ng-show="data.type == 'ele'">
+                                <img src="uploads/anquanyongdian.jpg" style="width:100%" />
+                            </div>
+                            <div ng-show="data.type == 'water'">
+                                <img src="uploads/shuiliupingheng.jpg" style="width:100%" />
+                            </div>
+                            <div class="tab-pane active" ng-show="data.type == 'device' || data.type == 'fire'">
                                 <div class="table-responsive">
                                     <table class="table table-hover table-inline" id="summaryTable">
                                         <thead>

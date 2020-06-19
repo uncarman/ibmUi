@@ -1,0 +1,320 @@
+<style type="text/css">
+.dockposition {
+  position: absolute;
+  height: 20px;
+  width: 80%;
+  margin-left: 10%;
+  bottom: 0px;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+.dockposition:hover {
+  height: 100px;
+  overflow: inherit;
+}
+.dockposition .content {
+  width: 680px;
+  margin: auto;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px 4px 0px 0px;
+  position: relative;
+}
+.dockposition ._icons {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.dockposition ._icons > ._icon {
+  margin: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 0px solid rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transform-style: flat;
+          transform-style: flat;
+  outline: none;
+  cursor: pointer;
+}
+
+.dockposition ._icons > ._icon i {
+  margin: auto;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 36px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.dockposition ._icons > ._icon .title {
+  word-break: keep-all;
+  z-index: 2;
+  position: absolute;
+  top: -90%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  padding: 10px 15px;
+  border-radius: 4px;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  opacity: 0;
+}
+.dockposition ._icons > ._icon .title:after {
+  content: '';
+  position: absolute;
+  border: 10px solid transparent;
+  border-top: 10px solid rgba(0, 0, 0, 0.75);
+  bottom: -20px;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(0px);
+          transform: translateX(-50%) translateY(0px);
+}
+.dockposition ._icons > ._icon:hover .title {
+  opacity: 1;
+}
+
+.dockposition ._icons > .more {
+  margin-left: 40px;
+}
+.dockposition ._icons > .more:before {
+  content: '';
+  height: 100%;
+  position: absolute;
+  left: -26px;
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+}
+.dockposition ._icons > .more:after {
+  position: absolute;
+  content: '6';
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  background: #f22;
+  opacity: 0.8;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 100%;
+  line-height: 30px;
+  left: 70%;
+  top: -6px;
+}
+
+.dockposition ._icons > .more:focus, .dockposition ._icons > .demo {
+  pointer-events: none;
+}
+.dockposition ._icons > .more:focus .download, .dockposition ._icons > .demo .download {
+  opacity: 1;
+}
+
+
+
+
+.dockposition ._icons > ._icon#downloads:focus .download:nth-of-type(1), .dockposition ._icons > ._icon#downloads.demo .download:nth-of-type(1) {
+  -webkit-transform: translateY(0%) rotateZ(0deg) translateX(0px);
+          transform: translateY(0%) rotateZ(0deg) translateX(0px);
+}
+.dockposition ._icons > ._icon#downloads:focus .download:nth-of-type(2), .dockposition ._icons > ._icon#downloads.demo .download:nth-of-type(2) {
+  -webkit-transform: translateY(-105%) rotateZ(2deg) translateX(2.5px);
+          transform: translateY(-105%) rotateZ(2deg) translateX(2.5px);
+}
+.dockposition ._icons > ._icon#downloads:focus .download:nth-of-type(3), .dockposition ._icons > ._icon#downloads.demo .download:nth-of-type(3) {
+  -webkit-transform: translateY(-210%) rotateZ(4deg) translateX(5px);
+          transform: translateY(-210%) rotateZ(4deg) translateX(5px);
+}
+.dockposition ._icons > ._icon#downloads:focus .download:nth-of-type(4), .dockposition ._icons > ._icon#downloads.demo .download:nth-of-type(4) {
+  -webkit-transform: translateY(-315%) rotateZ(6deg) translateX(7.5px);
+          transform: translateY(-315%) rotateZ(6deg) translateX(7.5px);
+}
+.dockposition ._icons > ._icon#downloads:focus .download:nth-of-type(5), .dockposition ._icons > ._icon#downloads.demo .download:nth-of-type(5) {
+  -webkit-transform: translateY(-420%) rotateZ(8deg) translateX(10px);
+          transform: translateY(-420%) rotateZ(8deg) translateX(10px);
+}
+.dockposition ._icons > ._icon#downloads:focus .download:nth-of-type(6), .dockposition ._icons > ._icon#downloads.demo .download:nth-of-type(6) {
+  -webkit-transform: translateY(-525%) rotateZ(10deg) translateX(12.5px);
+          transform: translateY(-525%) rotateZ(10deg) translateX(12.5px);
+}
+.dockposition ._icons > ._icon#downloads:focus .download:nth-of-type(7), .dockposition ._icons > ._icon#downloads.demo .download:nth-of-type(7) {
+  -webkit-transform: translateY(-630%) rotateZ(12deg) translateX(15px);
+          transform: translateY(-630%) rotateZ(12deg) translateX(15px);
+}
+.dockposition ._icons > ._icon#downloads:focus .open, .dockposition ._icons > ._icon#downloads.demo .open {
+  opacity: 0;
+}
+.dockposition ._icons > ._more:focus .close, .dockposition ._icons > .more.demo .close {
+  opacity: 1;
+}
+.dockposition ._icons > .more .open, .dockposition ._icons > .more .close {
+  position: absolute;
+  opacity: 1;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  opacity: 1;
+}
+.dockposition ._icons > .more .close {
+  opacity: 0;
+}
+.dockposition ._icons > .more .download {
+  position: absolute;
+  top: -120%;
+  right: 8%;
+  width: 350px;
+  opacity: 0;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+  z-index: 1;
+  text-align: right;
+}
+.dockposition ._icons > .more .download .text {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: inline-block;
+  text-align: right;
+  margin: auto;
+  padding: 5px 10px;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 4px;
+  vertical-align: top;
+  margin-top: 14px;
+}
+.dockposition ._icons > .more .download ._icon {
+  display: inline-block;
+  width: 60px;
+  text-align: right;
+  vertical-align: top;
+}
+.dockposition ._icons > .more .download ._icon i {
+  color: #FFF;
+  font-size: 60px;
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0px) translateX(0.1px);
+            transform: translateY(0px) translateX(0.1px);
+  }
+  25% {
+    -webkit-transform: translateY(-40px) translateX(0.1px);
+            transform: translateY(-40px) translateX(0.1px);
+  }
+  50% {
+    -webkit-transform: translateY(0px) translateX(0.1px);
+            transform: translateY(0px) translateX(0.1px);
+  }
+  75% {
+    -webkit-transform: translateY(-20px) translateX(0.1px);
+            transform: translateY(-20px) translateX(0.1px);
+  }
+  100% {
+    -webkit-transform: translateY(0px) translateX(0.1px);
+            transform: translateY(0px) translateX(0.1px);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    -webkit-transform: translateY(0px) translateX(0.1px);
+            transform: translateY(0px) translateX(0.1px);
+  }
+  25% {
+    -webkit-transform: translateY(-40px) translateX(0.1px);
+            transform: translateY(-40px) translateX(0.1px);
+  }
+  50% {
+    -webkit-transform: translateY(0px) translateX(0.1px);
+            transform: translateY(0px) translateX(0.1px);
+  }
+  75% {
+    -webkit-transform: translateY(-20px) translateX(0.1px);
+            transform: translateY(-20px) translateX(0.1px);
+  }
+  100% {
+    -webkit-transform: translateY(0px) translateX(0.1px);
+            transform: translateY(0px) translateX(0.1px);
+  }
+}
+</style>
+<div class="dockposition">
+  <div class="content">
+    <div class="_icons">
+      <div class="_icon" ng-click="bouneve();">
+        <i class="fa fa-bandcamp"></i>
+        <div class="title">设备管理</div>
+      </div>
+      <div class="_icon">
+        <i class="fa fa-bandcamp"></i>
+        <div class="title">用能管理</div>
+      </div>
+      <div class="_icon">
+        <i class="fa fa-bandcamp"></i>
+        <div class="title">管网安全</div>
+      </div>
+      <div class="_icon">
+        <i class="fa fa-bandcamp"></i>
+        <div class="title">智慧消防</div>
+      </div>
+      <div class="_icon">
+        <i class="fa fa-bandcamp"></i>
+        <div class="title">安防管理</div>
+      </div>
+      <div class="_icon">
+        <i class="fa fa-bandcamp"></i>
+        <div class="title">出入口</div>
+      </div>
+      <div class="_icon more" id="more">
+        <i class="fa fa-bandcamp"></i>
+        <i class="fa fa-close close"></i>
+        <div class="title">健康评估</div>
+        <div class="downloads">
+          <div class="download">
+            <div class="text">Sublime Text Build 3126.dmg</div>
+            <div class="icon"><i class="material-icons">description</i></div>
+          </div>
+          <div class="download">
+            <div class="text">googlechrome.dmg</div>
+            <div class="icon"><i class="material-icons">description</i></div>
+          </div>
+          <div class="download">
+            <div class="text">mode-v7.90-x64.dmg</div>
+            <div class="icon"><i class="material-icons">description</i></div>
+          </div>
+          <div class="download">
+            <div class="text">VirtualBox-5.1.22-115126.zip</div>
+            <div class="icon"><i class="material-icons">unarchive</i></div>
+          </div>
+          <div class="download">
+            <div class="text">snapshot-03-31-2017-36MP.jpg</div>
+            <div class="icon"><i class="material-icons">insert_photo</i></div>
+          </div>
+          <div class="download">
+            <div class="text">Open in Finder</div>
+            <div class="icon"><i class="material-icons">open_in_new</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

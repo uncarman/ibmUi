@@ -35,6 +35,12 @@ define(function (require) {
                 controllerUrl: './pages/energy/energySum',
                 controller: 'energySumCtrl',
             })
+            .state('energyGroup', {
+                url: '/energyGroup',
+                templateUrl: './pages/energy/energyGroup.html?v='+version,
+                controllerUrl: './pages/energy/energyGroup',
+                controller: 'energyGroupCtrl',
+            })
             .state('warning', {
                 url: '/warning',
                 templateUrl: './pages/warning/warning.html?v='+version,
@@ -46,6 +52,18 @@ define(function (require) {
                 templateUrl: './pages/device/device.html?v='+version,
                 controllerUrl: './pages/device/device',
                 controller: 'deviceCtrl',
+            })
+            .state('device2', {
+                url: '/device2',
+                templateUrl: './pages/device/device2.html?v='+version,
+                controllerUrl: './pages/device/device2',
+                controller: 'device2Ctrl',
+            })
+            .state('camera', {
+                url: '/camera',
+                templateUrl: './pages/camera/camera.html?v='+version,
+                controllerUrl: './pages/camera/camera',
+                controller: 'cameraCtrl',
             })
             .state('deviceDetail', {
                 url: '/deviceDetail',
@@ -60,20 +78,16 @@ define(function (require) {
                 controller: 'powerDispatchCtrl',
             })
 
+            // test demo 页面
+            .state('empty', {
+                url: '/empty',
+                templateUrl: './pages/empty/empty.html?v='+version,
+                controllerUrl: './pages/empty/empty',
+                controller: 'emptyCtrl',
+            })
 
 
-            .state('energyGroup', {
-                url: '/energyGroup',
-                templateUrl: './pages/energy/energyGroup.html?v='+version,
-                controllerUrl: './pages/energy/energyGroup',
-                controller: 'energyGroupCtrl',
-            })
-            .state('camera', {
-                url: '/camera',
-                templateUrl: './pages/camera/camera.html?v='+version,
-                controllerUrl: './pages/camera/camera',
-                controller: 'cameraCtrl',
-            })
+
             .state('monitor', {
                 url: '/monitor',
                 views: {
@@ -89,14 +103,6 @@ define(function (require) {
                         controller: 'navCtrl',
                     },
                 }
-            })
-            .state('products', {
-                url: '/products',
-                templateUrl: './modules/products/products.html?v='+version,
-                controllerUrl: './modules/products/productsCtrl',
-                controller: 'productsCtrl',
-                // load more controllers, services, filters, ...
-                //dependencies: ['./services/usersService']
             });
     }]);
 

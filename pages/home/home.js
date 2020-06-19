@@ -17,8 +17,10 @@ define(function (require) {
         var refreshInterval = 5*60*1000; // N 分钟刷新所有电站数据
         var startDay = "2020-03-24"; // 安全运行天数
         var videos = [
-            "http://192.168.151.163:9435/FmVideo.html?channel=4&ip=192.168.1.28",
-            "http://192.168.151.163:9435/FmVideo.html?channel=5&ip=192.168.1.29",
+            "./video.html?out_door01.mp4",
+            "./video.html?1f_elevator01.mp4",
+            "./video.html?under_floor_door01.mp4",
+            "./video.html?distribution_room01.mp4",
             "http://192.168.151.163:9435/FmVideo.html?channel=0&ip=192.168.1.140",
             "http://192.168.151.163:9435/FmVideo.html?channel=1&ip=192.168.1.141",
             "http://192.168.151.163:9435/FmVideo.html?channel=2&ip=192.168.1.142",
@@ -47,10 +49,10 @@ define(function (require) {
             safeDays: moment().diff(moment(startDay), "days"), // 安全运行天数
 
             videoInd : 0,
-            videos: videos.slice(0, 4),
+            videos: videos.slice(0, 2),
 
-            totalPerson: 100,
-            totalArea: 1000,
+            totalPerson: 3523,
+            totalArea: 56,
 
             totalElec: 0, // 左上
             totalElecAvgArea: 0,
@@ -62,8 +64,8 @@ define(function (require) {
             totalElecDay: 0, // 中间大字
             totalElecMonth: 0,
 
-            visitorByDay: 12,  // 右上 日访客
-            visitorByMonth: 12*30,  // 月访客
+            visitorByDay: 56,  // 右上 日访客
+            visitorByMonth: 3523,  // 月访客
 
             // 设备
             smokeDetector: {
@@ -83,6 +85,21 @@ define(function (require) {
             },
             elevator: {
                 online: 3,
+                closed: 0,
+                error: 0,
+            },
+            xfsy: { // 消防水压
+                online: 3,
+                closed: 0,
+                error: 0,
+            },
+            xfs: { // 消防栓
+                online: 12,
+                closed: 0,
+                error: 0,
+            },
+            mhq: { //  灭火器
+                online: 213,
                 closed: 0,
                 error: 0,
             },
@@ -286,11 +303,11 @@ define(function (require) {
                     });
                 });
                 var opt = copy(settings.defaultLineOpt);
-                opt.xAxis.type = "category";
-                opt.xAxis.data = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
+                opt.xAxis[0].type = "category";
+                opt.xAxis[0].data = ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09",
                                     "10", "11", "12", "13", "14", "15", "16", "17", "18", "19",
                                     "20", "21", "22", "23", "24"];
-                opt.xAxis.axisLabel = {
+                opt.xAxis[0].axisLabel = {
                     interval: 1
                 };
                 opt.series[0] = {
@@ -316,18 +333,18 @@ define(function (require) {
                 $scope.data.energyMonthList.map(function(d){
                     $scope.data.energyMonthDataList.push({
                         val: d.val,
-                        key: d.key.split(" ")[0].split("-")[2],
+                        key: d.key.split(" ")[0],
                     });
                 });
                 var opt = copy(settings.defaultLineOpt);
-                var defaultDays = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
-                                    "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-                                    "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
-                                    "31"];
-                var days = moment().daysInMonth();
-                opt.xAxis.data = defaultDays.slice(0, days);
-                opt.xAxis.type = "category";
-                opt.xAxis.axisLabel = {
+                // var defaultDays = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+                //                     "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+                //                     "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+                //                     "31"];
+                // var days = moment().daysInMonth();
+                // opt.xAxis[0].data = defaultDays.slice(0, days);
+                opt.xAxis[0].type = "time";
+                opt.xAxis[0].axisLabel = {
                     interval: 2
                 };
                 opt.series[0] = {
@@ -714,10 +731,10 @@ define(function (require) {
                 refreshDatas();
             //}, refreshInterval);
 
-            setInterval(function(){
+            // setInterval(function(){
                 $scope.data.videoInd += 1;
-                $scope.data.videos = videos.slice(4*($scope.data.videoInd%3), 4*(1+$scope.data.videoInd%3));
-            }, 60*1000*100);
+                $scope.data.videos = videos.slice(2*($scope.data.videoInd%3), 2*(1+$scope.data.videoInd%3));
+            // }, 60*1000*100);
 
         })();
 

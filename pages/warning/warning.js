@@ -30,7 +30,8 @@ define(function (require) {
         }, 0);
 
         var types = {
-            "pip": "管网安全",
+            "ele": "安全用电",
+            "water": "水流平衡",
             "fire": "消防报警",
             "device": "设备报警",
         };

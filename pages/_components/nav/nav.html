@@ -1,70 +1,108 @@
+<div id="sideMenu">
+    <span class="fa fa-list" id="sideMenuClosed" title="更多操作"></span>
+</div>
 
-    <div class="aside-header">
-        <a href="../../index.html" class="aside-logo"><!-- 智慧楼宇管理系统 --></a>
-        <a href="" class="aside-menu-link">
-            <i data-feather="menu"></i>
-            <i data-feather="x"></i>
-        </a>
+<div id="sideMenuContainer">
+    <div class="menu" ng-click="goto('home', '');">
+        <span class="fa fa-reply-all"></span>
+        返回首页
     </div>
-    <div class="aside-body">
-        <div class="aside-loggedin">
-            <div class="d-flex align-items-center justify-content-start">
-                <a class="avatar"><img ng-src="{{datas.user.photo_url}}" ng-alt="datas.user.name" class="rounded-circle"></a>
-                <div class="aside-alert-link">
-<!--                    <a href="" class="new" data-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>-->
-<!--                    <a href="" class="new" data-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a>-->
-                    <a ng-click="doLogout()" title="退出登录"><i data-feather="log-out"></i></a>
-                </div>
-            </div>
-            <div class="aside-loggedin-user">
-                <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2" data-toggle="collapse">
-                    <h6 class="tx-semibold mg-b-0" ng-bind="datas.user.name"></h6>
-                    <i data-feather="chevron-down"></i>
-                </a>
-                <p class="tx-color-03 tx-12 mg-b-0" ng-bind="datas.user.email"></p>
-            </div>
-            <div class="collapse" id="loggedinMenu">
-                <ul class="nav nav-aside mg-b-0">
-                    <li class="nav-item"><a href="" class="nav-link"><i data-feather="edit"></i> <span>Edit Profile</span></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i data-feather="user"></i> <span>View Profile</span></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i data-feather="settings"></i> <span>Account Settings</span></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i data-feather="help-circle"></i> <span>Help Center</span></a></li>
-                    <li class="nav-item"><a href="" class="nav-link"><i data-feather="log-out"></i> <span>Sign Out</span></a></li>
-                </ul>
-            </div>
-        </div><!-- aside-loggedin -->
-        <ul class="nav nav-aside">
-            <li class="nav-label">数据面板</li>
-            <li class="nav-item"><a ui-sref="monitor" class="nav-link"><i data-feather="layers"></i> <span>总体用能概述</span></a></li>
-            <li class="nav-label mg-t-25">监测分析</li>
-            <li class="nav-item with-sub">
-                <a href="" class="nav-link"><i data-feather="user"></i> <span>User Pages</span></a>
-                <ul>
-                    <li><a href="page-profile-view.html">View Profile</a></li>
-                    <li><a href="page-connections.html">Connections</a></li>
-                    <li><a href="page-groups.html">Groups</a></li>
-                    <li><a href="page-events.html">Events</a></li>
-                </ul>
-            </li>
-            <li class="nav-label mg-t-25">数据统计</li>
-            <li class="nav-item with-sub">
-                <a href="" class="nav-link"><i data-feather="user"></i> <span>User Pages</span></a>
-                <ul>
-                    <li><a href="page-profile-view.html">View Profile</a></li>
-                    <li><a href="page-connections.html">Connections</a></li>
-                    <li><a href="page-groups.html">Groups</a></li>
-                    <li><a href="page-events.html">Events</a></li>
-                </ul>
-            </li>
-            <li class="nav-item with-sub">
-                <a href="" class="nav-link"><i data-feather="file"></i> <span>管网安全</span></a>
-                <ul>
-                    <li><a href="page-timeline.html">Timeline</a></li>
-                </ul>
-            </li>
-            <li class="nav-label mg-t-25">系统设置</li>
-            <li class="nav-item"><a href="../../components" class="nav-link"><i data-feather="layers"></i> <span>Components</span></a></li>
-            <li class="nav-item"><a href="../../collections" class="nav-link"><i data-feather="box"></i> <span>Collections</span></a></li>
-        </ul>
+    <div class="menu" ng-click="goto('device', 'tp=101');">
+        <span class="fa fa-flag"></span>
+        设备管理
     </div>
+    <div class="menu" ng-click="goto('energySum', 'dt=hour&et=01');">
+        <span class="fa fa-bolt"></span>
+        用能管理
+    </div>
+    <div class="menu" ng-click="goto('statistics');">
+        <span class="fa fa-info-circle"></span>
+        管网安全
+    </div>
+    <div class="menu" ng-click="goto('device2', 'tp=101');">
+        <span class="fa fa-users"></span>
+        智慧消防
+    </div>
+    <div class="menu" ng-click="goto('camera', '');">
+        <span class="fa fa-camera"></span>
+        安防管理
+    </div>
+    <div class="menu" ng-click="goto('warning', 'tp=device');">
+        <span class="fa fa-glass"></span>
+        报警管理
+    </div>
+    <div class="menu" ng-click="goto('statistics', 'tp=healty');">
+        <span class="fa fa-heart"></span>
+        健康评估
+    </div>
+</div>
+<style type="text/css">
+  #sideMenu {
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    font-size: 160%;
+    z-index: 29999999;
+  }
+  #sideMenuContainer {
+    background: #002d58;
+    border-left: 0.9px solid rgba(255,255,255,.5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    height: 100%;
+    padding: 60px 10px 10px 10px;
+    position: fixed;
+    right: -150px;
+    width: 150px;
+    z-index: 19999999;
+  }
+  #sideMenuContainer > div {
+    display: block;
+    border: none;
+    border-top: 1px solid rgba(60, 231, 218, 0.2);
+    border-bottom: 1px solid rgba(60, 231, 218, 0.4); 
+    text-indent: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 3.8;
+    overflow: hidden;
+    padding-right: 5px;
+    text-shadow: 0 1px 2px rgba( 0, 0, 0, 0.5 );
+    font-size: 100%;
+  }
+  #sideMenuContainer > div > .fa { margin-right:10px;  }
+</style>
 
+<script type="text/javascript">
+    (function($){
+        $.fn.sideToggle = function(options) {
+            var settings = $.extend({
+                moving : null, // which object to toggle?
+                direction : null // toggle from this side of the window
+            }, options);
+            return this.click(function(){
+                var thisDir = {};
+                var moveThis = settings.moving;
+                var dirPos = parseInt($(moveThis).css(settings.direction), 10);
+                var menuWidth = $(moveThis).outerWidth();
+                if (isNaN(dirPos)) {
+                    console.log("Please define the object's position in the css.");
+                }
+                if (dirPos === 0) {
+                    thisDir[settings.direction] = -menuWidth;
+                    $(moveThis).animate(thisDir);
+                } else {
+                    thisDir[settings.direction] = 0;
+                    $(moveThis).animate(thisDir);
+                }
+            });
+        }
+    }(jQuery));
+
+    // 代码执行
+    $(document).ready(function(){
+        $('#sideMenu').sideToggle({
+            moving: '#sideMenuContainer',
+            direction: 'right'
+        });
+    });
+</script>

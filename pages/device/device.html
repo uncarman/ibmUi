@@ -9,14 +9,14 @@
     </div>
 
     <div class="clearfix"></div>
-    <div class="content">
+    <div class="content leftWidth">
         <div class="row">
             <div class="col-3 innerLeft">
                 <div class="title">
                     <span class="fa fa-bar-chart-o"></span>
                     <span ng-bind="data.curBuilding.name"></span>
                 </div>
-                <ul class="block">
+                <ul class="block leftNavP">
                     <li ng-class="k==data.type.id? 'active' : ''"
                         ng-repeat="(k,v) in data.types"
                         ng-click="displayType(v)">
@@ -24,8 +24,8 @@
                         <span ng-bind="v.name"></span>
                     </li>
                 </ul>
-                <p class="clearfix mb20"></p>
-                <ul class="block">
+                <!-- <p class="clearfix mb20"></p> -->
+                <ul class="block leftNaC" style="margin-left:51%; height:760px; background: none; border-left:none;">
                     <div ng-show="data.type.childs.length>0">
                         <li ng-class="!data.floor? 'active' : ''"
                             ng-click="displayFloor({})">
@@ -47,6 +47,8 @@
                     <div class="title">
                         <span class="fa" ng-class="data.type.icon"></span>
                         <span ng-bind="data.type.name"></span>
+                        <span style="font-weight: normal; margin-left:50px; border-bottom:1px solid #fff; ">手动运行</span>
+                        <span style="font-weight: normal; margin-left:50px; border-bottom:1px solid #fff; ">开启轮询</span>
                         <div class="summary pull-right" ng-show="data.type!=''">
                             <!-- <div>
                                 在线：<span ng-bind="data.floorSelected.points.length"></span>
@@ -109,6 +111,7 @@
                             <!-- 楼层设备显示 -->
                             <div ng-show="data.floor['id']>0">
                                 <div class="dynamic_plot" ng-repeat="d in data.devices"
+                                    ng-class='d.iconClass'
                                     ng-show="(d.type == data.type.id || d.type == data.subType.id) && d.floor == data.floor.id"
                                     ng-style="d.style" ng-click="displayDevice(d);">
                                 </div>

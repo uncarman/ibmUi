@@ -48,32 +48,32 @@ span, em, i{
 
 
 .default {
-    background-image: url('../../img/7niu/pvm_default_weather.png');
+    background-image: url('../../images/7niu/pvm_default_weather.png');
 }
 .sunny {
-    background-image: url('../image/weather_sunny.png');
+    background-image: url('../images/weather_sunny.png');
 }
 .snow {
-    background-image: url('../image/weather_snow.png');
+    background-image: url('../images/weather_snow.png');
 }
 .smog {
-    background-image: url('../image/weather_smog.png');
+    background-image: url('../images/weather_smog.png');
 }
 .sleet {
-    background-image: url('../image/weather_sleet.png');
+    background-image: url('../images/weather_sleet.png');
 }
 .rainy {
-    background-image: url('../image/weather_rainy.png');
+    background-image: url('../images/weather_rainy.png');
 }
 .cloudy {
-    background-image: url('../image/weather_cloudy.png');
+    background-image: url('../images/weather_cloudy.png');
 }
 .overcast {
-    background-image: url('../image/weather_overcast.png');
+    background-image: url('../images/weather_overcast.png');
 }
 .sandstorm {
-    background-image: url('../image/weather_sandstorm.png');
+    background-image: url('../images/weather_sandstorm.png');
 }
 .thunderstorm {
-    background-image: url('../image/weather_thunderstorm.png');
+    background-image: url('../images/weather_thunderstorm.png');
 }

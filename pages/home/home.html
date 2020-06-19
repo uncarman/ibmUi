@@ -10,7 +10,7 @@
     <div class="content">
         <div class="left">
             <!-- 当日当月标煤 -->
-            <div class="summary" ng-click="goto('statistics')">
+            <div class="summary">
                 <div class="col-12">
                     <div class="col-6">
                         <div class="">
@@ -35,7 +35,7 @@
             <div class="clearfix"></div>
 
             <!-- 大楼实时用电 -->
-            <div class="block" ng-click="goto('energySum', 'dt=hour&et=01');">
+            <div class="block">
                 <div class="chart">
                     <div class="title">
                         <span class="icons icon-chart"></span>
@@ -48,17 +48,17 @@
             <div class="clearfix"></div>
             <ul class="leftFoot">
                 <li class="pull-left dot">
-                    当月用电量: <span ng-bind="data.energyMonth | number :0"></span>度
+                    当月电量: <span ng-bind="data.energyMonth | number :0"></span>度
                 </li>
                 <li class="pull-right dot">
-                    上月用电量: <span ng-bind="data.energyLastMonth | number :0"></span>度
+                    上月电量: <span ng-bind="data.energyLastMonth | number :0"></span>度
                 </li>
                 <div class="clearfix"></div>
             </ul>
             <div class="clearfix"></div>
 
             <!-- 设备间状态 -->
-            <div class="block">
+            <!-- <div class="block">
                 <div class="col-12">
                     <div class="title">
                         <span class="icons icon-deviceRoom"></span>
@@ -84,10 +84,10 @@
                     </div>
                 </div>
                 <div class="clearfix"></div>
-            </div>
+            </div> -->
 
             <!-- 大楼设备能耗 -->
-            <div class="block" ng-click="goto('energyGroup', 'et=01&est=能耗分项');">
+            <div class="block">
                 <div class="chart">
                     <div class="title">
                         <span class="icons icon-pie"></span>
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="echart" id="chartMonthBySubentry"></div>
+                            <div class="echart" style="height:120px;" id="chartMonthBySubentry"></div>
                         </div>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
             </div>
             <div class="clearfix"></div>
             <!-- 本月每日用能 -->
-            <div class="block" ng-click="goto('energySum', 'dt=day&et=01');">
+            <div class="block">
                 <div class="chart">
                     <div class="title">
                         <span class="icons icon-chart"></span>
@@ -130,7 +130,7 @@
             <div class="leftFoot">
                 <div class="pull-left">
                     <span class="icons icon-safe"></span>
-                    大楼安全运行天数
+                    大楼健康评分
                 </div>
                 <div class="pull-right" ng-bind="data.safeDays"></div>
                 <div class="clearfix"></div>
@@ -144,27 +144,30 @@
                 <div class="temperature">
                     <div>
                         <span class="current-temp ng-binding" ng-bind="realtimeWeather_tp + '℃'"></span>
-                        <span ng-bind="realtimeWeather_city" class="current-city ng-binding"></span>
                     </div>
                     <div class="clearfix">
-                        空气质量：<span ng-bind="realtimeWeather_airPm" class="ng-binding"></span>
+                        <span ng-bind="realtimeWeather_city" class="current-city ng-binding"></span>
                     </div>
                 </div>
             </div>
             <div class="visitor">
                 <div class="">
-                    <span class="icons icon-person"></span>
-                    日访客：<span ng-bind="data.visitorByDay"></span>
+                    <!-- <span class="icons icon-person"></span> -->
+                    空气质量：<span ng-bind="realtimeWeather_airPm" class="ng-binding"></span>
                 </div>
                 <div class="">
-                    <span class="icons icon-person"></span>
-                    月访客：<span ng-bind="data.visitorByMonth"></span>
+                    <!-- <span class="icons icon-person"></span> -->
+                    空气湿度：<span ng-bind="data.visitorByDay"></span>
+                </div>
+                <div class="">
+                    <!-- <span class="icons icon-person"></span> -->
+                    光照度：<span ng-bind="data.visitorByMonth"></span>
                 </div>
             </div>
             <div class="clearfix"></div>
 
             <!-- 视频监控 -->
-            <div class="block" ng-click="goto('camera');">
+            <div class="block">
                 <div class="chart">
                     <div class="title">
                         <span class="icons icon-camera-s"></span>
@@ -181,6 +184,68 @@
             </div>
             <div class="clearfix"></div>
 
+            <!-- 智慧消防 -->
+            <div class="block">
+                <div class="medias">
+                    <div class="title">
+                        <span class="icons icon-device"></span>
+                        智慧消防
+                    </div>
+                    <div class="">
+                        <div class="media">
+                            <div class="leftImg"><img src="images/icon-sy.png"></div>
+                            <div class="rightBlock">
+                                <b>消防水压</b>
+                                <div>
+                                    总计：<span ng-bind="data.xfsy.online"></span>
+                                </div>
+                                <div>
+                                    正常：<span ng-bind="data.xfsy.closed"></span>
+                                </div>
+                                <div>
+                                    异常：<span ng-bind="data.xfsy.error"></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="media">
+                            <div class="leftImg"><img src="images/icon-sy.png"></div>
+                            <div class="rightBlock">
+                                <b>消防栓</b>
+                                <div>
+                                    总计：<span ng-bind="data.xfs.online"></span>
+                                </div>
+                                <div>
+                                    正常：<span ng-bind="data.xfs.closed"></span>
+                                </div>
+                                <div>
+                                    异常：<span ng-bind="data.xfs.error"></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="media">
+                            <div class="leftImg"><img src="images/icon-camera.png"></div>
+                            <div class="rightBlock">
+                                <b>灭火器</b>
+                                <div>
+                                    总计：<span ng-bind="data.mhq.online"></span>
+                                </div>
+                                <div>
+                                    正常：<span ng-bind="data.mhq.closed"></span>
+                                </div>
+                                <div>
+                                    异常：<span ng-bind="data.mhq.error"></span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
             <!-- 设备运行管理 -->
             <div class="block">
                 <div class="medias">
@@ -189,9 +254,10 @@
                         设备运行管理
                     </div>
                     <div class="">
-                        <div class="media" ng-click="goto('device', 'tp=1')">
+                        <div class="media">
                             <div class="leftImg"><img src="images/icon-airConditioning.png"></div>
                             <div class="rightBlock">
+                                <b>空调机组</b>
                                 <div>
                                     在线：<span ng-bind="data.airConditioning.online"></span>
                                 </div>
@@ -204,9 +270,10 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="media" ng-click="goto('device', 'tp=2')">
+                        <div class="media">
                             <div class="leftImg"><img src="images/icon-light.png"></div>
                             <div class="rightBlock">
+                                <b>智能照明</b>
                                 <div>
                                     在线：<span ng-bind="data.light.online"></span>
                                 </div>
@@ -219,9 +286,10 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="media" ng-click="goto('camera', '')">
+                        <div class="media">
                             <div class="leftImg"><img src="images/icon-camera.png"></div>
                             <div class="rightBlock">
+                                <b>视频监控</b>
                                 <div>
                                     在线：<span ng-bind="data.camera.online"></span>
                                 </div>
@@ -234,9 +302,10 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="media" ng-click="goto('device', 'tp=4')">
+                        <div class="media">
                             <div class="leftImg"><img src="images/icon-elevator.png"></div>
                             <div class="rightBlock">
+                                <b>电梯运行</b>
                                 <div>
                                     在线：<span ng-bind="data.elevator.online"></span>
                                 </div>
@@ -256,37 +325,13 @@
             </div>
             <div class="clearfix"></div>
 
-            <div class="block" ng-click="goto('warning', 'tp=pip');">
-                <div class="chart">
-                    <div class="title">
-                        <span class="icons icon-warning"></span>
-                        报警信息
-                    </div>
-                    <marquee width="100%" height="185" scrollamount="2" direction="up">
-                        <table class="table table-inline">
-                            <tr>
-                                <th>火警等级</th>
-                                <th>点位描述</th>
-                                <th>上报时间</th>
-                                <th>防火分区</th>
-                            </tr>
-                            <tr ng-repeat="a in data.warnings">
-                                <td ng-bind="a.level"></td>
-                                <td ng-bind="a.pointDesc"></td>
-                                <td ng-bind="a.firstTime"></td>
-                                <td ng-bind="a.zone"></td>
-                            </tr>
-                        </table>
-                    </marquee>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="clearfix"></div>
-            </div>
         </div>
 
         <div class="center">
             <div class="center-title" ng-bind="data.curBuilding.name"></div>
-            <div class="col-12">
+            <!-- <iframe id="bimFrame" src="http://120.52.22.142:8100/rongtong/788128365071568903?toolbar=0&model=0" style="border: none;"></iframe> -->
+            <!-- <iframe id="bimFrame" src="http://120.52.22.142/model/657065765387636749?model=1&fbx=1" style="border: none;"></iframe> -->
+            <!-- <div class="col-12">
                 <span class="point pointMz"></span>
                 <span class="point pointJs"></span>
                 <span class="point pointRt"></span>
@@ -300,10 +345,37 @@
                 <a href="http://192.168.151.163:8080/ibs" target="_blank" class="link linkJx">本部大楼</a>
                 <a href="http://192.168.151.201:8080/ibs" target="_blank" class="link linkHy">海盐大楼</a>
                 <img src="images/map.png" width="85%" style="margin-left:8.5%;">
-            </div>
+            </div> -->
             <div class="clearfix"></div>
 
-            <div class="block row medias" style="margin-bottom:24px;">
+            <div class="warning medias">
+                <div class="block">
+                    <div class="chart">
+                        <div class="title" style="margin-bottom:10px;">
+                            <span class="icons icon-warning"></span>
+                            报警信息
+                        </div>
+                        <marquee width="100%" height="85" scrollamount="2" direction="up">
+                            <table class="table table-inline">
+                                <tbody><tr>
+                                    <th>火警等级</th>
+                                    <th>点位描述</th>
+                                    <th>上报时间</th>
+                                    <th>防火分区</th>
+                                </tr>
+                                <!-- ngRepeat: a in data.warnings --><tr ng-repeat="a in data.warnings" class="ng-scope">
+                                    <td ng-bind="a.level" class="ng-binding">一级火警</td>
+                                    <td ng-bind="a.pointDesc" class="ng-binding">二楼楼道东门</td>
+                                    <td ng-bind="a.firstTime" class="ng-binding">06-12 10:24</td>
+                                    <td ng-bind="a.zone" class="ng-binding">二楼东</td>
+                                </tr><!-- end ngRepeat: a in data.warnings -->
+                            </tbody></table>
+                        </marquee>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
                 <div class="chart" style="display:none;">
                     <div class="title">
                         <span class="icons icon-chart"></span>
@@ -311,7 +383,7 @@
                     </div>
                     <div class="echart" id="chartRealTime2"></div>
                 </div>
-                <div class="diandu" ng-click="goto('powerDispatch', '');">
+                <!-- <div class="diandu">
                     <div class="title">
                         <span class="icons icon-chart"></span>
                         电力局调度大楼配电房
@@ -397,90 +469,90 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
-                </div>
+                </div> -->
                 <div class="clearfix"></div>
             </div>
             <div class="block row medias" style="box-shadow:none;">
             <div class="clearfix"></div>
 
-                <div class="col-6" ng-click="goto('device', 'tp=6')">
-                    <div class="title">
-                        <span class="icons icon-xfsb"></span>
-                        消防水箱位/水压
-                    </div>
-                    <div class="">
-                        <!-- 消防水位 -->
-                        <div class="media">
-                            <div class="leftImg"><img src="images/icon-sw-m.png"></div>
-                            <div class="rightBlock">
-                                <div>
-                                    消防水位
-                                </div>
-                                <div>
-                                    1# <span ng-bind="data.fireFighting.n1Level"></span>
-                                </div>
+            <div class="col-6" style="display:none;">
+                <div class="title">
+                    <span class="icons icon-xfsb"></span>
+                    消防水箱位/水压
+                </div>
+                <div class="">
+                    <!-- 消防水位 -->
+                    <div class="media">
+                        <div class="leftImg"><img src="images/icon-sw-m.png"></div>
+                        <div class="rightBlock">
+                            <div>
+                                消防水位
                             </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- 消防水压 -->
-                        <div class="media">
-                            <div class="leftImg"><img src="images/icon-sy.png"></div>
-                            <div class="rightBlock">
-                                <div>
-                                    消防水压
-                                </div>
-                                <div>
-                                    1# <span ng-bind="data.fireFighting.n1Pressure"></span>
-                                </div>
+                            <div>
+                                1# <span ng-bind="data.fireFighting.n1Level"></span>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <!-- 消防水压 -->
+                    <div class="media">
+                        <div class="leftImg"><img src="images/icon-sy.png"></div>
+                        <div class="rightBlock">
+                            <div>
+                                消防水压
+                            </div>
+                            <div>
+                                1# <span ng-bind="data.fireFighting.n1Pressure"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
+            </div>
 
-                <div class="col-6" ng-click="goto('device', 'tp=1')">
-                    <div class="title">
-                        <span class="icons icon-fs"></span>
-                        风冷热泵机组
-                    </div>
-                    <div class="">
-                        <!-- 风机盘管 -->
-                        <div class="media">
-                            <div class="leftImg"><img src="images/icon-wind-on.png"></div>
-                            <div class="rightBlock">
-                                <div>
-                                    风机盘管
-                                </div>
-                                <div>
-                                    运行：--
-                                </div>
-                                <div>
-                                    停止：--
-                                </div>
+            <div class="col-6" style="display:none;">
+                <div class="title">
+                    <span class="icons icon-fs"></span>
+                    风冷热泵机组
+                </div>
+                <div class="">
+                    <!-- 风机盘管 -->
+                    <div class="media">
+                        <div class="leftImg"><img src="images/icon-wind-on.png"></div>
+                        <div class="rightBlock">
+                            <div>
+                                风机盘管
                             </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- 风机盘管 -->
-                        <div class="media">
-                            <div class="leftImg"><img src="images/icon-wind-on.png"></div>
-                            <div class="rightBlock">
-                                <div>
-                                    热泵机组
-                                </div>
-                                <div>
-                                    运行：--
-                                </div>
-                                <div>
-                                    停止：--
-                                </div>
+                            <div>
+                                运行：--
                             </div>
-                            <div class="clearfix"></div>
+                            <div>
+                                停止：--
+                            </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <!-- 风机盘管 -->
+                    <div class="media">
+                        <div class="leftImg"><img src="images/icon-wind-on.png"></div>
+                        <div class="rightBlock">
+                            <div>
+                                热泵机组
+                            </div>
+                            <div>
+                                运行：--
+                            </div>
+                            <div>
+                                停止：--
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
                 
             </div>
             <div class="clearfix"></div>

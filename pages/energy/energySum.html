@@ -11,20 +11,23 @@
     <div class="clearfix"></div>
     <div class="content">
         <div class="row">
-
             <div class="col-3 innerLeft">
                 <div class="title">
                     <span class="fa fa-bar-chart-o"></span>
                     <span ng-bind="data.curBuilding.name"></span>
                 </div>
                 <ul class="block">
-                    <li ng-class="data.energyType=='01'? 'active' : ''" ng-click="gotoPage('01');">
+                    <li ng-class="data.showType=='hour' ? 'active' : ''" ng-click="gotoPage('01', 'hour')">
                         <span class="fa fa-edit"></span>
-                        用电监测
+                        实时用电
                     </li>
-                    <li ng-class="data.energyType=='02'? 'active' : ''" ng-click="gotoPage('02')">
+                    <li ng-class="data.showType=='day' ? 'active' : ''" ng-click="gotoPage('01', 'day')">
                         <span class="fa fa-edit"></span>
-                        用水监测
+                        本月用电
+                    </li>
+                    <li ng-click="goto('energyGroup', 'et=01&est=能耗分项')">
+                        <span class="fa fa-edit"></span>
+                        能耗分项
                     </li>
                 </ul>
                 <p class="clearfix mb20"></p>

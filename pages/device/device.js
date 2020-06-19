@@ -34,68 +34,86 @@ define(function (require) {
         }, 0);
 
         var types = {
-            "1": {
-                id: 1,
-                name: "暖通空调",
-                icon: "fa-plane",
-                childs: [
-                    {
-                        id: 101,
-                        name: "风机盘管",
-                        icon: "images/icon-wind-on.png",
-                    },
-                    {
-                        id: 102,
-                        name: "新风机组",
-                        icon: "fa-plane",
-                        icon: "images/icon-wind-on.png",
-                    },
-                    {
-                        id: 103,
-                        name: "冷热源",
-                        icon: "fa-plane",
-                        icon: "images/icon-wind-on.png",
-                    },
-                ],
+            "101": {
+                id: 101,
+                name: "风机盘管",
+                icon: "fa fa-bullseye",
+                childs: [],
             },
+            "102": {
+                id: 102,
+                name: "新风机组",
+                icon: "fa fa-thermometer-full",
+                childs: [],
+            },
+            "103": {
+                id: 103,
+                name: "冷热源",
+                icon: "fa fa-adjust",
+                childs: [],
+            },
+            // "1": {
+            //     id: 1,
+            //     name: "暖通空调",
+            //     icon: "fa-plane",
+            //     childs: [
+            //         {
+            //             id: 101,
+            //             name: "风机盘管",
+            //             icon: "images/icon-wind-on.png",
+            //         },
+            //         {
+            //             id: 102,
+            //             name: "新风机组",
+            //             icon: "fa-plane",
+            //             icon: "images/icon-wind-on.png",
+            //         },
+            //         {
+            //             id: 103,
+            //             name: "冷热源",
+            //             icon: "fa-plane",
+            //             icon: "images/icon-wind-on.png",
+            //         },
+            //     ],
+            // },
             "2": {
                 id: 2,
                 name: "智能照明",
-                icon: "fa-paper-plane",
+                icon: "fa fa-paper-plane",
+                childs: [],
+            },
+            "200": {
+                id: 200,
+                name: "VRV空调",
+                icon: "fa fa-leaf",
                 childs: [],
             },
             "3": {
                 id: 3,
                 name: "室内空调照明",
-                icon: "fa-plug",
+                icon: "fa fa-plug",
                 childs: [],
             },
             "4": {
                 id: 4,
-                name: "电梯运行",
-                icon: "fa-shopping-basket",
-                childs: [],
-            },
-            "5": {
-                id: 5,
-                name: "门禁管理",
-                icon: "fa-tag",
+                name: "给排水",
+                icon: "fa fa-shopping-basket",
                 childs: [],
             },
             "6": {
                 id: 6,
                 name: "消防监控",
-                icon: "fa-taxi",
+                icon: "fa fa-taxi",
                 childs: [
                     {
                         id: 601,
                         name: "烟感探头",
-                        icon: "images/icon-wind-on.png",
+                        icon: "images/device_smoke_sensor.png",
                     },
                     {
                         id: 602,
                         name: "温感探头",
-                        icon: "images/icon-wind-on.png",
+                        icon: "images/device_smoke_sensor.png",
                     },
                     {
                         id: 603,
@@ -118,7 +136,9 @@ define(function (require) {
                 type: 101,
                 floor: 2,
                 name: "顶楼楼东",
-                icon: "images/icon-wind-on.png",
+                icon: "images/icon_panguan.png",
+                iconClass: "icons icon-panguan",
+                // icon: "images/icon-wind-on.png",
                 style: {"margin-left": "200px", "margin-top": "120px" }
             },
             {
@@ -126,16 +146,39 @@ define(function (require) {
                 type: 101,
                 floor: 2,
                 name: "二楼楼中",
-                video: "video.html",
+                icon: "images/icon_panguan.png",
+                iconClass: "icons icon-panguan",
+                // video: "video.html",
                 style: {"margin-left": "620px", "margin-top": "400px" }
+            },
+            {
+                id: 3,
+                type: 101,
+                floor: 2,
+                name: "二楼楼中",
+                icon: "images/icon_panguan.png",
+                iconClass: "icons icon-panguan",
+                // video: "video.html",
+                style: {"margin-left": "420px", "margin-top": "120px" }
             },
             {
                 id: 2,
                 type: 102,
                 floor: 2,
                 name: "顶楼楼东",
-                video: "video.html",
+                icon: "images/icon_xinfeng.png",
+                iconClass: "icons icon-xinfeng",
+                // video: "video.html",
                 style: {"margin-left": "300px", "margin-top": "150px" }
+            },
+            {
+                id: 3,
+                type: 102,
+                floor: 2,
+                name: "二楼楼中",
+                iconClass: "icons icon-xinfeng",
+                // video: "video.html",
+                style: {"margin-left": "620px", "margin-top": "400px" }
             },
             // 智能照明
             {
@@ -224,7 +267,7 @@ define(function (require) {
             },
             "5": {
                 id: 5,
-                name: "地下一层",
+                name: "配电间",
                 resource: "./uploads/floor-b1.png",
             }
         };
@@ -253,7 +296,29 @@ define(function (require) {
         }
 
         $scope.displayType = function(type) {
-            $scope.goto('device', 'tp='+type.id);
+            //$scope.goto('device', 'tp='+type.id);
+            $scope.data.type = type;
+            if($scope.data.type.childs.length>0 && !$scope.data.subType) {
+                $scope.data.subType = $scope.data.type.childs[0];
+            }
+            if(!$scope.data.floor) {
+                $scope.data.floor = $scope.data.floors[Object.keys($scope.data.floors)[0]];
+            }
+
+            // 风冷热泵
+            if($scope.data.type.id == "103") {
+                $scope.data.floors = {
+                    "103": {
+                        id: 103,
+                        name: "风冷热泵",
+                        resource: "./uploads/fenglengrebeng.png",
+                    }
+                };
+                $scope.data.floor = $scope.data.floors["103"];
+            } else {
+                $scope.data.floors = floors;
+                $scope.data.floor = $scope.data.floors[Object.keys($scope.data.floors)[0]];
+            }
         }
 
         $scope.displayFloor = function(floor) {

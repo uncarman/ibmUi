@@ -1092,8 +1092,6 @@ var global = {
         // if(!token) {
         //     global["goto"]('login');
         // }
-
-        window._scope = $scope;  // 标记局部变量，提供给外部访问
     },
 
     // 页面载入完成后调用函数
@@ -1109,7 +1107,7 @@ var global = {
         }
 
         //gtm使用的scope对象
-        window._scope = $scope;  // 标记局部变量，提供给外部访问
+        window.$scope = $scope;  // 标记局部变量，提供给外部访问
         // 复用 goto 函数到每个页面, 因统计代码所需, 挪至最前面
         $scope["goto"] = global["goto"];
     },

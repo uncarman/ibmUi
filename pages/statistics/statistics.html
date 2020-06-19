@@ -32,10 +32,72 @@
                     </div>
                     
                     <div class="body">
-                        <div class="">
+                        <!-- 健康评分 -->
+                        <div class="" ng-show="data.type=='healty'">
+                            <div class="col-5">
+                                <div class="score">
+                                    49分
+                                    <b>等级差</b>
+                                </div>
+                                <div class="scoreDetail">
+                                    <b>当前建筑存在有消防隐患, 建议尽快改善!</b>
+                                    <div class="text-info">体检项目: 15</div>
+                                    <div>正常项: 11</div>
+                                    <div class="text-danger">异常项: 4</div>
+                                    <div class="text-warning">提醒项: 0</div>
+                                </div>
+                            </div>
+                            <div class="col-7">
+                                <p>以下3个系列系统存在异常, 请及时处理:</p>
+                                <div class="scoreText">
+                                    <div class="title">
+                                        <span class="icons icon-xfsb"></span>
+                                        消火栓系列
+                                        <span class="badge">2项异常</span>
+                                    </div>
+                                    <p class="text-danger">月度消防水泵手动启动试验不合格, 共有4个消防栓泵, 进完成0个消防水泵手动启动试验.</p>
+                                    <p class="text-danger">消火栓泵处于手动状态.</p>
+                                    <p>消火栓泵已供电.</p>
+                                    <p>消火栓泵正常.</p>
+                                </div>
+                                <div class="scoreText">
+                                    <div class="title">
+                                        <span class="icons icon-xfsb"></span>
+                                        火灾自动报警系统
+                                        <span class="badge">1项异常</span>
+                                    </div>
+                                    <p class="text-danger">有3个未处理的故障报警信息, 占总点位的13.46%.</p>
+                                    <p>点位描述符合规定.</p>
+                                    <p>设备类型描述符合规定.</p>
+                                    <p>无未处理火警信息.</p>
+                                    <p>消防室电话符合规定.</p>
+                                    <p>无屏蔽信息.</p>
+                                </div>
+                                <div class="scoreText">
+                                    <div class="title">
+                                        <span class="icons icon-xfsb"></span>
+                                        自动喷水灭火系统
+                                        <span class="badge">1项异常</span>
+                                    </div>
+                                    <p class="text-danger">月度喷淋泵自动实验不合格, 共有2个喷淋泵, 进完成0个喷淋泵启动试验.</p>
+                                    <p>喷淋泵正常.</p>
+                                    <p>喷淋泵处于自动状态.</p>
+                                    <p>喷淋泵已供电.</p>
+                                </div>
+                                <div class="scoreText">
+                                    <div class="title">
+                                        <span class="icons icon-xfsb"></span>
+                                        建筑基础信息
+                                    </div>
+                                    <p>已填写信息完善.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 综合考评 -->
+                        <div class="" ng-show="data.type=='summary'">
                             <div class="col-8">
                                 <div class="chart">
-                                    <div class="echart" id="summaryChart" style="height:800px;"></div>
+                                    <div class="echart" id="summaryChart" style="height:600px;"></div>
                                 </div>
                             </div>
                             <div class="col-4">

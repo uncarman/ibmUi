@@ -23,9 +23,10 @@ define(function (require) {
         });
 
         var types = {
-            "all": "综合考评",
-            "safety": "安全考评",
-            "energy": "能耗考评",
+            "healty": "健康评分",
+            "summary": "综合考评",
+            // "safety": "安全考评",
+            // "energy": "能耗考评",
         };
 
         $scope.data = {
@@ -38,7 +39,7 @@ define(function (require) {
             headRight: moment().format("YYYY-MM-DD dddd"),
 
             types: types,
-            type: global.request("tp") != "" ? global.request("tp") : "all", // all 综合考评
+            type: global.request("tp") != "" ? global.request("tp") : "healty", // healty 健康评分
             typeName: "",
 
             fmt: "YYYY-MM",
@@ -142,7 +143,11 @@ define(function (require) {
         };
 
         $scope.changeType = function(type) {
-            $scope.goto('statistics', 'tp='+type);
+            $scope.data.type = type;
+            setTimeout(function(){
+                $scope.getDatas();
+            }, 0);
+            //$scope.goto('statistics', 'tp='+type);
         }
 
 

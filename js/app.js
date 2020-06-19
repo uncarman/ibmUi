@@ -15,10 +15,8 @@ define(function (require, exports, module) {
 	}]).filter('rangeFormat', function($filter) {
 	    return function(number) {
 	        number = number || 0;
-
 	        var unit='';
 	        switch(true){
-
 	            case number > 1000*1000*1000:
 	                unit='G';
 	                number=number/(1000*1000*1000);
@@ -35,14 +33,13 @@ define(function (require, exports, module) {
 	                unit='';
 	                number=number;
 	                break;
-
 	        }
-
-	        return   $filter('number')(number,2)+unit;;
+	        return $filter('number')(number, 2)+unit;
 	    };
+	}).controller('navController',function($scope){
+		$scope.goto = global.goto;
+		$('#sideMenu').click();
 	});
-
     asyncLoader.configure(app);
-
     module.exports = app;
 });

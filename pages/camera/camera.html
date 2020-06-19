@@ -24,8 +24,7 @@
                         <span ng-bind="f.name"></span>
                     </li>
                 </ul>
-                <p class="clearfix mb20"></p>
-                <ul class="block">
+                <!-- <ul class="block leftNavC" style="position:absolute; margin-left:49%; height:760px; background: none; border-left:none;">
                     <li class="title">监控列表</li>
                     <li ng-repeat="p in data.floorSelected.points"
                         ng-class="p.id==data.cameraSelected.id ? 'active' : ''"
@@ -33,7 +32,7 @@
                         <span class="fa fa-align-center"></span>
                         <span ng-bind="p.name"></span>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <div class="col-9 innerRight">
                 <div class="block">
@@ -54,8 +53,13 @@
                     </div>
                     <div class="body floor">
                         <div class="floor-out">
-                            <div class="dynamic_plot" ng-repeat="p in data.floorSelected.points"
+                            <!-- <div class="dynamic_plot" ng-repeat="p in data.floorSelected.points"
                                 ng-style="p.style" ng-click="displayCamera(p);">
+                            </div> -->
+                            <div class="dynamic_plot" ng-repeat="d in data.floorSelected.points"
+                                ng-class='d.iconClass'
+                                ng-show="(d.type == data.type.id || d.type == data.subType.id) && d.floor == data.floor.id"
+                                ng-style="d.style" ng-click="displayCamera(d);">
                             </div>
                             <img ng-src="{[{data.floorSelected.resource}]}" />
                         </div>
@@ -81,7 +85,7 @@
               </div>
               <div class="modal-body">
                 <div class="iframe">
-                    <iframe ng-src="{[{data.cameraSelected.video | trustAsResourceUrl}]}" class="camera" frameborder=0 scrolling="no"></iframe>
+                    <iframe id="videoIframe" ng-src="{[{data.cameraSelected.video | trustAsResourceUrl}]}" class="camera" frameborder=0 scrolling="no"></iframe>
                 </div>
               </div>
               <div class="modal-footer">
