@@ -245,7 +245,7 @@ span { display: inline; }
 .content > .left .block ul li { list-style: none; line-height: 1.6; }
 .content > .left .block .bar { width: 50%; }
 
-.content > .left .block .echart { height: 160px; }
+.content > .left .block .echart { height: 150px; }
 .content > .left .leftFoot { margin-top:-10px; border-top:none; padding-top:10px; }
 
 .content > .left .tb  { width: 45%; }

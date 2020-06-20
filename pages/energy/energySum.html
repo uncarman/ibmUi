@@ -25,26 +25,57 @@
                         <span class="fa fa-edit"></span>
                         本月用电
                     </li>
-                    <li ng-click="goto('energyGroup', 'et=01&est=能耗分项')">
-                        <span class="fa fa-edit"></span>
-                        能耗分项
+                    <li>
+                        <span class="fa fa-circle-o"></span>
+                        <span>价格计费</span>
                     </li>
                 </ul>
                 <p class="clearfix mb20"></p>
                 <ul class="block">
                     <li class="title">
-                        选择设备
-                        <button ng-click="refreshDatas();" class="submit pull-right"><spam class="glyphicon glyphicon-refresh"></spam> 查看</button>
+                        能耗分类
+                        <!-- <button ng-click="refreshDatas();" class="submit pull-right"><spam class="glyphicon glyphicon-refresh"></spam> 查看</button> -->
                     </li>
                     <div style="max-height:600px; overflow:auto;">
-                        <li ng-repeat="it in data.result.itemList"
+                        <li ng-click="goto('energyGroup', 'et=01&est=能耗分项')">
+                            <span class="fa fa-life-ring"></span>
+                            <span>分项用能</span>
+                        </li>
+                        <ul style="display:none1;">
+                            <li ng-repeat="it in data.result.itemGroups"
+                                ng-show="it.type=='能耗分项' && (it.parent==1)"
+                                ng-click="goto('energyGroup', 'et=01&est=能耗分项')">
+                                <span class="fa fa-circle-o" ng-show="data.itemSelected.indexOf(it)<0"></span>
+                                <span class="fa fa-check" ng-show="data.itemSelected.indexOf(it)>=0"></span>
+                                <span ng-bind="it.name"></span>
+                            </li>
+                        </ul>
+                        <li ng-click="goto('energyGroup', 'et=01&est=建筑区域')">
+                            <span class="fa fa-life-ring"></span>
+                            <span>分区域用能</span>
+                        </li>
+                        <ul style="display:none1;">
+                            <li ng-repeat="it in data.result.itemGroups"
+                                ng-show="it.type=='建筑区域' && (it.parent==112)"
+                                 ng-click="goto('energyGroup', 'et=01&est=建筑区域')">
+                                <span class="fa fa-circle-o" ng-show="data.itemSelected.indexOf(it)<0"></span>
+                                <span class="fa fa-check" ng-show="data.itemSelected.indexOf(it)>=0"></span>
+                                <span ng-bind="it.name"></span>
+                            </li>
+                        </ul>
+                        <li>
+                            <span class="fa fa-life-ring"></span>
+                            <span>自定义选项</span>
+                        </li>
+
+                        <!-- <li ng-repeat="it in data.result.itemList"
                             ng-show="it.dataType==data.itemType"
                             ng-click="doSelect(it);"
                             ng-class="data.itemSelected.indexOf(it)>=0 ? 'active' : ''">
                             <span class="fa fa-circle-o" ng-show="data.itemSelected.indexOf(it)<0"></span>
                             <span class="fa fa-check" ng-show="data.itemSelected.indexOf(it)>=0"></span>
                             <span ng-bind="it.name"></span>
-                        </li>
+                        </li> -->
                     </div>
                 </ul>
             </div>

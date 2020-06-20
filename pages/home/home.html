@@ -94,7 +94,7 @@
                         大楼设备能耗
                     </div>
                     <div class="row">
-                        <div class="col-6 tb">
+                        <!-- <div class="col-6 tb" style="width:39%;">
                             <div class="tbinner">
                                 <b class="col-6">设备类型</b>
                                 <b class="col-6">已用电量</b>
@@ -104,9 +104,9 @@
                                     <span class="col-6"><span ng-bind="s.tt | number :0"></span>度</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="echart" style="height:120px;" id="chartMonthBySubentry"></div>
+                        </div> -->
+                        <div class="col-12">
+                            <div class="echart" id="chartMonthBySubentry"></div>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                 <div class="chart">
                     <div class="title">
                         <span class="icons icon-camera-s"></span>
-                        监控画面
+                        视频监控
                     </div>
                     <div class="">
                         <div class="iframe" ng-repeat="v in data.videos">
@@ -329,6 +329,9 @@
 
         <div class="center">
             <div class="center-title" ng-bind="data.curBuilding.name"></div>
+            <div class="img" style="min-height:450px; padding-top:55px; margin-bottom:20px; width:97.5%; margin-left:5px;">
+                <img src="uploads/building.jpg" style="width:100%" id="bimFrame">
+            </div>
             <!-- <iframe id="bimFrame" src="http://120.52.22.142:8100/rongtong/788128365071568903?toolbar=0&model=0" style="border: none;"></iframe> -->
             <!-- <iframe id="bimFrame" src="http://120.52.22.142/model/657065765387636749?model=1&fbx=1" style="border: none;"></iframe> -->
             <!-- <div class="col-12">

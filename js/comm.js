@@ -215,7 +215,7 @@ var settings = {
         color: _colors,
         calculable : true,
         grid: {
-            top: 40,
+            top: 15,
             left: 40,
             right: 10,
             bottom: 25,
@@ -285,24 +285,37 @@ var settings = {
         tooltip: {
             trigger: 'item',
         },
+        // grid: {
+        //     top: 60,
+        //     left: 80,
+        //     right: 80,
+        //     bottom: 60,
+        // },
         legend: {
             data:[],
+            type: 'scroll',
+            orient: 'vertical',
+            right: 10,
+            top: 10,
+            bottom: 0,
             textStyle: {
                 color: "rgba(60, 231, 218, 0.85)",
-                fontSize: "14",
+                fontSize: "11",
             },
         },
         series: [{
             type: 'pie',
-            radius: '75%',
+            radius: '60%',
+            center: ['40%', '50%'],
             data: [],
-            label:{ //饼图图形上的文本标签
-                normal:{
-                    textStyle : {
-                        fontSize : 16 //文字的字体大小
-                    }
-                }
-            }
+            label: {},
+            // label:{ //饼图图形上的文本标签
+            //     normal:{
+            //         textStyle : {
+            //             fontSize : 10 //文字的字体大小
+            //         }
+            //     }
+            // }
         }]
     },
 };

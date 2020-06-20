@@ -65,7 +65,7 @@ define(function (require) {
             totalElecMonth: 0,
 
             visitorByDay: 56,  // 右上 日访客
-            visitorByMonth: 3523,  // 月访客
+            visitorByMonth: 423,  // 月访客
 
             // 设备
             smokeDetector: {
@@ -290,6 +290,7 @@ define(function (require) {
                     });
                 });
                 var opt = copy(settings.defaultPieOpt);
+                opt.legend.data = ["特殊用电", "动力用电","照明插座","空调用电"];
                 opt.series[0].data = $scope.data.energyMonthBySubentryDataList;
                 drawEChart($scope.chartMonthBySubentry, opt);
 
