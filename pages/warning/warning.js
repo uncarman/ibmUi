@@ -1,33 +1,31 @@
 define(function (require) {
     var app = require('../../js/app');
-    var feather = require('feather');
-    var moment = require('moment');
-    var echarts = require('echarts');
 
-    app.controller('warningCtrl',function ($scope) {
+    app.controller('warningCtrl', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+        var settings = require('comm').settings;
+        var global = require('comm').global;
+        var feather = require('feather');
+        var echarts = require('echarts');
+        var moment = require('moment');
+
         window.echarts = echarts;
         moment.locale("zh_cn");
         $scope.is_debug = settings.is_debug;
         global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
 
         $scope.$watch('$viewContentLoaded', function () {
-            global.on_loaded_func($scope);    // 显示页面内容
-            $("body").on('click', function(ev) {
-                $scope.$apply(function(){
-                    $scope.data.showActionMenu = false;
-                });
-            });
-            $("#actionMenu").on("click", function(ev){
-                var oEvent = ev || event;
-                oEvent.cancelBubble = true;
-                oEvent.stopPropagation();
-            });
-        });
+			// 显示页面内容
+            global.on_loaded_func($scope, $state, $stateParams);
 
-        // 最后执行
-        setTimeout(function () {
-            $scope.getDatas();
-        }, 0);
+            // 初始化参数
+            if(!$scope.data.type) {
+                $scope.data.type = Object.keys(types)[0];
+                $scope.data.typeName = types[$scope.data.type];
+            }
+			
+			// 加载数据
+			$scope.getDatas();
+        });
 
         var types = {
             "ele": "安全用电",
@@ -230,5 +228,5 @@ define(function (require) {
         }
 
 
-    });
+    }]);
 });

@@ -1,1 +1,16 @@
-打分卡拉是分开了萨芬的
+
+<h1 ng-click="gotoPage('test', 1);">aaa</h1>
+
+<ul>
+<li ng-repeat="i in data.result.itemList">
+	<span ng-bind="i.id"></span>
+	<span ng-bind="i.category"></span>
+	<span ng-bind="i.floor"></span>
+	<span ng-bind="i.val"></span>
+	<span ng-bind="i.note"></span>
+	<img ng-src="{[{i.val}]}" width="100" />
+</li>
+</ul>
+
+
+<div id="map" style="z-index: 1; position: absolute; top: 0;right: 0; left: 0; bottom: 0; background:transparent;"></div>

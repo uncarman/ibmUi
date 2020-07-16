@@ -1,20 +1,19 @@
 define(function (require) {
     var app = require('../../js/app');
-    var feather = require('feather');
-    var moment = require("moment");
-    var echarts = require("echarts");
 
     moment.locale("zh-CN");
 
-    app.controller('monitorCtrl',function ($scope) {
+    app.controller('monitorCtrl', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+        var settings = require('comm').settings;
+        var global = require('comm').global;
+        var feather = require('feather');
+        var moment = require("moment");
+        var echarts = require("echarts");
 
         $scope.$watch('$viewContentLoaded', function() {
-            feather.replace();
-            global.on_loaded_func($scope);    // 显示页面内容
-        });
+            //feather.replace();
+            global.on_loaded_func($scope, $state, $stateParams);    // 显示页面内容
 
-        // 最后执行
-        setTimeout(function(){
             // 初始化日期控件
             $($scope.datas.datePickerDom).datepicker({
                 autoclose: true,
@@ -24,7 +23,7 @@ define(function (require) {
             });
 
             $scope.getDatas();
-        }, 0);
+        });
 
         $scope.datas = {
             // 建筑id

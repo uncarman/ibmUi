@@ -2,9 +2,13 @@ define(function (require, exports, module) {
     var angular = require('angular');
     var asyncLoader = require('angular-async-loader');
 
+    var settings = require('comm').settings;
+    var global = require('comm').global;
+
     require('angular-ui-router');
 
     var app = angular.module('app', ['ui.router']);
+    
     app.config(function($interpolateProvider) {
 	    $interpolateProvider.startSymbol('{[{');
 	    $interpolateProvider.endSymbol('}]}');
@@ -36,10 +40,11 @@ define(function (require, exports, module) {
 	        }
 	        return $filter('number')(number, 2)+unit;
 	    };
-	}).controller('navController',function($scope){
-		$scope.goto = global.goto;
+	}).controller('navController', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
 		$('#sideMenu').click();
-	});
+		$scope.goto = global.goto;
+		$scope._state = $state;
+	}]);
     asyncLoader.configure(app);
     module.exports = app;
 });

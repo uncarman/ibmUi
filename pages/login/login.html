@@ -1,13 +1,32 @@
-<div>
-   	<div ng-if="data.userinfo">
-   		<div>name: <i ng-bind="data.userinfo.name"></i></div>
-   		<div>mobile: <i ng-bind="data.userinfo.mobile"></i></div>
-   	</div>
-
-   	<input type="text" ng-model="data.mobile">
-   	<input type="button" value="submit" ng-click="send_sms()">
-
-</div>
-<div>
-    <a ui-sref="products">goto products</a>
+<div class="login">
+	<div id="particles" class="particles"></div>
+    <div class="boardLogin">
+        <h1>
+            <img src="images/s_ico1.png">
+            <span ng-bind="data.pageTitle"></span>
+        </h1>
+        <div>
+            <div class="inpGroup">
+                <span class="loginIco1"></span>
+                <input class="form-control1" type="text" autocomplete="off" placeholder="请输入您的用户名"
+                    ng-model="data.username" date-keys>
+            </div>
+            <div class="prompt">
+                <p class="error">用户名错误或不存在</p>
+            </div>
+            
+            <div class="inpGroup">
+                <span class="loginIco2"></span>
+                <input class="form-control1" type="password" autocomplete="new-password" placeholder="请输入您的密码"
+                    ng-model="data.password"
+                    date-keys >
+            </div>
+            <div class="prompt">
+                <p class="success">输入正确</p>
+            </div>
+            
+            <!-- <button class="submit">登录</button> -->
+            <button class="animsition-link submit" ng-click="doLogin();">登录</button>
+        </div>
+    </div>
 </div>

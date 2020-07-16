@@ -1,22 +1,19 @@
 define(function (require) {
     var app = require('../../js/app');
-    var feather = require('feather');
-    var moment = require('moment');
 
-    app.controller('device2Ctrl', function($scope) {
+    app.controller('device2Ctrl', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+        var settings = require('comm').settings;
+        var global = require('comm').global;
+        var feather = require('feather');
+        var moment = require('moment');
+        
         moment.locale("zh_cn");
         $scope.is_debug = settings.is_debug;
         global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
 
-        $scope.$watch('$viewContentLoaded', function () {
-            global.on_loaded_func($scope);    // 显示页面内容
-        });
-
-        refreshInterval = 5*60*1000; // N 分钟刷新所有电站数据
-
         $scope.$watch('$viewContentLoaded', function() {
             //feather.replace();
-            global.on_loaded_func($scope);    // 显示页面内容
+            global.on_loaded_func($scope, $state, $stateParams);    // 显示页面内容
 
             // 页面初始化,如果无子类展示,直接选中第一个楼层
             $scope.data.floor = (!$scope.data.subType && $scope.data.type.childs.length<=0) ? $scope.data.floors[Object.keys($scope.data.floors)[0]] : "";
@@ -320,5 +317,5 @@ define(function (require) {
                 })[0];
             });
         }
-    });
+    }]);
 });

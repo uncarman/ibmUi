@@ -1,25 +1,20 @@
 define(function (require) {
     var app = require('../../js/app');
-    var feather = require('feather');
-    var moment = require('moment');
-    var echarts = require('echarts');
 
-    app.controller('energySumCtrl', function($scope) {
+    app.controller('energySumCtrl', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+        var settings = require('comm').settings;
+        var global = require('comm').global;
+        var feather = require('feather');
+        var echarts = require('echarts');
+        var moment = require('moment');
+
         window.echarts = echarts;
         moment.locale("zh_cn");
         $scope.is_debug = settings.is_debug;
         global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
 
-        $scope.$watch('$viewContentLoaded', function () {
-            global.on_loaded_func($scope);    // 显示页面内容
-        });
-
-        refreshInterval = 5*60*1000; // N 分钟刷新所有电站数据
-
         $scope.$watch('$viewContentLoaded', function() {
-            //feather.replace();
-            global.on_loaded_func($scope);    // 显示页面内容
-
+            global.on_loaded_func($scope, $state, $stateParams);    // 显示页面内容
             // 初始化日期控件
             $($scope.data.datePickerDom).datepicker({
                 autoclose: true,
@@ -28,7 +23,7 @@ define(function (require) {
                 format: "yyyy-mm-dd"
             });
         });
-
+        console.log($stateParams);
         // 最后执行
         setTimeout(function(){
             // 初始化日期控件
@@ -56,7 +51,7 @@ define(function (require) {
                 }
                 $scope.data.chartCompare = $scope.data.chartCompares[0];
             });
-            $scope.getDatas();
+            //$scope.getDatas();
         }, 0);
 
         $scope.data = {
@@ -78,10 +73,10 @@ define(function (require) {
             // energyType -> 01/02/03/04
             // energySubType -> 能耗分项/建筑区域/组织机构
 
-            showType: global.request("dt"), // 
-            energyType: global.request("et"), //
+            showType: $stateParams.dt, // 
+            energyType: $stateParams.et, //
 
-            itemType: parseInt(global.request("et")) + 10, // 表对应的dateType
+            itemType: parseInt($stateParams.et) + 10, // 表对应的dateType
 
             chartTypes: settings.defaultDateTypes,
             chartCompares: [],
@@ -336,6 +331,6 @@ define(function (require) {
             $scope.data.chartCompare = $scope.data.chartCompares[0];
             $scope.refreshDatas();
         };
-    });
+    }]);
 
 });

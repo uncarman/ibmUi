@@ -1,0 +1,434 @@
+define(function (require) {
+    var app = require('../../js/app');
+    var feather = require('feather');
+    var moment = require('moment');
+    var echarts = require('echarts');
+
+    app.controller('energyDetailCtrl', function($scope, $state, $stateParams) {
+        window.echarts = echarts;
+        moment.locale("zh_cn");
+        $scope.is_debug = settings.is_debug;
+        global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
+
+        $scope.$watch('$viewContentLoaded', function () {
+            global.on_loaded_func($scope, $state, $stateParams);    // 显示页面内容
+        });
+
+        refreshInterval = 5*60*1000; // N 分钟刷新所有电站数据
+
+        $scope.$watch('$viewContentLoaded', function() {
+            $scope.dailyChart = echarts.init(document.getElementById("dailyChart"));
+            $scope.summaryPieChart = echarts.init(document.getElementById("summaryPieChart"));
+            // 初始化日期控件
+            $($scope.data.datePickerDom).datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                language: "zh-CN",
+                format: "yyyy-mm-dd"
+            });
+            // 更新时间选择
+            if($scope.data.showType == "hour") {
+                $scope.data.fromDate = $scope.data.toDate;
+            }
+            $scope.data.chartType = $scope.data.chartTypes.filter(function(t){
+                return t.val == $scope.data.showType;
+            })[0];
+            // 生成对比年份
+            for(var i = 1; i < 6; i++) {
+                var year = moment().add(-i, 'year').format("YYYY");
+                $scope.data.chartCompares.push({
+                    val: year,
+                    name: year,
+                });
+            }
+            $scope.data.chartCompare = $scope.data.chartCompares[0];
+        });
+
+        // 最后执行
+        setTimeout(function(){
+            $scope.getDatas();
+        }, 0);
+
+        $scope.data = {
+            user: global.read_storage("session", "user"),
+            curBuilding: global.read_storage("session", "building"),
+            buildingList: global.read_storage("session", "buildingList"),
+
+            pageTitle: settings.pageTitle,
+            headLeft: "安全·舒适·节能",
+            headRight: moment().format("YYYY-MM-DD dddd"),
+
+            fmt: "YYYY-MM-DD",
+            datePickerDom: ".datePicker",
+            fromDate: moment().add(-30, 'day').format("YYYY-MM-DD"),
+            toDate: moment().format("YYYY-MM-DD"),
+            todayStr:moment().format("YYYY-MM-DD"),
+            
+            // showType ->  hour/day/month/year
+            // energyType -> 01/02/03/04
+            // energySubType -> 能耗分项/建筑区域/组织机构
+            showType: $stateParams.showType, // 
+            energyType: $stateParams.energyType, //
+            subType: $stateParams.subType, //
+            itemType: parseInt($stateParams.energyType) + 10, // 表对应的dateType
+
+            subTypes: settings.subTypes, // 能耗分项,建筑区域,组织机构,自定义
+            chartTypes: settings.defaultDateTypes,
+            chartCompares: [],
+            query: {},
+            chartType: null,  // 默认按天
+            chartCompare: null,  // 默认上一年度
+
+            viewType: "all",  // 是查看总计，还是选设备看汇总
+            itemSelected: [],
+            groupSelected: [],
+
+            result:{
+                summaryDatas: [],
+                chartDatas: {},
+                tableData: {},
+
+                itemGroups: [],
+                itemList: [],
+            },
+            option: settings.defaultLineOpt,
+        }
+
+        // 格式化from to
+        $scope.fmtDateRange = function() {
+            var from = $scope.data.fromDate;
+            var to = $scope.data.toDate;
+            var compareFrom = moment($scope.data.fromDate).year($scope.data.chartCompare.val).format("YYYY-MM-DD");
+            var compareTo = moment($scope.data.toDate).year($scope.data.chartCompare.val).format("YYYY-MM-DD");
+            if($scope.data.chartType.val == "hour") {
+                from = from + " 00";
+                to = to + " 24";
+                compareFrom = compareFrom + " 00";
+                compareTo = compareTo + " 24";
+            } else {
+                from = moment($scope.data.fromDate).format($scope.data.chartType.paramFmt);
+                to = moment($scope.data.toDate).format($scope.data.chartType.paramFmt);
+                compareFrom = moment($scope.data.compareFromDate).format($scope.data.chartType.paramFmt);
+                compareTo = moment($scope.data.compareToDate).format($scope.data.chartType.paramFmt);
+            }
+            return {
+                from: from,
+                to: to,
+                compareFrom: compareFrom,
+                compareTo: compareTo,
+            }
+        }
+        
+        // 获取图表数据
+        $scope.getEnergyChartDataByType = function () {
+            var param = {
+                _method: 'post',
+                _url: settings.ajax_func.getEnergyChartDataByType,
+                _param: {
+                    buildingId: $scope.data.curBuilding.id,
+                    from: $scope.fmtDateRange().from,
+                    to: $scope.fmtDateRange().to,
+                    type: $scope.data.chartType.val,
+                    energyType: $scope.data.energyType,
+                    parent: $scope.data.parent ? $scope.data.parent : $scope.data.result.itemGroups.id,
+                }
+            };
+            global.ajax_data($scope, param, function (res) {
+                $scope.$apply(function(){
+                    $scope.data.result.chartDatas = res.data;
+                    if(Object.keys(res.data).length > 1) {
+                        $scope.data.hasChilds = true;
+                    } else {
+                        $scope.data.hasChilds = false;
+                    }
+                    summaryPieDraw();
+                    dailyChartDraw();
+                });
+            });
+        };
+
+        // 获取table数据
+        $scope.getEnergyTableDataByType = function () {
+            var to = $scope.data.toDate
+            if($scope.data.chartType.val == "hour") {
+                to = $scope.data.toDate + " 24";
+            } else {
+                to = moment($scope.data.toDate).format($scope.data.chartType.paramFmt);
+            }
+            var param = {
+                _method: 'post',
+                _url: settings.ajax_func.getEnergyTableDataByType,
+                _param: {
+                    buildingId: $scope.data.curBuilding.id,
+                    from: moment($scope.data.fromDate).format($scope.data.chartType.paramFmt), // $scope.data.fromDate,
+                    to: to,   // $scope.data.toDate,
+                    type: $scope.data.chartType.val,
+                    energyType: $scope.data.energyType,
+                }
+            };
+            global.ajax_data($scope, param, function (res) {
+                $scope.$apply(function(){
+                    $scope.data.result.tableData.title = res.data[0];
+                    $scope.data.result.tableData.data = res.data.slice(1, res.data.length);
+                });
+            });
+        };
+
+        // 获取设备列表
+        $scope.getBuildingItems = function() {
+            // 设备分组
+            var param = {
+                _method: 'post',
+                _url: settings.ajax_func.ajaxGetItemGroups,
+                _param: {
+                    buildingId: $scope.data.curBuilding.id,
+                }
+            };
+            global.ajax_data($scope, param, function (res) {
+                $scope.$apply(function(){
+                    $scope.data.result.itemGroups = $scope.fmtItemGroups(res.data);
+                    // 默认全部选中
+                    $scope.data.result.itemGroups.map(function(ig) {
+                        $scope.changeItemGroup(ig);
+                    });
+                });
+            });
+
+            // 设备列表
+            var param = {
+                _method: 'post',
+                _url: settings.ajax_func.ajaxGetBuildingItems,
+                _param: {
+                    buildingId: $scope.data.curBuilding.id,
+                }
+            };
+            global.ajax_data($scope, param, function (res) {
+                $scope.$apply(function(){
+                    $scope.data.result.itemList = res.data;
+                });
+            });
+        }
+        $scope.fmtItemGroups = function(list) {
+            var tmp = [];
+            // 排列好父子关系
+            list.map(function(g) {
+                if(!g.parent || g.parent == "") {
+                    g.childs = [];
+                    tmp.push(g);
+                }
+            });
+            tmp.map(function(t) {
+                list.map(function(g) {
+                    if(g.parent == t.id) {
+                        g.childs = [];
+                        t.childs.push(g);
+                    }
+                });
+            });
+            tmp.map(function(_t) {
+                _t.childs.map(function(t) {
+                    list.map(function(g) {
+                        if(g.parent == t.id) {
+                            g.childs = [];
+                            t.childs.push(g);
+                        }
+                    });
+                });
+            });
+            // 筛选出当前大类
+            var cp = tmp.filter(function(g) {
+                return g.code.slice(0,2) == $scope.data.energyType && g.type == $scope.data.subType;
+            })[0];
+            console.log(cp);
+            return cp.childs;
+        }
+
+
+
+        // 【多个设备】按【时/日/月/年】汇总数据
+        $scope.getItemDatasByDate = function () {
+            var to = $scope.data.toDate
+            if($scope.data.chartType.val == "hour") {
+                to = $scope.data.toDate + " 24";
+            } else {
+                to = moment($scope.data.toDate).format($scope.data.chartType.paramFmt);
+            }
+            var param = {
+                _method: 'post',
+                _url: settings.ajax_func.getItemDatasByDate,
+                _param: {
+                    buildingId: $scope.data.curBuilding.id,
+                    from: moment($scope.data.fromDate).format($scope.data.chartType.paramFmt), // $scope.data.fromDate,
+                    to: to,   // $scope.data.toDate,
+                    type: $scope.data.chartType.val,
+                    itemIds: $scope.data.itemSelected.map(function(it) { return it.id; }).join(","),
+                }
+            };
+            global.ajax_data($scope, param, function (res) {
+                $scope.$apply(function(){
+                    if($scope.data.result.chartDatas.hasOwnProperty($scope.data.energyType)) {
+                        $scope.data.result.chartDatas[$scope.data.energyType].datas = res.data;
+                    } else {
+                        MyAlert("数据加载失败，请稍后重试。");
+                    }
+                    summaryChartDraw($scope.data);
+                    fmtTableWithBaseData($scope.data.result.chartDatas[$scope.data.energyType]);
+                });
+            });
+        };
+
+        // 获取数据
+        $scope.getDatas = function(){
+            $scope.refreshDatas();
+            // 获取设备相关数据
+            $scope.getBuildingItems();
+        };
+
+        // 画图表
+        $scope.summaryChart = echarts.init(document.getElementById("summaryChart"));
+
+        function summaryChartDraw(data) {
+            var opt = angular.copy($scope.data.option);
+            opt.xAxis[0].type = 'category';
+            opt.xAxis[0].data = [];
+            var curFmt = $scope.data.chartType.fmt;
+
+            var to = $scope.data.toDate;
+            if($scope.data.chartType.val == "hour") {
+                to = $scope.data.toDate + " 24";
+            } else {
+                to = moment($scope.data.toDate).format($scope.data.chartType.paramFmt);
+            }
+
+            // 生成x轴内容
+            var xlen = Math.ceil(moment(moment(to).format($scope.data.chartType.fmt)).diff(moment($scope.data.fromDate).format($scope.data.chartType.fmt), $scope.data.chartType.val+'s', true));
+            for(var i=0; i<=xlen; i++) {
+                opt.xAxis[0].data.push(moment($scope.data.fromDate).add($scope.data.chartType.val+'s', i).format($scope.data.chartType.xAxisFmt));
+            }
+
+            for(var o in data.result.chartDatas) {
+                var sd = [];
+                for(var i=0; i<=xlen; i++) {
+                    sd.push(0);
+                }
+                var d = data.result.chartDatas[o];
+                opt.legend.data.push(d.name);
+                if(d.datas) {
+                    d.datas.map(function (k) {
+                        var ind = opt.xAxis[0].data.indexOf(moment(k[d.key]).format($scope.data.chartType.xAxisFmt));
+                        sd[ind] = parseFloat(k[d.val]).toFixed(4);
+                    });
+                }
+
+                var tempSeries = {
+                    name: d.name,
+                    type: "bar",
+                    stack: "总量",
+                    barWidth:"40%",
+                    data: sd
+                };
+                opt.series.push(tempSeries);
+            }
+            console.log(opt);
+            $scope.summaryChart.setOption(opt, true);
+            $scope.summaryChart.resize();
+        };
+
+        // 基于图表数据，生成简单的table
+        function fmtTableWithBaseData(data) {
+            $scope.data.result.tableData.title = ["时间", data.name];
+            $scope.data.result.tableData.data = data.datas.map(function(d){
+                return [d[data.key], d[data.val]];
+            });
+        }
+
+        // 分项选择
+        $scope.changeItemGroup = function(item, subItem) {
+            if(subItem) {
+                // 选择子项
+                var ind = $scope.data.groupSelected.indexOf(subItem);
+                if(ind >=0) {
+                    $scope.data.groupSelected.splice(ind,1);
+                } else {
+                    $scope.data.groupSelected.push(subItem);
+                }
+            } else {
+                // 选择总项
+                var ind = $scope.data.groupSelected.indexOf(item);
+                if(ind >= 0) {
+                    $scope.data.groupSelected.splice(ind,1);
+                    $scope.data.groupSelected.map(function(sit, i) {
+                        if(sit.parent == item.id) {
+                            delete $scope.data.groupSelected[i];
+                        }
+                    });
+                } else {
+                    $scope.data.groupSelected.push(item);
+                    item.childs.map(function(sit) {
+                        var i = $scope.data.groupSelected.indexOf(sit);
+                        if( i < 0) {
+                            $scope.data.groupSelected.push(sit);
+                        }
+                    });
+                }
+                $scope.data.groupSelected = $scope.data.groupSelected.notEmpty();
+            }
+        }
+
+        // 点击选中设备
+        $scope.doSelect = function(item) {
+            var ind = $scope.data.itemSelected.indexOf(item);
+            if( ind >=0 ) {
+                $scope.data.itemSelected.splice(ind,1);
+            } else {
+                $scope.data.itemSelected.push(item);
+            }
+        }
+
+        // 点击按刷新页面
+        $scope.refreshDatas = function () {
+            // 获取图表数据
+            $scope.getEnergyChartDataByType();
+            // 获取table数据
+            $scope.getEnergyTableDataByType();
+        };
+
+        $scope.changeSubType = function(subType) {
+            $state.go("energyDetail", {
+                energyType: $scope.data.energyType,
+                subType: subType,
+                showType: $scope.data.showType,
+            });
+        }
+
+        // 点击跳转
+        $scope.gotoPage = function (et, dt) {
+            //var query = "dt="+$scope.data.showType+"&et="+et;
+            //$scope.goto("energySum", query);
+            $scope.data.showType = dt;
+            $scope.data.energyType = et;
+            $scope.data.itemType = parseInt(et) + 10;
+
+
+            if($scope.data.showType == "hour") {
+                $scope.data.fromDate = $scope.data.toDate;
+            } else {
+                $scope.data.fromDate = moment($scope.data.toDate).add(-15, 'day').format("YYYY-MM-DD");
+            }
+            $scope.data.chartType = $scope.data.chartTypes.filter(function(t){
+                return t.val == $scope.data.showType;
+            })[0];
+            // 生成对比年份
+            for(var i = 1; i < 6; i++) {
+                var year = moment().add(-i, 'year').format("YYYY");
+                $scope.data.chartCompares.push({
+                    val: year,
+                    name: year,
+                })
+            }
+            $scope.data.chartCompare = $scope.data.chartCompares[0];
+            $scope.refreshDatas();
+        };
+    });
+
+});

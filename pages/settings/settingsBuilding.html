@@ -1,0 +1,178 @@
+<div class="container innerPage">
+
+    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="row">
+            <div class="col-3 innerLeft">
+                <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
+                <ul class="block">
+                    <li class="title">
+                        <span class="fa fa-bolt"></span>后台管理
+                    </li>
+                    <li ng-class="data.settingsRouteInd==$index ? 'active' : ''"
+                        ng-repeat="r in data.settingsRoutes"
+                        ng-click="goto(r.url);">
+                        <span class="fa" ng-class="r.icon"></span>
+                        <span ng-bind="r.name"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-9 innerRight">
+                <div class="block">
+                    <div class="title">
+                        <span class="fa fa-area-chart"></span>
+                        建筑信息
+                    </div>
+                    <div class="body">
+                        <div class="col-6">
+                            <div class="media">
+                                <div class="title">安全评分</div>
+                                <div class="clearfix">
+                                    <div class="leftImg">
+                                        <div class="score score-healthy">90</div>
+                                    </div>
+                                    <div class="rightBlock">
+                                        <p>
+                                            该建筑已击败平台100%的建筑
+                                        </p>
+                                        <p>
+                                            <button class="btn submit">重新评分</button>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="media">
+                                <div class="title">点位信息</div>
+                                <div class="clearfix">
+                                    <div id="pointsChart" style="height:150px;" class="echart"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-6">
+                            <table class="table table-hover table-inline">
+                                <thead>
+                                <tr>
+                                   <th colspan="2">建筑物</th> 
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>建筑面积</td>
+                                    <td>12000平方米</td>
+                                </tr>
+                                <tr>
+                                    <td>建筑类型</td>
+                                    <td>办公建筑</td>
+                                </tr>
+                                <tr>
+                                    <td>建成时间</td>
+                                    <td>2007</td>
+                                </tr>
+                                <tr>
+                                    <td>建筑层数</td>
+                                    <td>7</td>
+                                </tr>
+                                <tr>
+                                    <td>总占地面积</td>
+                                    <td>65000平方米</td>
+                                </tr>
+                                <tr>
+                                    <td>建筑业主</td>
+                                    <td>人民卫生出版社有限公司</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <div class="mapBox">
+                                <div class="map" id="mapBuilding" style="position:relative; width:98%; height:400px;"></div>
+                                <div class="address" ng-bind="data.curBuilding.name"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade itemEdit in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" ng-show="datas.curMethod=='edit'" ng-bind="datas.curItemCache.name"></h4>
+                    <h4 class="modal-title" ng-show="datas.curMethod=='create'">创建分组</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="curItem" class="form-horizontal form-label-left">
+                        <div>
+                            <div class="item form-group" ng-show="datas.curMethod=='view' || datas.curMethod=='edit'">
+                                <label class="control-label col-xs-4">ID:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control col-xs-12"
+                                           ng-readonly="datas.curMethodReadOnly"
+                                           id="id" ng-model="datas.curItem.id" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-xs-4">类型ID:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control col-xs-12"
+                                           ng-readonly="datas.curMethodReadOnly"
+                                           id="type" ng-model="datas.curItem.type" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-xs-4">类型名称:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control col-xs-12"
+                                           ng-readonly="datas.curMethodReadOnly"
+                                           id="name" ng-model="datas.curItem.name" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-xs-4">数据编码:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control col-xs-12"
+                                           ng-readonly="datas.curMethodReadOnly"
+                                           id="basic_code" ng-model="datas.curItem.basicCode" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-xs-4">数据名称:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control col-xs-12"
+                                           ng-readonly="datas.curMethodReadOnly"
+                                           id="basic_name" ng-model="datas.curItem.basicName" />
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-xs-4">备注:</label>
+                                <div class="col-xs-8">
+                                    <input type="text" class="form-control col-xs-12"
+                                           ng-readonly="datas.curMethodReadOnly"
+                                           id="note" ng-model="datas.curItem.note" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button ng-show="datas.curMethod=='create'" type="button" class="btn btn-primary" ng-click="saveItem();">保存</button>
+                    <button ng-show="datas.curMethod=='edit'" type="button" class="btn btn-primary" ng-click="updateItem();">更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

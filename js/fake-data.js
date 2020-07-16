@@ -2030,4 +2030,39 @@ var fakeData = {
     "data" : [ [ "日期", "照明插座用电", "照明插座用电密度", "空调用电", "空调用电密度", "动力用电", "动力用电密度", "特殊用电", "特殊用电密度" ], [ "2020-06-04", 8290.5625, 0.07583757, 4339.1875, 0.039692532, 16777.6875, 0.15347317, 10701.6875, 0.09789322 ], [ "2020-06-05", 8577.8125, 0.07846517, 4246.3125, 0.03884296, 17810.4375, 0.1629202, 11024.7500, 0.10084843 ], [ "2020-06-06", 8892.8125, 0.08134662, 4498.8750, 0.041153267, 17530.0000, 0.16035493, 10402.8125, 0.09515928 ], [ "2020-06-07", 8077.1875, 0.073885724, 4241.3750, 0.038797796, 17218.0625, 0.15750149, 10984.6875, 0.10048196 ], [ "2020-06-08", 8847.6875, 0.08093384, 4111.5000, 0.03760977, 17097.9375, 0.15640265, 10844.9375, 0.0992036 ], [ "2020-06-09", 8572.1250, 0.078413144, 4393.5625, 0.040189926, 17094.0000, 0.15636663, 10685.9375, 0.09774915 ], [ "2020-06-10", 8818.9375, 0.08067085, 4396.4375, 0.040216222, 17391.4375, 0.15908742, 10795.7500, 0.09875366 ], [ "2020-06-11", 3906.0000, 0.035729967, 1955.7500, 0.017890139, 8021.2500, 0.07337404, 4880.0000, 0.04463959 ] ]
   },
 
+
+  "api/recource": {
+    "code" : 200,
+    "message" : "SUCCESS",
+    "data" : [
+      {
+        id :1,
+        category: "变配电",
+        "type": "大楼配电房",
+        "subType": null,
+        val: [{"class":"line","style":{"width":"1000px","margin-left":"50px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"75px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"275px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"475px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"675px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"875px","margin-top":"10px"}}],
+        otherData: "",
+        "note": "", 
+      },
+      {
+        id :2,
+        category: "变配电",
+        "type": "中压变电",
+        "subType": null,
+        val: [{"class":"line","style":{"width":"1470px","margin-left":"50px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"75px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"375px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"675px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"975px","margin-top":"10px"}},{"class":"hline","style":{"width":"250px","margin-left":"1275px","margin-top":"10px"}}],
+        otherData: "",
+        "note": "", 
+      },
+      {
+        id :3,
+        category: "变配电",
+        "type": "低压变电I",
+        "subType": null,
+        val: [{"class":"line","style":{"width":"1270px","margin-left":"50px","margin-top":"10px"}},{"class":"hline","style":{"width":"700px","margin-left":"75px","margin-top":"10px"}},{"class":"hline","style":{"width":"450px","margin-left":"375px","margin-top":"10px"}},{"class":"hline","style":{"width":"450px","margin-left":"675px","margin-top":"10px"}},{"class":"hline","style":{"width":"700px","margin-left":"975px","margin-top":"10px"}},{"class":"hline","style":{"width":"700px","margin-left":"1275px","margin-top":"10px"}}],
+        otherData: "",
+        "note": "", 
+      }
+    ],
+  }
+
 }

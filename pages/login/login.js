@@ -1,76 +1,108 @@
 define(function (require) {
     var app = require('../../js/app');
-    var jQuery = require('jquery');
 
-    app.controller('loginCtrl', ['$scope', function($scope) {
-        $scope.data = {
-        	title: "title"
-        }
-        setTimeout(function(){
-        	$scope.$apply(function(){
-        		$scope.data.userinfo = {
-	        		name: "sam",
-	        		mobile: "1584444444"
-	        	}
-        	});
-        	session.userinfo = $scope.data.userinfo;
+    app.directive('dateKeys', function () {
+        return {
+            restrict: 'A',
+                link: function (scope, element, attrs, controller) {
+                    element.on('keydown', function (event) {
+                        if (event.keyCode == 13) {
+                            scope.doLogin();
+                        } else {
+                            return true;
+                        }
+                    });
+                }
+            }
+    }).controller('loginCtrl', ['$scope', '$state', '$stateParams', function($scope, $state, $stateParams) {
+        var particles = require('particles');
+        var particleOpt = require('../../js/login-particles-opt');
+
+        var settings = require('comm').settings;
+        var global = require('comm').global;
+        var feather = require('feather');
+        var echarts = require('echarts');
+        var moment = require('moment');
+
+        $scope.is_debug = settings.is_debug;
+        global.on_load_func();    // 加载隐藏div数据并保存到js的session变量
+
+        $scope.$watch('$viewContentLoaded', function () {
+            global.on_loaded_func($scope, $state, $stateParams);    // 显示页面内容
+            particlesJS('particles', particleOpt.opt);
         });
 
-        $scope.send_sms = function () {
-        	var param = {
+        $scope.data = {
+            pageTitle: settings.pageTitle,
+
+            data: {
+                user: {},
+                username: "",
+                password: "",
+            }
+        }
+
+        $scope.doLogin = function () {
+            if($scope.data.username == "") {
+                alert("请填写用户名.");
+                return false;
+            }
+            if($scope.data.password == "") {
+                alert("请填写密码.");
+                return false;
+            }
+            var param = {
                 _method: 'post',
-                _url: settings.ajax_base_url,
+                _url: settings.ajax_func.ajaxLogin,
                 _param: {
-                    act: settings.ajax_func.send_sms, //功能号
-                    mobile: $scope.data.mobile,
-                    sms_type: "login"
+                    userName: $scope.data.username,
+                    password: $scope.data.password,
                 }
             };
-            global.ajax_data($scope, param,
-                function (data) {
-                    console.log(data);
-                    if(data.code == -1) // 验证码已经发送成功并且还没失效
+            global.ajax_data($scope, param, function (res) {
+                var user = res.data;
+                user.photo_url = user.photo_url ? user.photo_url : settings.default_photo;
+                global.set_storage_key('session', [
                     {
-                        has_get_vcode = true;
-                        countdown(); //倒计时
-                        $scope.$apply(function(){
-                            $scope.data.login_error = "";
-                            $scope.data.login_info = "亲，您的验证码已经发送成功，失效时间是15分钟，请耐心等待。";
-                        });
-                        return;
+                        key: 'user',
+                        val: user,
                     }
-                    else if(data.code == -4)    // 超过次数
+                ]);
+                $scope.data.user = user;
+                $scope.getBuildingList();
+            }, [], function (res) {
+                if(res.message) {
+                    alert(res.message);
+                }
+            });
+        }
+
+        $scope.getBuildingList = function() {
+            var param = {
+                _method: 'post',
+                _url: settings.ajax_func.ajaxGetUserBuildings,
+                _param: {
+                    userId: $scope.data.user.id
+                }
+            };
+            global.ajax_data($scope, param, function (res) {
+                // 缓存用户建筑列表
+                global.set_storage_key('session', [
                     {
-                        $scope.$apply(function(){
-                            $scope.data.login_error = data.message;
-                            $scope.data.login_info = "";
-                        });
-                        return;
-                    }
-                    else if(data.code == -2 || data.code == -3) // 发送验证码失败
+                        key: 'buildingList',
+                        val: res.data,
+                    },
                     {
-                        $scope.$apply(function(){
-                            $scope.data.login_error = data.message;
-                            $scope.data.login_info = "";
-                        });
-                        return;
+                        key: 'building',
+                        val: res.data[0],
                     }
-                    else
-                    {
-                        if(configs.fake_sms)
-                        {
-                            alert("验证码是: " + data.result.sms_code);
-                        }
-                        has_get_vcode = true;
-                        countdown(); //倒计时
-                        return;
-                    }
-                }, [-1,-2,-3,-4],
-                function (){
-                    $scope.$apply(function(){
-                        $scope.smsCanClick = true; //按钮可点击
-                    });
-                });
-        };
+                ]);
+                $scope.goto("home");
+            }, [], function (res) {
+                if(res.message) {
+                    alert(res.message);
+                }
+            });
+        }
     }]);
 });

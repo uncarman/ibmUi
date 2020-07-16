@@ -1,3 +1,4 @@
+<!-- 右侧菜单 -->
 <div id="sideMenu">
     <span class="fa fa-list" id="sideMenuClosed" title="更多操作"></span>
 </div>
@@ -11,9 +12,13 @@
         <span class="fa fa-flag"></span>
         设备管理
     </div>
-    <div class="menu" ng-click="goto('energySum', 'dt=hour&et=01');">
+    <div class="menu" ng-click="goto('energy');">
         <span class="fa fa-bolt"></span>
         用能管理
+    </div>
+    <div class="menu" ng-click="goto('energyDetail');">
+        <span class="fa fa-bolt"></span>
+        电能分项
     </div>
     <div class="menu" ng-click="goto('statistics');">
         <span class="fa fa-info-circle"></span>
@@ -27,13 +32,17 @@
         <span class="fa fa-camera"></span>
         安防管理
     </div>
-    <div class="menu" ng-click="goto('warning', 'tp=device');">
+    <div class="menu" ng-click="goto('safeElectricity', '');">
         <span class="fa fa-glass"></span>
         报警管理
     </div>
     <div class="menu" ng-click="goto('statistics', 'tp=healty');">
         <span class="fa fa-heart"></span>
         健康评估
+    </div>
+    <div class="menu" ng-click="goto('settingsItem');">
+        <span class="fa fa-asterisk"></span>
+        系统设置
     </div>
 </div>
 <style type="text/css">
@@ -104,5 +113,12 @@
             moving: '#sideMenuContainer',
             direction: 'right'
         });
+        $("#actionMenu").on("click", function(ev){
+            var oEvent = ev || event;
+            oEvent.cancelBubble = true;
+            oEvent.stopPropagation();
+        });
     });
 </script>
+<!-- 右侧菜单 -->
+
