@@ -8,6 +8,7 @@ require.config({
         'angular': 'js/libs/angular',
         'angular-ui-router': 'js/libs/angular-ui-router',
         'angular-async-loader': 'js/libs/angular-async-loader',
+        'angular-wui-date': 'js/libs/angular.wui-date',
         // 'jquery': 'js/libs/jquery-1.11.0.min',
         // 'bootstrap': 'js/libs/bootstrap.bundle.min',
         'feather': 'js/libs/feather.min',
@@ -21,11 +22,12 @@ require.config({
     shim: {
         'angular': {exports: 'angular'},
         'angular-ui-router': {deps: ['angular']},
+        'angular-wui-date': {deps: ['angular']},
     },
     urlArgs: "v=" + version, 
 });
 
-require(['angular', './js/app-routes', 'feather', 'perfect-scrollbar', 'moment', 'echarts', 'comm'], function (angular) {
+require(['angular', './js/app-routes', 'angular-wui-date', 'feather', 'perfect-scrollbar', 'moment', 'echarts', 'comm'], function (angular) {
     angular.element(document).ready(function () {
         angular.bootstrap(document, ['app']);
         angular.element(document).find('html').addClass('ng-app');

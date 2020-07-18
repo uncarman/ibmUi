@@ -1,12 +1,3 @@
-@font-face{
-    font-family: 'Alibaba-PuHuiTi-Bold';
-    src : url('./Alibaba-PuHuiTi-Bold.ttf');
-}
-@font-face{
-    font-family: 'digifacewide';
-    src : url('./digifacewide.ttf');
-}
-
 body {
     width: 100%;
     /*width: 1440px;
@@ -35,14 +26,14 @@ body {
 }
 
 span { display: inline; }
-.col-3 { width: 25%; float: left; }
-.col-6 { width: 50%; float: left; }
-.col-9 { width: 75%; float: left; }
-.col-12 { width: 100%; float: left; }
-.col-4 { width: 33.33%; float: left; }
-.col-8 { width: 66.66%; float: left; }
-.col-5 { width: 41.66%; float: left; }
-.col-7 { width: 58.33%; float: left; }
+.col-3, .col-xs-3 { width: 25%; float: left; }
+.col-6, .col-xs-6 { width: 50%; float: left; }
+.col-9, .col-xs-9 { width: 75%; float: left; }
+.col-12, .col-xs-12 { width: 100%; float: left; }
+.col-4, .col-xs-4 { width: 33.33%; float: left; }
+.col-8, .col-xs-8 { width: 66.66%; float: left; }
+.col-5, .col-xs-5 { width: 41.66%; float: left; }
+.col-7, .col-xs-7 { width: 58.33%; float: left; }
 .pull-left { float: left; }
 .pull-right { float: right; }
 
@@ -540,6 +531,13 @@ width: 85px; height: 85px; }
 
 .block { border-radius: 6px; box-shadow: 2px 2px 5px rgba(1, 1, 1, 0.3); }
 .modal { background: rgba(0,0,0,0.3); color: #333; }
+.modal .form-control { border: 1px solid #ced4da; border-radius: .25rem; color:#495057; font-size: 100%; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+.modal .form-group { overflow: auto; padding: 4px 20px; line-height: 2.4; }
+.modal .modal-header .close { position: absolute; right: 17px; top: 12px; }
+.modal .modal-title { font-size: 120%; }
+.modal .form-group .col-xs-4 { width: 20%; text-align: right; }
+.modal .form-group .col-xs-8 { width: 80%; }
+
 
 ul.bar_tabs { margin: 20px auto; padding-bottom:20px; text-align: center; font-size: 100%; }
 ul.bar_tabs li { padding: 5px 20px; border: 1px solid rgba(255,255,255,.5); border-radius: 5px; margin-right: 20px; }
@@ -583,7 +581,6 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 .energy .table th, .energy .table td { padding: 12px; color:#3CE7DA; min-width: 130px;
     border-color:rgba(255,255,255,.5);  word-break:keep-all;  }
 .energy .table th { border-top: none; font-size: 18px; }*/
-
 
 /*.camera .block,
 .warning .block,
@@ -629,4 +626,7 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 .statistics .scoreText .title { font-size: 100%; padding-left: 0px; }
 .statistics .scoreText .title .badge { background:yellow; color: #000; }
 .statistics .scoreText p { font-size: 14px; margin: 10px 0; padding-left: 30px; background: url('../images/menu_L_ggzm.png') left 4px no-repeat; background-size: 16px 16px; }
+
+.mapBox { position: relative; }
+.mapBox .address { text-align: center; width: 98%; height: 48px; line-height: 48px; background: rgba(11,9,37,.5); position: absolute; bottom: 0; }
 

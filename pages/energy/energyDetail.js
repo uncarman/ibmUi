@@ -18,25 +18,11 @@ define(function (require) {
 
             $scope.dailyChart = echarts.init(document.getElementById("dailyChart"));
             $scope.summaryPieChart = echarts.init(document.getElementById("summaryPieChart"));
-            // 初始化日期控件
-            $($scope.data.datePickerDom).datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                language: "zh-CN",
-                format: "yyyy-mm-dd"
-            });
+
             $scope.data.chartType = $scope.data.chartTypes.filter(function(t){
                 return t.val == $scope.data.showType;
             })[0];
-            // 生成对比年份
-            for(var i = 1; i < 6; i++) {
-                var year = moment().add(-i, 'year').format("YYYY");
-                $scope.data.chartCompares.push({
-                    val: year,
-                    name: year,
-                });
-            }
-            $scope.data.chartCompare = $scope.data.chartCompares[0];
+            
             // 更新查询条件所有输入
             $scope.changeDisplayType();
             // 最后执行获取数据
@@ -53,7 +39,6 @@ define(function (require) {
             headRight: moment().format("YYYY-MM-DD dddd"),
 
             fmt: "YYYY-MM-DD",
-            datePickerDom: ".datePicker",
             fromDate: moment().startOf("month").format("YYYY-MM-DD"),
             toDate: moment().format("YYYY-MM-DD"),
             todayStr:moment().format("YYYY-MM-DD"),

@@ -232,14 +232,14 @@ define(function (require, exports, module) {
                 "icon": "fa fa-codepen",
             },
             {
-                "url": "settingsItem",
-                "name": "设备管理",
-                "icon": "fa fa-codepen",
-            },
-            {
                 "url": "settingsGroup",
                 "name": "分组管理",
                 "icon": "fa fa-object-group",
+            },
+            {
+                "url": "settingsItem",
+                "name": "设备管理",
+                "icon": "fa fa-codepen",
             },
             {
                 "url": "settingsBase",
@@ -1161,6 +1161,31 @@ define(function (require, exports, module) {
                     }
                 ]);
             }
+            // 日历控件
+            var $doms = $(".datePicker");
+            if($doms.length > 0) {
+                $doms.datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    language: "zh-CN",
+                    format: "yyyy-mm-dd"
+                });
+            }
+            // 生成对比年份数据
+            if(!$scope.data) {
+                $scope.data = {};
+            }
+            if(!$scope.data.chartCompares) {
+                $scope.data.chartCompares = [];
+            }
+            for(var i = 1; i < 6; i++) {
+                var year = moment().add(-i, 'year').format("YYYY");
+                $scope.data.chartCompares.push({
+                    val: year,
+                    name: year,
+                });
+            }
+            $scope.data.chartCompare = $scope.data.chartCompares[0];
         },
 
         gotoPage: function(page, param) {

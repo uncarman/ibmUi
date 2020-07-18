@@ -7,7 +7,7 @@ define(function (require, exports, module) {
 
     require('angular-ui-router');
 
-    var app = angular.module('app', ['ui.router']);
+    var app = angular.module('app', ['ui.router', 'wui.date']);
     
     app.config(function($interpolateProvider) {
 	    $interpolateProvider.startSymbol('{[{');

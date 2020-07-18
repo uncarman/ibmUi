@@ -15,13 +15,6 @@ define(function (require) {
 
         $scope.$watch('$viewContentLoaded', function() {
             global.on_loaded_func($scope, $state, $stateParams);    // 显示页面内容
-            // 初始化日期控件
-            $($scope.data.datePickerDom).datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                language: "zh-CN",
-                format: "yyyy-mm-dd"
-            });
         });
         console.log($stateParams);
         // 最后执行
@@ -41,15 +34,6 @@ define(function (require) {
                 $scope.data.chartType = $scope.data.chartTypes.filter(function(t){
                     return t.val == $scope.data.showType;
                 })[0];
-                // 生成对比年份
-                for(var i = 1; i < 6; i++) {
-                    var year = moment().add(-i, 'year').format("YYYY");
-                    $scope.data.chartCompares.push({
-                        val: year,
-                        name: year,
-                    })
-                }
-                $scope.data.chartCompare = $scope.data.chartCompares[0];
             });
             //$scope.getDatas();
         }, 0);
@@ -64,7 +48,6 @@ define(function (require) {
             headRight: moment().format("YYYY-MM-DD dddd"),
 
             fmt: "YYYY-MM-DD",
-            datePickerDom: ".datePicker",
             fromDate: moment().add(-30, 'day').format("YYYY-MM-DD"),
             toDate: moment().format("YYYY-MM-DD"),
             todayStr:moment().format("YYYY-MM-DD"),

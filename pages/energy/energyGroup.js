@@ -22,13 +22,6 @@ define(function (require) {
 
         // 最后执行
         setTimeout(function(){
-            // 初始化日期控件
-            $($scope.data.datePickerDom).datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                language: "zh-CN",
-                format: "yyyy-mm-dd"
-            });
             $scope.$apply(function () {
                 $scope.data.chartType = $scope.data.chartTypes[1];
                 $scope.data.chartCompare = $scope.data.chartCompares[0];
@@ -65,7 +58,6 @@ define(function (require) {
 
             fmt: "YYYY-MM-DD",
             leftOn: true,
-            datePickerDom: ".datePicker",
             fromDate: moment().add(-7, 'day').format("YYYY-MM-DD"),
             toDate: moment().format("YYYY-MM-DD"),
 

@@ -109,58 +109,58 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" ng-show="datas.curMethod=='edit'" ng-bind="datas.curItemCache.name"></h4>
-                    <h4 class="modal-title" ng-show="datas.curMethod=='create'">创建分组</h4>
+                    <h4 class="modal-title" ng-show="data.curMethod=='edit'" ng-bind="data.curItemCache.name"></h4>
+                    <h4 class="modal-title" ng-show="data.curMethod=='create'">创建分组</h4>
                 </div>
                 <div class="modal-body">
                     <form id="curItem" class="form-horizontal form-label-left">
                         <div>
-                            <div class="item form-group" ng-show="datas.curMethod=='view' || datas.curMethod=='edit'">
+                            <div class="item form-group" ng-show="data.curMethod=='view' || data.curMethod=='edit'">
                                 <label class="control-label col-xs-4">ID:</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control col-xs-12"
-                                           ng-readonly="datas.curMethodReadOnly"
-                                           id="id" ng-model="datas.curItem.id" />
+                                           ng-readonly="data.curMethodReadOnly"
+                                           id="id" ng-model="data.curItem.id" />
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-xs-4">类型ID:</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control col-xs-12"
-                                           ng-readonly="datas.curMethodReadOnly"
-                                           id="type" ng-model="datas.curItem.type" />
+                                           ng-readonly="data.curMethodReadOnly"
+                                           id="type" ng-model="data.curItem.type" />
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-xs-4">类型名称:</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control col-xs-12"
-                                           ng-readonly="datas.curMethodReadOnly"
-                                           id="name" ng-model="datas.curItem.name" />
+                                           ng-readonly="data.curMethodReadOnly"
+                                           id="name" ng-model="data.curItem.name" />
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-xs-4">数据编码:</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control col-xs-12"
-                                           ng-readonly="datas.curMethodReadOnly"
-                                           id="basic_code" ng-model="datas.curItem.basicCode" />
+                                           ng-readonly="data.curMethodReadOnly"
+                                           id="basic_code" ng-model="data.curItem.basicCode" />
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-xs-4">数据名称:</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control col-xs-12"
-                                           ng-readonly="datas.curMethodReadOnly"
-                                           id="basic_name" ng-model="datas.curItem.basicName" />
+                                           ng-readonly="data.curMethodReadOnly"
+                                           id="basic_name" ng-model="data.curItem.basicName" />
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-xs-4">备注:</label>
                                 <div class="col-xs-8">
                                     <input type="text" class="form-control col-xs-12"
-                                           ng-readonly="datas.curMethodReadOnly"
-                                           id="note" ng-model="datas.curItem.note" />
+                                           ng-readonly="data.curMethodReadOnly"
+                                           id="note" ng-model="data.curItem.note" />
                                 </div>
                             </div>
                         </div>
@@ -168,8 +168,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button ng-show="datas.curMethod=='create'" type="button" class="btn btn-primary" ng-click="saveItem();">保存</button>
-                    <button ng-show="datas.curMethod=='edit'" type="button" class="btn btn-primary" ng-click="updateItem();">更新</button>
+                    <button ng-show="data.curMethod=='create'" type="button" class="btn btn-primary" ng-click="saveItem();">保存</button>
+                    <button ng-show="data.curMethod=='edit'" type="button" class="btn btn-primary" ng-click="updateItem();">更新</button>
                 </div>
             </div>
         </div>
