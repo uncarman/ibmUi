@@ -74,6 +74,49 @@ define(function (require) {
                 }
             })
 
+            // ---------------- 消防安全 ---------------- 
+            // 监测中心
+            .state('monitoringCenter', {
+                url: '/monitoringCenter',
+                templateUrl: './pages/fireFighter/monitoringCenter.html?v='+version,
+                controllerUrl: './pages/fireFighter/monitoringCenter',
+                controller: 'monitoringCenterCtrl',
+                params: {}
+            })
+            // 应急预案
+            .state('emergencyPlan', {
+                url: '/emergencyPlan',
+                templateUrl: './pages/fireFighter/emergencyPlan.html?v='+version,
+                controllerUrl: './pages/fireFighter/emergencyPlan',
+                controller: 'emergencyPlanCtrl',
+                params: {}
+            })
+            // 消防设备
+            .state('fireFighterDevice', {
+                url: '/fireFighterDevice',
+                templateUrl: './pages/fireFighter/fireFighterDevice.html?v='+version,
+                controllerUrl: './pages/fireFighter/fireFighterDevice',
+                controller: 'fireFighterDeviceCtrl',
+                params: {}
+            })
+            // 安全月报
+            .state('fireFighterReport', {
+                url: '/fireFighterReport',
+                templateUrl: './pages/fireFighter/fireFighterReport.html?v='+version,
+                controllerUrl: './pages/fireFighter/fireFighterReport',
+                controller: 'fireFighterReportCtrl',
+                params: {}
+            })
+            // 安全评分
+            .state('fireFighterScore', {
+                url: '/fireFighterScore',
+                templateUrl: './pages/fireFighter/fireFighterScore.html?v='+version,
+                controllerUrl: './pages/fireFighter/fireFighterScore',
+                controller: 'fireFighterScoreCtrl',
+                params: {}
+            })
+
+
             // ---------------- 后台编辑 ---------------- 
             // 建筑信息
             .state('settingsBuilding', {
