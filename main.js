@@ -24,7 +24,8 @@ require.config({
         'angular-ui-router': {deps: ['angular']},
         'angular-wui-date': {deps: ['angular']},
     },
-    urlArgs: "v=" + version, 
+    urlArgs: "v=" + version,
+    waitSeconds: 0,
 });
 
 require(['angular', './js/app-routes', 'angular-wui-date', 'feather', 'perfect-scrollbar', 'moment', 'echarts', 'comm'], function (angular) {

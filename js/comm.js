@@ -57,8 +57,8 @@ define(function (require, exports, module) {
         wsServer: "localhost",
         wsPort: 8002,
 
-        domain: "http://localhost:8095/",  // 接口地址
-        //domain: "http://47.100.196.152:9091/",
+        //domain: "http://localhost:8095/",  // 接口地址
+        domain: "http://47.100.196.152:9090/",
         cross_domain: true,
         ajax_timeout: 30*1000, //ajax超时时间 (单位:毫秒)
 
