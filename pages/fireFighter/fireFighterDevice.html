@@ -14,7 +14,6 @@
 					<span>所有分类</span>
 				</li>
 				<li ng-repeat="it in data.itemListTypes"
-                    ng-show=""
 					ng-class="it.id == data.curItemListType ? 'active' : ''"
 					ng-click="changeItemType(it.id);">
 					<i class="fa fa-caret-right"></i>

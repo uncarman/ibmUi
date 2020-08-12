@@ -1,17 +1,7 @@
 <ul class="fireNav overflow">
     <li>
-        <div class="menu" ng-class="{active: data.fireMenu=='monitoringCenter'}" ng-click="goto('monitoringCenter');">
-            监测中心
-        </div>
-    </li>
-    <li>
-        <div class="menu" ng-class="{active: data.fireMenu=='emergencyPlan'}" ng-click="goto('emergencyPlan');">
-            应急预案
-        </div>
-    </li>
-    <li>
-        <div class="menu" ng-class="{active: data.fireMenu=='fireFighterDevice'}" ng-click="goto('fireFighterDevice');">
-            消防设备
+        <div class="menu" ng-class="{active: data.fireMenu=='fireFighterScore'}" ng-click="goto('fireFighterScore');">
+            安全评分
         </div>
     </li>
     <li>
@@ -20,8 +10,18 @@
         </div>
     </li>
     <li>
-        <div class="menu" ng-class="{active: data.fireMenu=='fireFighterScore'}" ng-click="goto('fireFighterScore');">
-            安全评分
+        <div class="menu" ng-class="{active: data.fireMenu=='fireFighterDevice'}" ng-click="goto('fireFighterDevice');">
+            消防设备
+        </div>
+    </li>
+    <li>
+        <div class="menu" ng-class="{active: data.fireMenu=='emergencyPlan'}" ng-click="goto('emergencyPlan');">
+            应急预案
+        </div>
+    </li>
+    <li>
+        <div class="menu" ng-class="{active: data.fireMenu=='monitoringCenter'}" ng-click="goto('monitoringCenter');">
+            监测中心
         </div>
     </li>
 </ul>

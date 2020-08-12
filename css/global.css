@@ -679,7 +679,7 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 	font-size: .8vw;
 }
 .fireNav li{
-	float: left;
+	float: right;
 	margin-right: 2vw;
 	cursor: pointer;
 }
