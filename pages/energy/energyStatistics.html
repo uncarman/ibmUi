@@ -9,29 +9,6 @@
             <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
             <ul class="block">
                 <li class="title">
-                    <span class="fa fa-bolt"></span>电能监测
-                </li>
-                <li ng-class="data.subType=='' ? 'active' : ''"
-                    ng-click="goto('energy');">
-                    <span class="fa fa-bullseye"></span>
-                    总体用能概述
-                </li>
-                <li ng-class="data.subType==subType ? 'active' : ''"
-                    ng-repeat="subType in data.subTypes"
-                    ng-click="changeSubType(subType);">
-                    <span class="fa fa-bullseye"></span>
-                    <span ng-bind="subType"></span>
-                </li>
-                <li ng-class="data.showType=='设备查看' ? 'active' : ''">
-                    <span class="fa fa-bullseye"></span>
-                    按设备查看
-                </li>
-                <li>
-                    <span class="fa fa-circle-o"></span>
-                    <span>价格计费</span>
-                </li>
-                <hr />
-                <li class="title">
                     <span class="fa fa-bolt"></span>查询条件
                 </li>
                 <li class="search">
@@ -65,22 +42,44 @@
 
         <div class="col-9 innerRight">
             <div ng-include="'pages/_components/nav/energyNav.html'"></div>
+
             <div class="block">
                 <div class="title">
                     <span class="fa fa-area-chart"></span>
-                    用能概况
+                    用能统计
                 </div>
                 <div class="body">
                     <div class="row summaryHeader">
                         <div class="col" ng-repeat="t in data.result.summaryDatas">
-                            <div class="title" ng-bind="t.name"></div>
-                            <div class="titleVal">
-                                <span ng-bind="t.value"></span>
+                            <div class="title">
+                                <span class="pull-left" ng-bind="t.name"></span>
+                                <span class="pull-right" ng-bind="t.unit"></span>
+                                <div class="clearfix"></div>
                             </div>
-                            <!-- <p>
-                                <span class="pull-left">同比</span>
-                                <span class="pull-right" ng-bind="t.compare"></span>
-                            </p> -->
+                            <div class="titleVal">
+                                <span ng-bind="t.total | number:2"></span></span>
+                            </div>
+                            <hr/>
+                            <p>
+                                <span class="pull-left">本月</span>
+                                <span class="pull-right" ng-bind="t.curMonth | number:2"></span>
+                                <div class="clearfix"></div>
+                            </p>
+                            <p>
+                                <span class="pull-left">上月</span>
+                                <span class="pull-right" ng-bind="t.lastMonth | number:2"></span>
+                                <div class="clearfix"></div>
+                            </p>
+                            <p>
+                                <span class="pull-left">今年</span>
+                                <span class="pull-right" ng-bind="t.curYear | number:2"></span>
+                                <div class="clearfix"></div>
+                            </p>
+                            <p>
+                                <span class="pull-left">去年</span>
+                                <span class="pull-right" ng-bind="t.lastYear | number:2"></span>
+                                <div class="clearfix"></div>
+                            </p>
                         </div>
                     </div>
 
@@ -93,17 +92,18 @@
                     <div class="table-responsive">
                         <table class="table table-hover table-inline" id="summaryTable">
                             <thead>
-                                <tr>
-                                    <th ng-repeat="(k,n) in data.result.tableData.title" ng-bind="n"></th>
-                                </tr>
+                            <tr>
+                                <th ng-repeat="(k,n) in data.result.tableData.title" ng-bind="n"></th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="v in data.result.tableData.data">
-                                    <td ng-repeat="(k,n) in data.result.tableData.title"
-                                        ng-bind="v[k]"></td>
-                                </tr>
+                            <tr ng-repeat="v in data.result.tableData.data">
+                                <td ng-repeat="(k,n) in data.result.tableData.title"
+                                    ng-bind="v[k]"></td>
+                            </tr>
                             </tbody>
                         </table>
+                        
                     </div>
                     <div class="clearfix"></div>
                 </div>

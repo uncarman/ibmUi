@@ -1,12 +1,193 @@
 <div class="container innerPage">
-    <div id="map"></div>
+	<div id="map"></div>
 
-    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
+	<div ng-include="'pages/_components/nav/headerInner.html'"></div>
 
-    <div class="clearfix"></div>
-    <div class="content">
-    	<div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
-    	安全月报
-    </div>
+	<div class="clearfix"></div>
+	<div class="content">
+		<div class="col-3 innerLeft">
+            <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
+			<div class="fireAsideReportCont borderAndBg">
+				<select class="fireSelect">
+					<option ng-repeat="item in data.reportSelect" ng-bind="item" value="{{item}}"></option>
+				</select>
+				<ul class="fireAsideReportList">
+					<li>
+						<div class="leftCont">
+							<span>7</span>
+							<i>月</i>
+						</div>
+						<div class="rightCont">
+							<h5>消防物联网月度分析报告</h5>
+							<span>生成时间：2020-07-01</span>
+						</div>
+					</li>
+					<li>
+						<div class="leftCont">
+							<span>6</span>
+							<i>月</i>
+						</div>
+						<div class="rightCont">
+							<h5>消防物联网月度分析报告</h5>
+							<span>生成时间：2020-07-01</span>
+						</div>
+					</li>
+					<li class="active">
+						<div class="leftCont">
+							<span>5</span>
+							<i>月</i>
+						</div>
+						<div class="rightCont">
+							<h5>消防物联网月度分析报告</h5>
+							<span>生成时间：2020-07-01</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+        </div>
 
-</div>   
+        <div class="col-9 innerRight">
+            <div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
+            <div class="borderAndBg fireReportWrap">
+				<div>
+					<div class="fireReportNav">1.消防安全评分</div>
+					<div class="fireReportDesc">05月国网嘉兴供电公司生产综合大楼消防安全评分最高<span>87</span>，最低<span>0</span>，平均<span>82</span>，平均消防安全评分高于上月。</div>
+					<div class="fireReport1" id="fireReport1"></div>
+				</div>
+				<div>
+					<div class="fireReportNav">2.故障</div>
+					<div class="fireReportDesc">05月国网嘉兴供电公司生产综合大楼共发现故障215起(系统上报215起,人工上报0起)
+						,故障频发点位数0个。完成故障维修0起,平均维修时间0小时,平均维修时间低于上月(0小时)</div>
+					<div class="fireReport2" id="fireReport2"></div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>点位号</th>
+									<th>点位描述</th>
+									<th>设备类型</th>
+									<th>故障上报次数</th>
+									<th>备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="5" style="text-align: center;">暂无数据</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div>
+					<div class="fireReportNav">3.火警</div>
+					<div class="fireReportDesc">05月国网嘉兴供电公司生产综合大楼共上报火警12起，确认0起。人工处理1起，系统自动处理11起。平均人工处理时间1分钟。火警频报点位数0个</div>
+					<div class="fireReport2" id="fireReport3"></div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>点位号</th>
+									<th>点位描述</th>
+									<th>火警上报次数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="3" style="text-align: center;">暂无数据</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div>
+					<div class="fireReportNav">4.水系统</div>
+					<div class="fireReportDesc">05月国网嘉兴供电公司生产综合大楼水泵处于手动状态共0.05小时，月起泵次数1次。压力异常点位2个。</div>
+					<div class="fireReport4" id="fireReport4"></div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>压力表编号</th>
+									<th>位置描述</th>
+									<th>设备类型</th>
+									<th>所属系统</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>C004</td>
+									<td>--</td>
+									<td>无线压力传感器喷淋系统</td>
+									<td>消防水柜控制系统</td>
+								</tr>
+								<tr>
+									<td>C005</td>
+									<td>--</td>
+									<td>无线压力传感器喷淋系统</td>
+									<td>消防水柜控制系统</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div>
+					<div class="fireReportNav">5.维护统计</div>
+					<div class="fireReportDesc">国网嘉兴供电公司生产综合大楼月共完成维保I作0次，其中涉及更换设备0次。触发火警0条，触发故障0条。维保综合满意度0分。</div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>维护时间</th>
+									<th>维护目的</th>
+									<th>用时</th>
+									<th>联动点位</th>
+									<th>触发火警</th>
+									<th>触发故障</th>
+									<th>满意度</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2020-05-10 08:36:09-2020-05-10 15:03:00</td>
+									<td>维护保养</td>
+									<td>6时26分51秒</td>
+									<td>42</td>
+									<td>150</td>
+									<td>7</td>
+									<td>--分</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div>
+					<div class="fireReportNav">6.人员工作统计</div>
+					<div class="fireReportDesc">国网嘉兴供电公司生产综合大楼月共有1人通过云平台参与到日常管理工作中，所有工作人员共在云平台中处理火警及故障1起次。</div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>人员</th>
+									<th>处理火警</th>
+									<th>处理故障</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>后勤管理员</td>
+									<td>1</td>
+									<td>--</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div>
+					<div class="fireReportNav">7.服务统计</div>
+					<div class="fireReportDesc">国网嘉兴供电公司生产综合大楼月共使用应用内推送873次，使用短信60条，语音电话0分钟，我们客服人员共为您提供了0次人工服务。我们将继续竭诚为您提供优质</div>
+				</div>
+			</div>
+        </div>
+	</div>
+
+</div>

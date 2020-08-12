@@ -1,9 +1,16 @@
-<div class="title" ng-click="changeBuilding();">
-    <span class="fa fa-bar-chart-o"></span>
-    <span ng-bind="data.curBuilding.name"></span>
-    <i class="fa fa-chevron-down"></i>
+<div class="title">
+    <span class="dropdown-toggle" data-toggle="dropdown">
+        <span ng-bind="data.curBuilding.name"></span>
+    </span>
+    <div class="dropdown-menu">
+        <li class=""
+            ng-class="b.id == data.curBuilding.id ? 'active' : ''"
+            ng-repeat="b in data.buildingList"
+            ng-click="changeBuildingSelect(b);">
+            <span ng-bind="b.name"></span>
+        </li>
+    </div>
 </div>
-
 
 <!-- 建筑选择弹框 -->
 <div id="buildingList" class="modal fade in">

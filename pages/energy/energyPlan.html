@@ -1,0 +1,82 @@
+<div class="container innerPage energy">
+    <div id="map"></div>
+
+    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
+
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="col-3 innerLeft">
+            <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
+            <ul class="block">
+                <li class="title">
+                    <span class="fa fa-bolt"></span>能耗种类
+                </li>
+                <li ng-class="data.energyType==k ? 'active' : ''"
+                    ng-repeat="(k,v) in data.typeNames"
+                    ng-click="changeType(k);">
+                    <span class="fa fa-bullseye"></span>
+                    <span ng-bind="v"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-9 innerRight">
+            <div ng-include="'pages/_components/nav/energyNav.html'"></div>
+            <div class="block">
+                <div class="title">
+                    <span class="fa fa-area-chart"></span>
+                    用<span ng-bind="data.typeNames[data.energyType]"></span>计划
+                </div>
+                <div class="body">
+                    <div class="row summaryHeader">
+                        <div class="col" ng-repeat="t in data.result.summaryDatas">
+                            <div class="title" ng-bind="t.name"></div>
+                            <div class="titleVal">
+                                <span ng-bind="t.value"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-inline" id="summaryTable">
+                            <thead>
+                            <tr>
+                                <th ng-repeat="(k,n) in data.tableData.title" ng-bind="n"></th>
+                                <!-- <th>操作</th> -->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="v in data.tableData.data">
+                                <td ng-repeat="(k,n) in data.tableData.title"
+                                    ng-bind="v[k]">
+                                </td>
+                                <!-- <td>
+                                    <button class="btn btn-info btn-sm" ng-click="viewItem(v);">
+                                        <i class="fa fa-folder"></i> 查看
+                                    </button>
+                                    <button class="btn btn-info btn-sm" ng-click="editItem(v);">
+                                        <i class="fa fa-pencil"></i> 编辑
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" ng-click="removeItem(v, $index);">
+                                        <i class="fa fa-trash-o"></i> 删除
+                                    </button>
+                                </td> -->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr />
+                    <div class="title">
+                        <span class="fa fa-area-chart"></span>
+                        数据对照
+                    </div>
+                    <div class="chart">
+                        <div id="summaryChart" class="echart"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

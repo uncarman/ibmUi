@@ -1,0 +1,108 @@
+<div class="container innerPage">
+    <div id="map"></div>
+
+    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
+
+    <div class="clearfix"></div>
+    <div class="content leftWidth">
+        <div class="col-3 innerLeft">
+            <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
+            <ul class="block leftNavP">
+                <li ng-class="'' == data.curItemListType ? 'active' : ''"
+                    ng-click="changeItemType('');">
+                    <i class="fa fa-caret-right"></i>
+                    <span>所有分类</span>
+                </li>
+                <li ng-repeat="it in data.itemListTypes"
+                    ng-class="it.id == data.curItemListType ? 'active' : ''"
+                    ng-click="changeItemType(it.id);">
+                    <i class="fa fa-caret-right"></i>
+                    <span ng-bind="it.name"></span>
+                </li>
+            </ul>
+            <ul class="block leftNavC">
+                <li class="search">
+                    <input type="text" class="form-control" placeholder="搜索" ng-model="data.itemFilter">
+                </li>
+                <li ng-repeat="it in data.itemList | filter: data.itemFilter "
+                    ng-show="it.itemTypeId == data.curItemListType || data.curItemListType == ''"
+                    ng-click="displayItem(it);"
+                    ng-class="disabled">
+                    <i class="fa fa-angle-right"></i>
+                    <span ng-bind="it.name"></span>
+                    <i class="fa fa-chevron-circle-right" ng-click="addItemToRecource(it);"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-9 innerRight">
+            <div class="block">
+                <div class="title">
+                    <span class="fa fa-area-chart"></span>
+                    <div class="btn-group">
+                        建筑区域:
+                        <span class="ml20 dropdown-toggle" data-toggle="dropdown">
+                            <span ng-bind="data.curRecource.floor"></span>
+                        </span>
+                        <div class="dropdown-menu">
+                            <li ng-repeat="r in data.recourceList" ng-bind="r.floor" ng-click="changeFloor(r);"></li>
+                        </div>
+                    </div>
+                    <div class="pull-right" ng-show="data.curItem.id > 0">
+                        <span ng-bind="data.curItem.name"></span>
+                        <button class="btn btn-sm submit" ng-click="removeItem()">删除</button>
+                    </div>
+                </div>
+                <div class="body floor">
+                    <div class="floor-out">
+                        <div class="floatInfo">
+                        </div>
+                        <div class="dynamicPlot" ng-repeat="it in data.recourceItemList"
+                        	ng-style="it.style"
+                        	ng-dblclick="dragChangeStatus(it, $event);"
+                        	ng-mousemove="dragMove(it, $event);"
+                        	ng-click="displayItem(it);"
+                            ng-class="it.id == data.curItem.id ? 'actived': ''">
+                        	<img ng-src="{[{it.icon}]}" />
+                        </div>
+
+                        <img class="img" ng-src="{[{data.curRecource.val}]}" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade itemDetail in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" ng-bind="data.curItemCache.name + '设备'"></h4>
+                </div>
+                <div class="modal-body">
+                    <p class="form-inline">
+                        输入关键字:
+                        <input class="form-control" type="text" ng-model="data.filterKey" />
+                    </p>
+                    <ul class="list-group" style="max-height:400px; overflow:auto;">
+                        <li class="list-group-item" ng-repeat="i in data.itemList | filter : {name:data.filterKey}">
+                            <label style="display: block; cursor:pointer;">
+                                <input type="checkbox" name="selectedItem" ng-model="i.checked" />
+                                <span ng-bind="i.type_name"></span> -
+                                <span ng-bind="i.name"></span> -
+                                <span ng-bind="i.description"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" ng-click="updateGroupItem();">更新</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

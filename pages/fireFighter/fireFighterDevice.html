@@ -1,12 +1,93 @@
 <div class="container innerPage">
-    <div id="map"></div>
+	<div id="map"></div>
 
-    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
+	<div ng-include="'pages/_components/nav/headerInner.html'"></div>
 
-    <div class="clearfix"></div>
-    <div class="content">
-    	<div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
-    	消防设备
+	<div class="clearfix"></div>
+	<div class="content overflow">
+		<div class="col-3 innerLeft">
+            <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
+            <ul class="block leftNavP">
+                <li ng-class="'' == data.curItemListType ? 'active' : ''"
+					ng-click="changeItemType('');">
+					<i class="fa fa-caret-right"></i>
+					<span>所有分类</span>
+				</li>
+				<li ng-repeat="it in data.itemListTypes"
+                    ng-show=""
+					ng-class="it.id == data.curItemListType ? 'active' : ''"
+					ng-click="changeItemType(it.id);">
+					<i class="fa fa-caret-right"></i>
+					<span ng-bind="it.name"></span>
+				</li>
+            </ul>
+            <ul class="block leftNavC">
+            	<li class="search">
+                    <input type="text" class="form-control" placeholder="搜索" ng-model="data.itemFilter">
+                </li>
+                <li ng-repeat="it in data.itemList | filter: data.itemFilter "
+					ng-show="it.itemTypeId == data.curItemListType || data.curItemListType == ''"
+                    ng-click="displayItem(it);">
+					<i class="fa fa-angle-right"></i>
+					<span ng-bind="it.name"></span>
+				</li>
+            </ul>
+        </div>
+
+        <div class="col-9 innerRight">
+            <div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
+            <div class="block">
+                <div class="title">
+                    <span class="fa fa-area-chart"></span>
+                    <div class="btn-group">
+                        建筑区域:
+						<span class="ml20 dropdown-toggle" data-toggle="dropdown">
+							<span ng-bind="data.curRecource.floor"></span>
+						</span>
+						<div class="dropdown-menu">
+							<li ng-repeat="r in data.recourceList" ng-bind="r.floor" ng-click="changeFloor(r);"></li>
+						</div>
+					</div>
+                </div>
+                <div class="body floor">
+                    <div class="floor-out">
+                        <div class="dynamicPlot" ng-repeat="it in data.recourceItemList"
+                            ng-show="it.itemType == data.curItemListType || data.curItemListType == ''"
+                        	ng-style="it.style"
+                        	ng-dblclick="dragChangeStatus(it, $event);"
+                        	ng-mousemove="dragMove(it, $event);"
+                        	ng-click="displayItem(it);">
+                        	<img ng-src="{[{it.icon}]}" />
+                        </div>
+
+                        <img class="img" ng-src="{[{data.curRecource.val}]}" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+    <div class="modal fade itemDetail in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" ng-bind="'设备: ' + data.curItem.name"></h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group" style="max-height:400px; overflow:auto;">
+                        <li class="list-group-item" ng-repeat="(k, v) in data.curItemDetail">
+                            <div class="col-3" ng-bind="k"></div>
+                            <div class="col-9" ng-bind="v != '' ? v : '--'"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>   
+</div>

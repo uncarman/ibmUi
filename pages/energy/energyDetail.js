@@ -51,6 +51,7 @@ define(function (require) {
             subType: $stateParams.subType, //
             itemType: parseInt($stateParams.energyType) + 10, // 表对应的dateType
             parent: $stateParams.parent, // 分类ID
+            energyMenu: $stateParams.energyMenu || "energyDetail",
 
             subTypes: settings.subTypes, // 能耗分项,建筑区域,组织机构,自定义
             chartTypes: settings.defaultDateTypes,

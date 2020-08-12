@@ -1,12 +1,126 @@
 <div class="container innerPage">
-    <div id="map"></div>
+	<div id="map"></div>
 
-    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
+	<div ng-include="'pages/_components/nav/headerInner.html'"></div>
 
-    <div class="clearfix"></div>
-    <div class="content">
-    	<div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
-    	应急预案
+	<div class="clearfix"></div>
+	<div class="content leftWidth">
+		<div class="col-3 innerLeft">
+            <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
+
+			<div class="borderAndBg firePlanAside">
+				<ul>
+					<li class="title">
+                        应急预案人员安排及说明
+                    </li>
+					<li class="fireLi" ng-repeat="g in data.personGroupList">
+						<h4><i class="fa fa-address-card-o"></i> <span ng-bind="g.name"></span></h4>
+						<div>
+							<label>描述：</label>
+							<div class="cont" ng-bind="g.comment"></div>
+							<div class="clearfix"></div>
+						</div>
+						<div>
+							<label>人员：</label>
+							<span class="cont" ng-show="g.person.length <= 0">组长</span>
+							<ul class="cont" ng-show="g.person.length > 0">
+								<li ng-repeat="p in g.person">
+									<span ng-bind="p.name"></span>
+									<span ng-bind="p.mobile"></span>
+									<div class="clearfix"></div>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+						<div>
+							<label>任务：</label>
+							<span class="cont" ng-show="g.task.length <= 0">无</span>
+							<ul class="cont" ng-show="g.task.length > 0">
+								<li ng-repeat="t in g.task">
+									<i class="fa fa-angle-right"></i>
+									<span ng-bind="t.comment"></span>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="col-9 innerRight">
+            <div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
+            
+            <div class="block fireEmergencyPlan">
+                <div class="title">
+                    <span class="fa fa-area-chart"></span>
+                    <div class="btn-group">
+                        应急流程
+						<button class="submit" ng-click="startPlan();" ng-show="data.emergencyPlan.status!='开始'">
+							开始演练 <span class="fa fa-angle-right"></span>
+						</button>
+						<button class="submit" ng-click="endPlan();" ng-show="data.emergencyPlan.status=='开始'">
+							结束演练 <span class="fa fa-angle-right"></span>
+						</button>
+						<span ng-show="data.emergencyPlan.status=='开始'" ng-bind="data.emergencyPlan.totalSeconds"></span>
+					</div>
+					<button class="pull-right submit" ng-click="showEmergencyPlanHistory();">应急演练历史 <span class="fa fa-angle-right"></span></button>
+                </div>
+                <div class="body">
+                	<img src="./images/fire-flowChart.png" />
+                </div>
+            </div>
+
+            <div class="block fireEmergencyFloor">
+                <div class="title">
+                    <span class="fa fa-area-chart"></span>
+                    <div class="btn-group">
+                        建筑区域:
+						<span class="ml20 dropdown-toggle" data-toggle="dropdown" style="margin-left:20px;">
+							<span ng-bind="data.curRecource.floor"></span>
+						</span>
+						<div class="dropdown-menu">
+							<li ng-repeat="r in data.recourceList" ng-bind="r.floor" ng-click="changeFloor(r);"></li>
+						</div>
+					</div>
+                </div>
+                <div class="body floor">
+                    <div class="floor-out">
+                        <img class="img" ng-src="{[{data.curRecource.val}]}" />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+
+	<div class="modal fade history in">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                    <h4>应急演练历史</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group" style="max-height:400px; overflow:auto;">
+                        <li class="list-group-item" ng-repeat="i in data.emergencyPlanList">
+                            <label style="display: block; cursor:pointer;">
+                                开始时间: <span ng-bind="i.createdAt"></span> -
+                                结束时间: <span ng-bind="i.updatedAt"></span> -
+                                历时: <span ng-bind="i.timeSpan"></span> 秒
+                                <div class="clearfix"></div>
+                                备注信息: <span ng-bind="i.note"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>   
+
+</div>

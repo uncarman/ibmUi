@@ -55,6 +55,7 @@ define(function (require) {
             energyType: $stateParams.energyType, //
             subType: $stateParams.subType, //
             itemType: parseInt($stateParams.energyType) + 10, // 表对应的dateType
+            energyMenu: $stateParams.energyMenu || "energy",
 
             subTypes: settings.subTypes, // 能耗分项,建筑区域,组织机构,自定义
             chartTypes: settings.defaultDateTypes,
@@ -92,8 +93,8 @@ define(function (require) {
             } else {
                 from = moment($scope.data.fromDate).format($scope.data.chartType.paramFmt);
                 to = moment($scope.data.toDate).format($scope.data.chartType.paramFmt);
-                compareFrom = moment($scope.data.compareFromDate).format($scope.data.chartType.paramFmt);
-                compareTo = moment($scope.data.compareToDate).format($scope.data.chartType.paramFmt);
+                compareFrom = moment(compareFrom).format($scope.data.chartType.paramFmt);
+                compareTo = moment(compareTo).format($scope.data.chartType.paramFmt);
             }
             return {
                 from: from,
@@ -193,7 +194,7 @@ define(function (require) {
                     summaryDatas.push({
                         name: t,
                         value: tableData.data.map(function(d) {
-                            return d[ind];
+                            return d[ind] || 0;
                         }).Sum().toFixed(2),
                     });
                 }

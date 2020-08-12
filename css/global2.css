@@ -37,11 +37,6 @@ span { display: inline; }
 .pull-left { float: left; }
 .pull-right { float: right; }
 
-input::-webkit-input-placeholder {
-    color: #fff;
-}
-
-
 .table { width: 100%; line-height: 2; }
 .table th { font-weight: bold; padding: 0; text-align: left; padding: 12px;  }
 .table th, .table td { color:#3CE7DA; min-width: 130px;
@@ -50,21 +45,19 @@ input::-webkit-input-placeholder {
 .table thead th { border-top: none; font-size: 18px; border-bottom-width: 1px; }
 
 .mb20 { margin-bottom: 20px; }
-.ml20 { margin-left: 20px; }
 hr { border-top: 0.9px solid rgba(255,255,255,.5); }
-
 
 .echart { height: 350px; }
 .mg-b-0 { margin-bottom: 0px; }
 .text-center { text-align: center; }
 
-.form-control { background: none;border: none; outline: none; color: #fff;
+.form-control { background: none;border: none; outline: none;
 border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color: #fff; margin:0 10px; }
 .submit {
     margin: 0px;
     padding: 0 15px;
     box-sizing: border-box;
-    display: inline-block;
+    display: block;
     line-height: 30px;
     text-align: center;
     border: 1px solid #01d1f2;
@@ -73,9 +66,7 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
     cursor: pointer;
 }
 
-.dropdown-menu { }
-.dropdown-menu > li { margin:0 5px; font-weight: normal; padding: 5px 10px; cursor: pointer; }
-.dropdown-menu > li:hover { background: rgba(60, 231, 218, 0.5); }
+
 
 .icons { display: inline-block; width: 20px; height: 20px; background-size:100% 100%;  vertical-align: middle; position: relative; top:-2px; }
 .weather_icon { width: 35px; height: 35px; float: left; margin-top: 10px; }
@@ -123,16 +114,6 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
 .icon-shuibeng { background-image: url(../images/shuibeng_1.png)  }
 .icon-pump { background-image: url(../images/icon-pump.png)  }
 .icon-vidio { background-image: url(../images/icon-vidio.png)  }
-
-.icon-guandaoyali { background-image: url(../images/icon-guandaoyali.png); 管道压力 }
-.icon-yewei { background-image: url(../images/icon-yewei.png); 水箱液位 }
-.icon-meihuoqi { background-image: url(../images/icon-meihuoqi.png); 灭火器 }
-.icon-shuijin { background-image: url(../images/icon-shuijin.png); 水浸报警器 }
-.icon-wenshidu { background-image: url(../images/icon-wenshidu.png); 水浸报警器 }
-.icon-ranqifa { background-image: url(../images/icon-ranqifa.png); 燃气阀 }
-.icon-ranqibaojingqi { background-image: url(../images/icon-ranqibaojingqi.png); 燃气报警器 }
-.icon-yangan { background-image: url(../images/icon-yangan.png); 烟感 }
-.icon-wangguan { background-image: url(../images/icon-wangguan.png); 网关 }
 
 /**
 火灾报警系统
@@ -512,7 +493,6 @@ width: 85px; height: 85px; }
 .innerLeft ul.block { padding-left:0px; padding-top:0px; padding-right:0px;  }
 .innerLeft .block li { list-style:none; padding: 10px 15px; margin: 5px; cursor: pointer; }
 .innerLeft .block li.active { color: #fff; background-color:rgba(60, 231, 218, 0.3); }
-.innerLeft .block li.disabled { opacity: 0.5; cursor:not-allowed; }
 .innerLeft .block li.title { margin:0px; font-size: 120%; cursor: default; }
 .innerLeft .block li.search { padding-top: 5px; }
 .innerLeft .block li.search .form-control { margin:0px; height: 30px; font-size: 100%; padding: 3px 8px; }
@@ -521,9 +501,6 @@ width: 85px; height: 85px; }
 .innerLeft .block p { margin:5px 0; }
 .innerLeft .fa { margin-right: 10px; }
 
-.innerLeft ul ul { margin: 0px; padding: 0px; }
-.innerLeft ul ul li { padding: 0px; margin:0px; }
-.innerLeft ul li h4 { font-size: 120%; font-weight: bold; }
 
 .innerRight .title {  }
 .innerRight .title .fa { margin-right:10px; }
@@ -561,31 +538,22 @@ width: 85px; height: 85px; }
 .modal .form-group .col-xs-4 { width: 20%; text-align: right; }
 .modal .form-group .col-xs-8 { width: 80%; }
 
-/** 设备地图 **/
-.floor-out { position: relative; }
-.floor .dynamicPlot { position: absolute; z-index: 1000; text-align: center; }
-.floor .actived { border: 2px dashed red; }
-.floor img { position: relative; z-index: 100; }
-
 
 ul.bar_tabs { margin: 20px auto; padding-bottom:20px; text-align: center; font-size: 100%; }
 ul.bar_tabs li { padding: 5px 20px; border: 1px solid rgba(255,255,255,.5); border-radius: 5px; margin-right: 20px; }
 ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255,255,.9); }
 
-.dynamicPlot {
-    width: 30px;
-    height: 30px;
-    padding: 3px;
-    border: 2px dashed transform;
+.dynamic_plot {
+    width: 35px;
+    height: 35px;
     background-repeat: no-repeat;
     background-size: 90% 90%;
-    background-position: center center;
-    border-radius: 50%;
+    background-position: center center; 
+    /*border-radius: 50%;
     opacity: 0.5;
-    /*animation: warn 2s infinite;
+    animation: warn 2s infinite;
     background-color: rgba(255,15,15, 0.85);*/
 }
-.dynamicPlot img { max-width:100%; max-height: 100%; }
 @keyframes warn {
     100% {
         transform: scale(0.6);
@@ -627,6 +595,10 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 .camera .iframe { width: 100%; height: 680px; border:none; overflow: hidden; }
 .camera .iframe iframe { width: 100%; height: 100%; overflow: hidden; }
 
+.camera .floor-out { position: relative; }
+.camera .floor .dynamic_plot { position: absolute; z-index: 1000; }
+.camera .floor img { position: relative; z-index: 100; }
+
 .camera .modal .closeBox { position: absolute;right:-30px; top: -30px; font-size: 40px; line-height: 1.35; color: #fff;
     width: 60px; height: 60px; text-align: center; border-radius: 50%; background: rgba(255,15,15, 0.85); }
 
@@ -658,590 +630,3 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 .mapBox { position: relative; }
 .mapBox .address { text-align: center; width: 98%; height: 48px; line-height: 48px; background: rgba(11,9,37,.5); position: absolute; bottom: 0; }
 
-
-/* 智慧消防 start*/
-/* 监控中心 */
-.overflow{
-	overflow: hidden;
-}
-.fireWrap{
-	font-size: 0.8vw;
-}
-.fireWrap .header{
-	height: 7vh;
-	margin-bottom: 4vh;
-}
-.fireWrap .header .center{
-	font-size: 1.6vw;
-}
-.fireWrap .header .left,
-.fireWrap .header .right{
-	font-size: .8vw;
-}
-.fireNav li{
-	float: left;
-	margin-right: 2vw;
-	cursor: pointer;
-}
-.fireNav .menu{
-  margin-left: 10px;
-	padding-bottom: 4px;
-	font-size: 120%;
-  font-weight: bold;
-	border-bottom: 2px solid transparent;
-}
-.fireNav .menu:hover,
-.fireNav .menu.active {
-	border-bottom-color: #3CE7DA;
-}
-.fireSelect{
-	padding-left: 1vw;
-	min-width: 60%;
-	color: #3CE7DA;
-	font-size: 0.84vw;
-	border: none;
-	outline: none;
-	background: transparent;
-}
-.fireSelect option{
-	background: #033877;
-	border: none;
-}
-.borderAndBg{
-	padding: 1vw;
-	border: 1px solid rgba(255,255,255,.3);
-	background: rgba(60, 231, 218, 0.1);
-	box-shadow: 0px 0px 5px rgba(1, 1, 1, 0.2);
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-  overflow: hidden;
-}
-.fireAside {
-	width: 20vw;
-	float: left;
-}
-
-.fireAside .fireAside1{
-	margin-top: 20px;
-	height: 24vh;
-}
-.fireAside .fireAside2{
-	margin: 3vh 0;
-	height: 16vh;
-}
-.fireAside .fireAside3{
-	height: 32vh;
-}
-.fireAside .fireManage{
-	overflow: hidden;
-}
-.fireAside .fireManageLeft{
-	float: left;
-	width: 40%;
-}
-.fireAside h4{
-	font-size: 0.84vw;
-	font-weight: 600;
-}
-.fireAside .fireManageLeft .circle{
-	margin: 1vh 0;
-	display: inline-block;
-	width: 5.5vw;
-	height: 5.5vw;
-	line-height: 5.5vw;
-	font-size: 2.5vw;
-	font-weight: bold;
-	text-align: center;
-	border: 2px solid #3CE7DA;
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
-}
-.fireAside .fireManageRight p{
-	margin: 1vh 0;
-}
-.fireAside .fireManageRight li{
-}
-.fireAside .fireController li {
-	float: left;
-	width: 33%;
-}
-.fireAside .fireController h4{
-	margin-bottom: 1.5vh;
-	
-}
-.fireAside .fireController p{
-	margin-bottom: .5vh;
-	font-size: 0.7vw;
-}
-.positionRelative{
-	position: relative;
-}
-.fireAside .fireAside3 .abnormalTit{
-	position: absolute;
-	top: 1vw;
-	left: 1vw;
-}
-.fireAside #abnormalChart{
-	width: 100%;
-	height: 30vh;
-}
-.fireContainer .fireContent{
-	margin: 3.1vh 0;
-	height: 50.1vh;
-}
-.fireContent .fireNotice,
-.fireSystem .fireSystemItem .fireSystemItemBotttom,
-.fireAsideReportList li{
-	display: -webkit-flex;
-	display: flex;
-	-webkit-align-items: center;	
-	align-items: center;	
-}
-.fireContent .fireNotice li{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-.fireContent .fireNotice li,
-.fireSystem .fireSystemItem .fireSystemCont,
-.fireAsideReportList .rightCont{
-	-webkit-flex: 1;
-	flex: 1;
-}
-.fireSystem .fireSystemItem{
-	float: left;
-	width: 30%;
-}
-.fireSystem .fireSystemItem.mlr2{
-	margin: 0 2vw;
-}
-
-.fireSystem .fireSystemItem .firePie{
-	width: 8vw;
-	height: 8vw;
-	margin-right: 2vw;
-}
-.fireSystem .fireSystemItem h3{
-	margin-bottom: 3vh;
-	font-size: 0.84vw;
-	font-weight: 600;
-}
-
-.fireSystem .fireSystemItem h4{
-	margin-bottom: 2vh;
-}
-.fireSystem .fireSystemItem p{
-	margin-bottom: .4vh;
-	font-size: 0.7vw;
-}
-
-
-/* 应急预案 */
-.firePlanAside,
-.fireAsideReportCont,
-.fireAsideDevice{
-	margin-top: 20px;
-	height: 80vh;
-}
-.firePlanAside{
-		overflow-y: auto;
-    position: relative;
-}
-
-.firePlanAside .fireLi {
-  padding:0 5px 15px 15px;
-  border-bottom:0.9px dashed rgba(255,255,255,.3);
-}
-.firePlanAside .fireLi:last-child { border: none; }
-.firePlanAside .fireLi > div { clear: both; overflow: auto; margin-bottom: 10px; }
-.firePlanAside .fireLi > div label {
-  width: 50px; position: absolute; 
-}
-.firePlanAside .fireLi > div .cont {
-  margin-left: 50px;
-}
-.firePlanAside .fireLi > div ul li { margin-bottom: 5px;  }
-
-
-.firePlanAside li{
-	margin-top: 2.5vh;
-}
-
-.firePlanAside p{
-	margin-bottom: .3vh;
-	font-size: 0.7vw;
-}
-
-.fireEmergencyProcess {
-  margin: 30px 8px 15px;
-  height: 20vh;
-}
-.fireEmergencyProcess h4 { font-size: 120%; font-weight: bold; margin: 0 10px; float: left; }
-.fireEmergencyProcess img { max-width: 100%; max-height: 100%; float: right; }
-.fireEmergencyFloor { height: 58vh; }
-.fireEmergencyFloor .floor { height: 88%; }
-.fireEmergencyPlan { height: 24vh; }
-.fireEmergencyPlan .title button { margin: 0 20px; }
-.fireEmergencyPlan .body {}
-.fireEmergencyPlan .body img { max-width: 100%; max-height: 100%; height: 150px; }
-
-.fireFloor .nav-tabs{
-	border-bottom: none;
-  height: 
-}
-.fireFloor .nav-tabs .nav-link{
-	margin-right: 1vw;
-	padding: 0;
-	color: #3CE7DA;
-	border: none;
-	border-bottom: 2px solid transparent;
-}
-.fireFloor .nav-tabs .nav-link:hover,
-.fireFloor .nav-tabs .nav-link.active{
-	color: #3CE7DA;
-	border-bottom-color: #3CE7DA;
-	background-color: transparent;
-}
-
-.fireFloor .tab-content{
-	margin-top: 2vh;
-	height: 42vh;
-}
-
-
-/* 消防月报 */
-.fireAsideReport{
-	width: 18vw;
-}
-.fireAsideReportCont .fireSelect{
-	padding-left: 0.5vw;
-	width: 100%;
-	height: 3.6vh;
-	font-size: 0.8vw;
-}
-.fireAsideReportCont .fireSelect,
-.fireAsideReportList li{
-	border: 1px solid rgba(255,255,255,.5);
-	background-color: rgba(255,255,255,.1);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-.fireAsideReportList{
-	margin-top: 3vh;
-	height: 70vh;
-	overflow-y: auto;
-}
-.fireAsideReportList li{
-	margin-bottom: 1.2vh;
-	padding: 0.5vw;
-	cursor: pointer;
-}
-.fireAsideReportList li.active,
-.fireAsideReportList li:hover{
-	background-color: rgba(255,255,255,.24);
-}
-.fireAsideReportList .leftCont{
-	width: 4vw;
-}
-.fireAsideReportList .leftCont span{
-	display: inline;
-	font-size: 2vw;
-	font-weight: bold;
-}
-.fireAsideReportList .leftCont i{
-	display: inline;
-	font-size: 1vw;
-	font-style: normal;
-	font-weight: 600;
-}
-.fireAsideReportList .rightCont h5{
-	margin-bottom: 0.5vh;
-}
-.fireAsideReportList .rightCont span{
-	font-size: 0.7vw;
-}
-
-.fireReportContainer{
-	margin-left: 20vw;
-	width: 77.6vw;
-}
-.fireReportWrap{
-	margin-top: 3.1vh;
-	height: 80.2vh;
-	overflow-y: auto;
-}
-.fireReportWrap>div{
-	margin-bottom: 2vh;
-	padding-bottom: 2vh;
-	background-color: rgba(255,255,255,.04);
-}
-.fireReportWrap .fireReportNav{
-		padding: 0.6vw 1vw;
-		font-size: 1vw;
-		background-color: rgba(255,255,255,.15);
-}
-.fireReportWrap .fireReportDesc{
-	padding: 1.5vh 0;
-	font-size: 0.76vw;
-	text-indent: 1vw;
-	letter-spacing: 1px;
-}
-.fireReportWrap .table-responsive{
-	margin-top: 2vh;
-	padding: 0 1vw;
-}
-.fireReportWrap .table th{
-	padding-top: 0.5vh;
-	padding-bottom: 0.5vh;
-	font-size: 0.84vw;
-	font-weight: normal;
-	/* background-color: rgba(255,255,255,.05); */
-	border-bottom: 1px solid rgba(255,255,255,.2);
-}
-.fireReportWrap .table td{
-	padding-top: 0.5vh;
-	padding-bottom: 0.5vh;
-	border: none;
-}
-
-.fireReportWrap .fireReport1{
-	padding-left: 1vw;
-	height: 22vh;
-}
-.fireReportWrap .fireReport2{
-	padding-left: 1vw;
-	height: 26vh;
-}
-.fireReportWrap .fireReport4{
-	padding-left: 1vw;
-	height: 30vh;
-}
-
-/* 消防设备 */
-.fireAsideDevice{
-	padding-left: 0.5vw;
-	padding-right: 0.5vw;
-}
-.fireAsideDevice .firePrimaryMenu{
-	float: left;
-	width: 10.3vw;
-	height: 100%;
-	border-right: 1px solid rgba(255,255,255,0.2);
-	
-}
-.fireAsideDevice .fireSecondaryMenu{
-	float: right;
-	width: 8.5vw;
-	height: 100%;
-}
-.fireAsideDevice .firePrimaryMenu h3{
-	font-size: 1vw;
-	margin-bottom: 2vh;
-}
-.fireAsideDevice .fireSearch{
-	margin-left: 0.8vw;
-	height: 3vh;
-	border: 1px solid rgba(255,255,255,.5);
-	background: rgba(255,255,255,0.1);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-.fireAsideDevice .fireSearch input{
-	padding-right: 0;
-	width: 5.7vw;
-	height: 100%;
-	color: #3CE7DA;
-	font-size: 0.8vw;
-	background-color: transparent;
-}
-.fireAsideDevice .fireSearch .fa{
-	width: 1.5vw;
-	height: 2.8vh;
-	line-height: 2.8vh;
-	font-size: .8vw;
-	text-align: center;
-	cursor: pointer;
-	vertical-align: middle;
-}
-.fireAsideDevice .fireSecondaryList{
-	margin-top: 1.5vh;
-	height: 70vh;
-	overflow-y: auto;
-}
-
-.fireAsideDevice .firePrimaryMenuList li,
-.fireAsideDevice .fireSecondaryList li{
-	padding-top: 0.3vw;
-	padding-bottom: 0.3vw;
-	padding-left: 0.8vw;
-	cursor: pointer;
-}
-.fireAsideDevice .firePrimaryMenuList li .fa,
-.fireAsideDevice .fireSecondaryList li .fa{
-	margin-right: 0.2vw;
-}
-.fireAsideDevice .firePrimaryMenuList li{
-		padding-left: 0.5vw;
-}
-.fireAsideDevice .firePrimaryMenuList li.active{
-	background-color: rgba(255,255,255,0.1);
-}
-.fireAsideDevice .fireSecondaryList li{
-	font-size: 0.74vw;
-}
-.fireAsideDevice .firePrimaryMenuList li:hover,
-.fireAsideDevice .fireSecondaryList li:hover{
-	background-color: rgba(255,255,255,0.1);
-}
-.fireDeviceContainer{
-	margin-top: 3.1vh;
-	position: relative;
-	padding: 0;
-	height: 80.2vh;
-}
-.fireDeviceContainer .fireDeviceNav{
-	position: absolute;
-	top: 1vw;
-	left: 1vw;
-	z-index: 10;
-	font-size: 0.9vw;
-}
-.fireDeviceContainer .fireDeviceSelect{
-	position: absolute;
-	top: 1vw;
-	right: 1vw;
-	z-index: 10;	
-}
-.fireDeviceContainer .fireDeviceSelect select{
-	padding: 0.2vw 0.5vw;
-	color: #3CE7DA;
-	border: 1px solid rgba(255,255,255,.5);
-	background-color: rgba(255,255,255,0.2);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-.fireDeviceContainer .fireDeviceSelect option{
-	background: #396a94;
-	border: none;
-}
-
-/* 安全评分 */
-.fireScoreWrap{
-	margin-top: 3.1vh;
-	width: 55.6vw;
-}
-.fireScoreWrap .fireScoreChart{
-	margin-left: 12vw;
-	float: left;
-	width: 10vw;
-	height: 10vw;
-}
-.fireScoreWrap .fireScoreIntro{
-	margin-left: 23vw;
-	padding-top: 3vh;
-}
-.fireScoreWrap .fireScoreIntro h3{
-	font-size: 0.9vw;
-}
-.fireScoreWrap .fireScoreIntro ul{
-	margin-top: 2vh;
-	padding-top: 1vh;
-	display: inline-block;
-	border-top: 1px solid rgba(255,255,255,0.5);
-}
-.fireScoreWrap .fireScoreIntro li{
-	margin-right: 1.4vw;
-	float: left;
-	text-align: center;
-}
-.fireScoreWrap .fireScoreIntro .fireScoreTotal1{
-		color: rgba(255,255,255,0.5);
-}
-.fireScoreWrap .fireScoreIntro .fireScoreTotal3{
-		color: #ee3b4d;
-}
-.fireScoreWrap .fireScoreIntro .fireScoreTotal4{
-		color: #E6A23C;
-}
-.fireScoreWrap .fireScoreIntro P{
-	margin-bottom: 0.1vh;
-}
-.fireScoreWrap .fireScoreCont{
-	margin-top: 2vh;
-}
-.fireScoreWrap .fireScoreLeft{
-	float: left;
-	width: 27.2vw;
-	height: 54vh;
-}
-.fireScoreWrap .fireScoreLeft h3{
-	font-size: 0.9vw;
-	margin-bottom: 2.5vh;
-}
-.fireScoreWrap .fireScoreLeft ul{
-	height: 44vh;
-	overflow-y: auto;
-}
-.fireScoreWrap .fireScoreCont li{
-	padding: 1vw;
-	margin-bottom: 1.5vh;
-	background-color: rgba(255,255,255,0.15);
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-.fireScoreWrap ul h4{
-	font-size: 0.98vw;
-}
-
-.fireScoreWrap .fireScoreTips{
-	text-align: right;
-	margin-bottom: 1.5vh;
-}
-.fireScoreWrap .fireScoreTips span{
-	padding: 0.1vw 0.5vw;
-	margin-left: 0.5vw;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-}
-.fireScoreWrap .fireScoreTips span.error{
-	color: #ee3b4d;
-	background-color:rgba(238, 59, 77, .4);
-}
-.fireScoreWrap .fireScoreTips span.warning{
-	color: #E6A23C;
-	background-color:rgba(230, 162, 60, .4);
-}
-.fireScoreWrap p{
-	padding-left: 1vw;
-	margin-bottom: 0.3vh;
-	line-height: normal;
-}
-.fireScoreWrap .fireScoreLeft .fireDot{
-		display: inline-block;
-		margin-left: 0.2vw;
-		width: 0.5vw;
-		height: 0.5vw;
-		-webkit-border-radius: 50%;
-		-moz-border-radius: 50%;
-		border-radius: 50%;
-}
-.fireScoreWrap .fireScoreLeft .fireDot.error{
-	background-color: #ee3b4d;
-}
-.fireScoreWrap .fireScoreLeft .fireDot.warning{
-	background-color: #E6A23C;
-}
-.fireScoreWrap .fireScoreRight{
-	margin-left: 28.2vw;
-	width: 27.2vw;
-	height: 54vh;
-	overflow-y: auto;
-}
-/* 智慧消防 end*/

@@ -5,7 +5,7 @@ window.version = new Date().getMinutes();
 require.config({
     baseUrl: './',
     paths: {
-        'angular': 'js/libs/angular',
+        'angular': 'js/libs/angular.min',
         'angular-ui-router': 'js/libs/angular-ui-router',
         'angular-async-loader': 'js/libs/angular-async-loader',
         'angular-wui-date': 'js/libs/angular.wui-date',

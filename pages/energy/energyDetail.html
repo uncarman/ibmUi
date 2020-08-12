@@ -1,21 +1,13 @@
 <div class="container innerPage energy">
     <div id="map"></div>
 
-    <div class="header">
-        <div class="left" ng-click="goto('home')"><span class="fa fa-chevron-left"></span> 返回前页</div>
-        <div class="right" ng-bind="data.headRight"></div>
-        <div class="center" ng-bind="data.pageTitle"></div>
-        <div class="clearfix"></div>
-    </div>
+    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
 
     <div class="clearfix"></div>
     <div class="content leftWidth">
         <div class="row">
             <div class="col-3 innerLeft">
-                <div class="title">
-                    <span class="fa fa-bar-chart-o"></span>
-                    <span ng-bind="data.curBuilding.name"></span>
-                </div>
+                <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
                 <ul class="block leftNavP">
                     <li class="title">
                         <span class="fa fa-bolt"></span>电能监测
@@ -23,7 +15,7 @@
                     <li ng-class="data.subType=='' ? 'active' : ''"
                         ng-click="goto('energy');">
                         <span class="fa fa-bullseye"></span>
-                        总体用能概述
+                        用能概述
                     </li>
                     <li ng-class="data.subType==subType ? 'active' : ''"
                         ng-repeat="subType in data.subTypes"
@@ -51,9 +43,17 @@
                             ng-options="t.name for t in data.chartTypes">
                         </select>
                         <p>选择开始时间</p>
-                        <input type="text" class="form-control datePicker" ng-model="data.fromDate">
+                        <wui-date format="yyyy-mm-dd"
+                          id="data_fromDate"
+                          btns="{'ok':'确定','now':'现在'}"
+                          ng-model="data.fromDate"></wui-date>
+                        <!-- <input type="text" class="form-control datePicker" ng-model="data.fromDate"> -->
                         <p>选择结束时间</p>
-                        <input type="text" class="form-control mr10 datePicker" ng-model="data.toDate">
+                        <wui-date format="yyyy-mm-dd"
+                          id="data_toDate"
+                          btns="{'ok':'确定','now':'现在'}"
+                          ng-model="data.toDate"></wui-date>
+                        <!-- <input type="text" class="form-control mr10 datePicker" ng-model="data.toDate"> -->
                         <p>选择同比数据</p>
                         <select class="form-control"
                             ng-model="data.chartCompare"
@@ -89,6 +89,7 @@
             </div>
 
             <div class="col-9 innerRight">
+                <div ng-include="'pages/_components/nav/energyNav.html'"></div>
                 <div class="block">
                     <div class="title">
                         <span class="fa fa-area-chart"></span>

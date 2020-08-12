@@ -8,10 +8,10 @@
         <span class="fa fa-reply-all"></span>
         返回首页
     </div>
-    <div class="menu" ng-click="goto('device', 'tp=101');">
+<!--     <div class="menu" ng-click="goto('device', 'tp=101');">
         <span class="fa fa-flag"></span>
         设备管理
-    </div>
+    </div> -->
     <div class="menu" ng-click="goto('energy');">
         <span class="fa fa-bolt"></span>
         用能管理
@@ -20,15 +20,15 @@
         <span class="fa fa-bolt"></span>
         电能分项
     </div> -->
-    <div class="menu" ng-click="goto('statistics');">
+<!--     <div class="menu" ng-click="goto('statistics');">
         <span class="fa fa-info-circle"></span>
         管网安全
-    </div>
+    </div> -->
     <div class="menu" ng-click="goto('monitoringCenter');">
         <span class="fa fa-users"></span>
         智慧消防
     </div>
-    <div class="menu" ng-click="goto('camera', '');">
+    <!-- <div class="menu" ng-click="goto('camera', '');">
         <span class="fa fa-camera"></span>
         安防管理
     </div>
@@ -39,7 +39,7 @@
     <div class="menu" ng-click="goto('statistics', 'tp=healty');">
         <span class="fa fa-heart"></span>
         健康评估
-    </div>
+    </div> -->
     <div class="menu" ng-click="goto('settingsItem');">
         <span class="fa fa-asterisk"></span>
         系统设置
@@ -113,11 +113,11 @@
             moving: '#sideMenuContainer',
             direction: 'right'
         });
-        $("#actionMenu").on("click", function(ev){
-            var oEvent = ev || event;
-            oEvent.cancelBubble = true;
-            oEvent.stopPropagation();
-        });
+        // $("#actionMenu").on("click", function(ev){
+        //     var oEvent = ev || event;
+        //     oEvent.cancelBubble = true;
+        //     oEvent.stopPropagation();
+        // });
     });
 </script>
 <!-- 右侧菜单 -->

@@ -1,6 +1,41 @@
 
 <h1 ng-click="gotoPage('test', 1);">aaa</h1>
 
+
+<!-- daterange picker -->
+
+<form class="form-control">
+	<div class="">
+		<input class="datePicker" id="datef" ng-model="data.datef" />
+		<input class="datePicker" id="datet" ng-model="data.datet" />
+	</div>
+	<div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+	  <input type="text" class="layui-input" id="test1">
+	</div>
+	<script>
+	laydate.render({
+	  elem: '#test1' //指定元素
+	});
+	</script>
+
+	<wui-date format="yyyy-mm-dd"
+			  id="data_datef"
+              btns="{'ok':'确定','now':'现在'}"
+              ng-model="data.datef">
+    </wui-date>
+    <wui-date format="yyyy-mm-dd"
+			  id="data_datet"
+              btns="{'ok':'确定','now':'现在'}"
+              ng-model="data.datet">
+    </wui-date>
+    <wui-date format="yyyy-mm-dd"
+			  id="data_datee"
+              btns="{'ok':'确定','now':'现在'}"
+              ng-model="data.datee">
+    </wui-date>
+</form>
+
+
 <ul>
 <li ng-repeat="i in data.result.itemList">
 	<span ng-bind="i.id"></span>
@@ -13,4 +48,4 @@
 </ul>
 
 
-<div id="map" style="z-index: 1; position: absolute; top: 0;right: 0; left: 0; bottom: 0; background:transparent;"></div>
+<!-- <div id="map" style="z-index: 1; position: absolute; top: 0;right: 0; left: 0; bottom: 0; background:transparent;"></div> -->

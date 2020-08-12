@@ -17,6 +17,13 @@ define(function (require) {
             //$scope.getBuildingRecource();
 
             $scope.initMap();
+
+            $(".datePicker").datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                language: "zh-CN",
+                format: "yyyy-mm-dd"
+            });
         });
         
         $scope.data = {
@@ -25,7 +32,9 @@ define(function (require) {
             buildingList: global.read_storage("session", "buildingList"),
 
             category: "消防安全",
-
+            datef: moment().add(-7, "day").format("YYYY-MM-DD"),
+            datet: moment().format("YYYY-MM-DD"),
+            datee: moment().add(7, "day").format("YYYY-MM-DD"),
             result: {
                 itemList: [],
             }

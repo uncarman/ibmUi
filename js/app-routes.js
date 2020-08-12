@@ -46,6 +46,7 @@ define(function (require) {
                     energyType: "01",
                     subType: "",
                     showType: "day",
+                    energyMenu: "energy",
                 }
             })
             // 能耗分项
@@ -54,12 +55,45 @@ define(function (require) {
                 templateUrl: './pages/energy/energyDetail.html?v='+version,
                 controllerUrl: './pages/energy/energyDetail',
                 controller: 'energyDetailCtrl',
-                // params: {
-                //     energyType: "01",
-                //     subType: "能耗分项",
-                //     showType: "day",
-                //     parent: 1,
-                // }
+                params: {
+                    energyType: "01",
+                    subType: "能耗分项",
+                    showType: "day",
+                    parent: 1,
+                    energyMenu: "energyDetail",
+                }
+            })
+            // 能耗分项
+            .state('energyStatistics', {
+                url: '/energyStatistics',
+                templateUrl: './pages/energy/energyStatistics.html?v='+version,
+                controllerUrl: './pages/energy/energyStatistics',
+                controller: 'energyStatisticsCtrl',
+                params: {
+                    showType: "month",
+                    energyMenu: "energyStatistics",
+                }
+            })
+            // 用能计划
+            .state('energyPlan', {
+                url: '/energyPlan/:energyType',
+                templateUrl: './pages/energy/energyPlan.html?v='+version,
+                controllerUrl: './pages/energy/energyPlan',
+                controller: 'energyPlanCtrl',
+                params: {
+                    energyType: "01",
+                    energyMenu: "energyPlan",
+                }
+            })
+            // 用能评分
+            .state('energyScore', {
+                url: '/energyScore',
+                templateUrl: './pages/energy/energyScore.html?v='+version,
+                controllerUrl: './pages/energy/energyScore',
+                controller: 'energyScoreCtrl',
+                params: {
+                    energyMenu: "energyScore",
+                }
             })
             // ---------------- 报警相关 ---------------- 
             // 安全用电
@@ -81,7 +115,9 @@ define(function (require) {
                 templateUrl: './pages/fireFighter/monitoringCenter.html?v='+version,
                 controllerUrl: './pages/fireFighter/monitoringCenter',
                 controller: 'monitoringCenterCtrl',
-                params: {}
+                params: {
+                    fireMenu: "monitoringCenter",
+                }
             })
             // 应急预案
             .state('emergencyPlan', {
@@ -89,7 +125,11 @@ define(function (require) {
                 templateUrl: './pages/fireFighter/emergencyPlan.html?v='+version,
                 controllerUrl: './pages/fireFighter/emergencyPlan',
                 controller: 'emergencyPlanCtrl',
-                params: {}
+                params: {
+                    fireMenu: "emergencyPlan",
+                    category: "智慧消防",
+                    type: "应急预案",
+                }
             })
             // 消防设备
             .state('fireFighterDevice', {
@@ -97,7 +137,11 @@ define(function (require) {
                 templateUrl: './pages/fireFighter/fireFighterDevice.html?v='+version,
                 controllerUrl: './pages/fireFighter/fireFighterDevice',
                 controller: 'fireFighterDeviceCtrl',
-                params: {}
+                params: {
+                    fireMenu: "fireFighterDevice",
+                    category: "智慧消防",
+                    type: "消防设备",
+                }
             })
             // 安全月报
             .state('fireFighterReport', {
@@ -105,7 +149,9 @@ define(function (require) {
                 templateUrl: './pages/fireFighter/fireFighterReport.html?v='+version,
                 controllerUrl: './pages/fireFighter/fireFighterReport',
                 controller: 'fireFighterReportCtrl',
-                params: {}
+                params: {
+                    fireMenu: "fireFighterReport",
+                }
             })
             // 安全评分
             .state('fireFighterScore', {
@@ -113,7 +159,9 @@ define(function (require) {
                 templateUrl: './pages/fireFighter/fireFighterScore.html?v='+version,
                 controllerUrl: './pages/fireFighter/fireFighterScore',
                 controller: 'fireFighterScoreCtrl',
-                params: {}
+                params: {
+                    fireMenu: "fireFighterScore",
+                }
             })
 
 

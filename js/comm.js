@@ -57,8 +57,8 @@ define(function (require, exports, module) {
         wsServer: "localhost",
         wsPort: 8002,
 
-        //domain: "http://localhost:8095/",  // 接口地址
-        domain: "http://47.100.196.152:8095/",
+        domain: "http://localhost:8095/",  // 接口地址
+        //domain: "http://47.100.196.152:9091/",
         cross_domain: true,
         ajax_timeout: 30*1000, //ajax超时时间 (单位:毫秒)
 
@@ -77,8 +77,6 @@ define(function (require, exports, module) {
             "ajaxGetSummaryByDate": "/ajax_get_building_total_by_date", //
             "ajaxGetMeters": "/ajax_get_meters", //
             "ajaxGetMeterDatas": "/ajax_get_meter_datas", //
-
-
 
             // 可用apis
             "ajaxLogin": "api/login",
@@ -134,6 +132,17 @@ define(function (require, exports, module) {
             "ajaxCreateCashflow": "api/cashFlowAdd", // 充值添加
 
             "ajaxGetBuildingResourceList": "api/getBuildingResourceList", // 获取分类对应资源
+            "ajaxBuildingResourceList": "api/buildingResourceList", // 获取建筑资源
+            "ajaxCreateResourceItem": "api/createResourceItem", // 添加设备到建筑资源
+            "ajaxRemoveResourceItem": "api/removeResourceItem", // 删除设备到建筑资源
+            "ajaxUpdateResourceItem": "api/updateResourceItem", // 更新设备到建筑资源
+            "ajaxGetItemListByResourceIds": "api/getItemListByResourceIds", // 查询某个资源下所有设备
+
+            "ajaxGetItemListByTypes": "api/getItemListByTypes", // 查询分类下的设备
+            "ajaxGetFirePersonGroup": "api/firePersonGroupList", // 应急预案组织列表
+            "ajaxGetFireEmergencyPlanList": "api/getFireEmergencyPlanList", // 当前建筑应急预案列表
+            "ajaxFireEmergencyPlanStart": "api/fireEmergencyPlanStart", // 应急预案执行开始
+            "ajaxFireEmergencyPlanEnd": "api/fireEmergencyPlanEnd", // 应急预案执行停止
         },
 
         // 分页参数
@@ -227,8 +236,8 @@ define(function (require, exports, module) {
                 "icon": "fa fa-delicious",
             },
             {
-                "url": "settingsBuildingFloor",
-                "name": "楼层管理",
+                "url": "settingsBuildingResource",
+                "name": "资源管理",
                 "icon": "fa fa-codepen",
             },
             {
@@ -1898,6 +1907,72 @@ define(function (require, exports, module) {
             }
         },
 
+        fmtDeviceDetail: function(item) {
+            if(item.itemTypeCode == "30-01") {
+                // 灭火器(室内)
+                var od = JSON.parse(item.itemDataOtherData);
+                return {
+                    "设备名称": item.name,
+                    "设备编号": item.code,
+                    "设备类型": item.itemTypeName,
+                    "更新时间": item.itemDataUpdateAt,
+                    "压力": od["压力"],
+                    "电池电压": od["电池电压"],
+                }
+            } else if (item.itemTypeCode == "01")  {
+                // 电表
+                var od = JSON.parse(item.itemDataOtherData);
+                return {
+                    "设备名称": item.name,
+                    "设备编号": item.code,
+                    "设备类型": item.itemTypeName,
+                    "更新时间": item.itemDataUpdateAt,
+                    "计量有功数": od.pa,
+                    "计量尖有功": od.pj,
+                    "计量峰有功": od.pf,
+                    "计量平有功": od.pp,
+                    "计量谷有功": od.pg,
+                    "瞬时电压": od.v,
+                    "瞬时电流": od.a,
+                    "瞬时功率": od.v*od.a,
+                    "剩余费用": od.rm,
+                }
+            } else {
+                try {
+                    var od = JSON.parse(item.itemDataOtherData);
+                } catch(e) {
+                    var od = {};
+                }
+                return {
+                    "设备名称": item.name,
+                    "设备编号": item.code,
+                    "设备类型": item.itemTypeName,
+                    "更新时间": item.itemDataUpdateAt,
+                    ...od,
+                }
+            }
+        },
+
+        filterEnergyTitle: function(title, keys) {
+            return title.filter(function(d) {
+                for(var k in keys) {
+                    if(d.indexOf(keys[k]) >= 0 || d == "日期") {
+                        return d;
+                        break;
+                    }
+                }
+            });
+        },
+        filterEnergyDatas: function(data, keys) {
+            return data.filter(function(d) {
+                for(var k in keys) {
+                    if(d.typeName.indexOf(keys[k]) >= 0) {
+                        return d;
+                        break;
+                    }
+                }
+            });
+        },
     };
 
     module.exports = {
