@@ -44,3 +44,25 @@ Function.prototype.getName = function(){
     return this.name || this.toString().match(/function\s*([^(]*)\(/)[1]
 }
 
+function ScrollImgLeft($dom, speed){ 
+    var MyMar = null;
+    var scroll_begin = $dom.find(".rollBegin")[0]; 
+    var scroll_end = $dom.find(".rollEnd")[0];
+    var scroll_div = $dom[0]; 
+    scroll_end.innerHTML=scroll_begin.innerHTML; 
+    function Marquee(){ 
+        if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0) {
+            scroll_div.scrollLeft-=scroll_begin.offsetWidth; 
+        }
+        else {
+            scroll_div.scrollLeft++; 
+        }
+    } 
+    MyMar=setInterval(Marquee,speed);  
+    scroll_div.onmouseover = function(){
+　　    clearInterval(MyMar);
+    }
+    scroll_div.onmouseout = function(){
+        MyMar = setInterval(Marquee,speed);  　　　　
+    }
+}

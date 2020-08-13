@@ -59,6 +59,8 @@ define(function (require, exports, module) {
 
         //domain: "http://localhost:8095/",  // 接口地址
         domain: "http://47.100.196.152:9090/",
+        //domain: "http://a.com:9090/",
+
         cross_domain: true,
         ajax_timeout: 30*1000, //ajax超时时间 (单位:毫秒)
 
@@ -71,7 +73,6 @@ define(function (require, exports, module) {
 
             "baseTableList": "/system/base/table_list", // table列表
             "baseTableDetail": "/system/base/table_detail/{table_name}", // table列表
-
 
             "ajaxGetSummary": "/ajax_get_building_total", //
             "ajaxGetSummaryByDate": "/ajax_get_building_total_by_date", //
@@ -143,6 +144,10 @@ define(function (require, exports, module) {
             "ajaxGetFireEmergencyPlanList": "api/getFireEmergencyPlanList", // 当前建筑应急预案列表
             "ajaxFireEmergencyPlanStart": "api/fireEmergencyPlanStart", // 应急预案执行开始
             "ajaxFireEmergencyPlanEnd": "api/fireEmergencyPlanEnd", // 应急预案执行停止
+
+            "ajaxGetFirePersonList": "api/firePersonList", // 火警负责人列表
+            "ajaxGetItemWarningList": "api/itemWarningList", // 设备预警列表
+
         },
 
         // 分页参数

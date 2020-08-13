@@ -1,120 +1,116 @@
 <div class="container innerPage">
-	<div id="map"></div>
+    <div id="map"></div>
 
-	<div ng-include="'pages/_components/nav/headerInner.html'"></div>
+    <div ng-include="'pages/_components/nav/headerInner.html'"></div>
 
-	<div class="clearfix"></div>
-	<div class="content">
-		<div class="col-3 innerLeft fireAside">
+    <div class="clearfix"></div>
+    <div class="content">
+        <div class="col-3 innerLeft fireAside">
             <div ng-include="'pages/_components/nav/buildingChange.html'"></div>
-			<div class="fireAside1 borderAndBg">
-				<h4>后勤管理</h4>
-				<div class="fireManage">
-					<div class="fireManageLeft">
-						<div class="circle">75</div>
-						<p>安全等级：优</p>
-					</div>
-					<div class="fireManageRight">
-						<p>楼宇负责人</p>
-						<ul>
-							<li>
-								<span>李某某</span>
-								<span>18800000000</span>
-							</li>
-							<li>
-								<span>李某某</span>
-								<span>18800000000</span>
-							</li>
-							<li>
-								<span>李某某</span>
-								<span>18800000000</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="fireAside2 borderAndBg">
-				<ul class="fireController">
-					<li>
-						<h4>今日火警</h4>
-						<p>待处理：<span>0</span></p>
-						<p>已完成：<span>0</span></p>
-						<p>已超时：<span>0</span></p>
-					</li>
-					<li>
-						<h4>今日故障</h4>
-						<p>待处理：<span>0</span></p>
-						<p>已完成：<span>0</span></p>
-						<p>已超时：<span>0</span></p>
-					</li>
-					<li>
-						<h4>今日隐患</h4>
-						<p>待处理：<span>0</span></p>
-						<p>已完成：<span>0</span></p>
-						<p>已超时：<span>0</span></p>
-					</li>
-				</ul>
-			</div>
-			<div class="fireAside3 positionRelative borderAndBg">
-				<h4 class="abnormalTit">异常管理</h4>
-				<div id="abnormalChart"></div>
-			</div>
-		</div>
+            <div class="fireAside1 borderAndBg">
+                <h4>后勤管理</h4>
+                <div class="fireManage">
+                    <div class="fireManageLeft">
+                        <div class="circle">75</div>
+                        <p>安全等级：优</p>
+                    </div>
+                    <div class="fireManageRight">
+                        <p>楼宇负责人</p>
+                        <ul>
+                            <li ng-repeat="p in data.personList">
+                                <span ng-bind="p.name"></span>
+                                <span ng-bind="p.mobile"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="fireAside2 borderAndBg">
+                <ul class="fireController">
+                    <li>
+                        <h4>今日火警</h4>
+                        <p>待处理：<span ng-bind="data.itemWarningSummary.todayFire.new"></span></p>
+                        <p>已完成：<span ng-bind="data.itemWarningSummary.todayFire.deal"></span></p>
+                        <p>已超时：<span ng-bind="data.itemWarningSummary.todayFire.timeout"></span></p>
+                    </li>
+                    <li>
+                        <h4>今日故障</h4>
+                        <p>待处理：<span ng-bind="data.itemWarningSummary.todayError.new"></span></p>
+                        <p>已完成：<span ng-bind="data.itemWarningSummary.todayError.deal"></span></p>
+                        <p>已超时：<span ng-bind="data.itemWarningSummary.todayError.timeout"></span></p>
+                    </li>
+                    <li>
+                        <h4>今日隐患</h4>
+                        <p>待处理：<span ng-bind="data.itemWarningSummary.todayWarning.new"></span></p>
+                        <p>已完成：<span ng-bind="data.itemWarningSummary.todayWarning.deal"></span></p>
+                        <p>已超时：<span ng-bind="data.itemWarningSummary.todayWarning.timeout"></span></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="fireAside3 positionRelative borderAndBg">
+                <h4 class="abnormalTit">异常管理</h4>
+                <div id="abnormalChart"></div>
+            </div>
+        </div>
 
-		<div class="col-9 innerRight fireContainer">
-			<div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
-			<div class="fireContent">
-				<ul class="fireNotice borderAndBg">
-					<li>
-						<i class="fa fa-envelope-o"></i>
-						<span>最新事件1</span>
-						<span>2020-07-01</span>
-					</li>
-					<li>
-						<i class="fa fa-envelope-o"></i>
-						<span>最新事件2</span>
-						<span>2020-07-01</span>
-					</li>
-				</ul>
-			</div>
-			<div class="fireSystem overflow">
-				<div class="fireSystemItem borderAndBg">
-					<h3>火灾报警系统</h3>
-					<div class="fireSystemItemBotttom">
-						<div class="firePie" id="fireSystem1"></div>
-						<div class="fireSystemCont">
-							<h4>报警点位：100</h4>
-							<p>报警点：<span>100</span></p>
-							<p>故障点：<span>0</span></p>
-							<p>离线点：<span>0</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="fireSystemItem mlr2 borderAndBg">
-					<h3>火灾报警系统</h3>
-					<div class="fireSystemItemBotttom">
-						<div class="firePie" id="fireSystem2"></div>
-						<div class="fireSystemCont">
-							<h4>报警点位：100</h4>
-							<p>报警点：<span>100</span></p>
-							<p>故障点：<span>0</span></p>
-							<p>离线点：<span>0</span></p>
-						</div>
-					</div>
-				</div>
-				<div class="fireSystemItem borderAndBg">
-					<h3>火灾报警系统</h3>
-					<div class="fireSystemItemBotttom">
-						<div class="firePie" id="fireSystem3"></div>
-						<div class="fireSystemCont">
-							<h4>报警点位：100</h4>
-							<p>报警点：<span>100</span></p>
-							<p>故障点：<span>0</span></p>
-							<p>离线点：<span>0</span></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        <div class="col-9 innerRight fireContainer">
+            <div ng-include="'pages/_components/nav/fireFighterNav.html'"></div>
+
+            <div class="block">
+                <div id="scrollSlider" class="scollSliderBox" ng-show="data.itemWarningTodayList.length > 0"> 
+                    <div class="rollBegin">
+                        <span ng-repeat="w in data.itemWarningTodayList">
+                            <i class="fa fa-envelope-o"></i>
+                            <span ng-bind="w.itemName"></span>
+                            <span ng-bind="w.warningCategory"></span>
+                            <span ng-bind="w.reportedAt"></span>
+                        </span>
+                    </div> 
+                    <div class="rollEnd"></div>
+                </div>
+            </div>
+
+            <div class="fireSystem">
+                <div class="fireSystemItem borderAndBg col-4">
+                    <h3>火灾报警</h3>
+                    <div class="clearfix"></div>
+                    <div class="fireSystemItemBotttom">
+                        <div class="firePie" id="fireSystem1"></div>
+                        <div class="fireSystemCont">
+                            <h4>采集设备: <span ng-bind="data.itemListSummary.fire.total"></span></h4>
+                            <p>报警点：<span ng-bind="data.itemListSummary.fire.warning"></span></p>
+                            <p>故障点：<span ng-bind="data.itemListSummary.fire.error"></span></p>
+                            <p>离线点：<span ng-bind="data.itemListSummary.fire.offline"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fireSystemItem mlr2 borderAndBg col-4">
+                    <h3>消防水柜报警</h3>
+                    <div class="clearfix"></div>
+                    <div class="fireSystemItemBotttom">
+                        <div class="firePie" id="fireSystem2"></div>
+                        <div class="fireSystemCont">
+                            <h4>采集设备: <span ng-bind="data.itemListSummary.water.total"></span></h4>
+                            <p>报警点：<span ng-bind="data.itemListSummary.water.warning"></span></p>
+                            <p>故障点：<span ng-bind="data.itemListSummary.water.error"></span></p>
+                            <p>离线点：<span ng-bind="data.itemListSummary.water.offline"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="fireSystemItem borderAndBg col-4">
+                    <h3>其他报警</h3>
+                    <div class="clearfix"></div>
+                    <div class="fireSystemItemBotttom">
+                        <div class="firePie" id="fireSystem3"></div>
+                        <div class="fireSystemCont">
+                            <h4>采集设备: <span ng-bind="data.itemListSummary.other.total"></span></h4>
+                            <p>报警点：<span ng-bind="data.itemListSummary.other.warning"></span></p>
+                            <p>故障点：<span ng-bind="data.itemListSummary.other.error"></span></p>
+                            <p>离线点：<span ng-bind="data.itemListSummary.other.offline"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
