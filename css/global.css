@@ -235,6 +235,12 @@ border: 1px solid rgba(255,255,255,.5); background:rgba(255,255,255,0.1); color:
 }
 /** 页面中间加载动画 */
 
+/** 滚动 **/
+.scollSliderBox { overflow: hidden; white-space:nowrap; width:100%; }
+.scollSliderBox .rollBegin, .scollSliderBox .rollEnd { display: inline; }
+.scollSliderBox .rollBegin > span, .scollSliderBox .rollEnd > span { margin-right: 80px; }
+
+
 /** login **/
 .login {}
 .login input, .login button {background: none;border: none;outline: none;-webkit-appearance: none;}
@@ -778,11 +784,7 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 .positionRelative{
 	position: relative;
 }
-.fireAside .fireAside3 .abnormalTit{
-	position: absolute;
-	top: 1vw;
-	left: 1vw;
-}
+.fireAside .fireAside3 .abnormalTit{ }
 .fireAside #abnormalChart{
 	width: 100%;
 	height: 30vh;
@@ -791,6 +793,30 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 	margin: 3.1vh 0;
 	height: 50.1vh;
 }
+
+
+.fireSystem { margin: 0 8px 8px;  }
+.fireSystem .fireSystemItem .firePie {
+  float: left;
+  width: 8vw;
+  height: 8vw;
+  margin-right: 2vw;
+}
+.fireSystem .fireSystemItem .fireSystemCont {
+  float: left;
+}
+.fireSystem .fireSystemItem h3 {
+  font-size: 120%;
+}
+.fireSystem .fireSystemItem h4 {
+  margin-bottom: 2vh;
+}
+.fireSystem .fireSystemItem p {
+  margin-bottom: .4vh;
+  font-size: 0.7vw;
+}
+
+/*
 .fireContent .fireNotice,
 .fireSystem .fireSystemItem .fireSystemItemBotttom,
 .fireAsideReportList li{
@@ -799,23 +825,18 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 	-webkit-align-items: center;	
 	align-items: center;	
 }
-.fireContent .fireNotice li{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-.fireContent .fireNotice li,
+
 .fireSystem .fireSystemItem .fireSystemCont,
 .fireAsideReportList .rightCont{
 	-webkit-flex: 1;
 	flex: 1;
 }
 .fireSystem .fireSystemItem{
-	float: left;
-	width: 30%;
+  display: -webkit-flex;
+  display: flex;
 }
 .fireSystem .fireSystemItem.mlr2{
-	margin: 0 2vw;
+
 }
 
 .fireSystem .fireSystemItem .firePie{
@@ -836,6 +857,7 @@ ul.bar_tabs li.active { background: rgba(60, 231, 218, 0.25); color:rgba(255,255
 	margin-bottom: .4vh;
 	font-size: 0.7vw;
 }
+*/
 
 
 /* 应急预案 */
